@@ -1,0 +1,76 @@
+//
+//  BitMatrix.c
+//  MyUIView
+//
+//  Created by Li Kai on 13-4-1.
+//  Copyright (c) 2013年 DomQiu. All rights reserved.
+//
+
+//#include <stdio.h>
+#include <stdlib.h>
+
+#include "BitMatrix.h"
+
+BitMatrix CreateBitMatrix (int rows, int cols)
+{
+    BitMatrix bm;
+    bm.rows = rows;
+    bm.cols = cols;
+    bm.bits = (byte*) calloc(sizeof(byte) * (1 + rows*cols/sizeof(byte)/8), 0);
+    return bm;
+}
+
+void ReleaseBitMatrix (BitMatrix* bm)
+{
+    free(bm->bits);
+}
+
+void BitMatrixSetAllBits (BitMatrix* bm, int value)
+{
+    if (0 == value)
+    {
+        byte* p = bm->bits;
+        for (int i = (1 + bm->rows * bm->cols / sizeof(byte) / 8); i>0; i--)
+        {
+            *p++ = 0;
+        }
+    }
+    else
+    {
+        byte* p = bm->bits;
+        for (int i = (1 + bm->rows * bm->cols / sizeof(byte) / 8); i>0; i--)
+        {
+            *p++ = 0xFF;
+        }
+    }
+}
+
+void BitMatrixSetBit (BitMatrix* bm, int row, int col, int value)
+{
+    int index = row * bm->cols + col;
+    int iByte = index / (sizeof(byte) * 8);
+    int iBit  = index - sizeof(byte) * 8 * iByte;
+    if (value & 0x01)
+    {
+        bm->bits[iByte] |= (0x80 >> iBit);
+    }
+    else
+    {
+        bm->bits[iByte] &= ~(0x80 >> iBit);
+    }
+}
+
+int BitMatrixGet (BitMatrix* bm, int row, int col)
+{
+    int index = row * bm->cols + col;
+    int iByte = index / (sizeof(byte) * 8);
+    int iBit  = index - sizeof(byte) * 8 * iByte;
+    if (bm->bits[iByte] & (0x80 >> iBit))
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}

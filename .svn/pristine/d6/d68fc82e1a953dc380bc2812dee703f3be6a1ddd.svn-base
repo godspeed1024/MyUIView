@@ -1,0 +1,23 @@
+//
+//  AIUIView.h
+//  MyUIView
+//
+//  Created by Li Kai on 13-3-28.
+//  Copyright (c) 2013年 DomQiu. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import "AlViewLayout.h"
+
+@interface AIUIView : NSObject
+
+{
+    UIView* _view;
+    AlViewLayout* _alViewLayout;
+}
+
+@property (nonatomic, retain) UIView* view;
+
+- (id) initWithUIView : (UIView*) wrappedView;
+
+@end

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		A238A832170BC4EC00F820D2 /* AlViewContainerLayout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A238A831170BC4EC00F820D2 /* AlViewContainerLayout.cpp */; };
-		A25B9E351717AC9300A1138D /* libpthread.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A25B9E341717AC9300A1138D /* libpthread.dylib */; };
 		A29CCC37170425B70068B119 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A29CCC36170425B70068B119 /* UIKit.framework */; };
 		A29CCC39170425B70068B119 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A29CCC38170425B70068B119 /* Foundation.framework */; };
 		A29CCC3B170425B70068B119 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A29CCC3A170425B70068B119 /* CoreGraphics.framework */; };
@@ -29,7 +28,6 @@
 
 /* Begin PBXFileReference section */
 		A238A831170BC4EC00F820D2 /* AlViewContainerLayout.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AlViewContainerLayout.cpp; sourceTree = "<group>"; };
-		A25B9E341717AC9300A1138D /* libpthread.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpthread.dylib; path = usr/lib/libpthread.dylib; sourceTree = SDKROOT; };
 		A29CCC33170425B70068B119 /* MyUIView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyUIView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A29CCC36170425B70068B119 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A29CCC38170425B70068B119 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -64,7 +62,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A25B9E351717AC9300A1138D /* libpthread.dylib in Frameworks */,
 				A29CCC37170425B70068B119 /* UIKit.framework in Frameworks */,
 				A29CCC39170425B70068B119 /* Foundation.framework in Frameworks */,
 				A29CCC3B170425B70068B119 /* CoreGraphics.framework in Frameworks */,
@@ -87,7 +84,6 @@
 		A29CCC2A170425B60068B119 = {
 			isa = PBXGroup;
 			children = (
-				A25B9E341717AC9300A1138D /* libpthread.dylib */,
 				A29CCC3E170425B70068B119 /* MyUIView */,
 				A29CCC35170425B70068B119 /* Frameworks */,
 				A29CCC34170425B70068B119 /* Products */,

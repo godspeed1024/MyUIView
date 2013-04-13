@@ -1,0 +1,31 @@
+//
+//  AIUIView.m
+//  MyUIView
+//
+//  Created by Li Kai on 13-3-28.
+//  Copyright (c) 2013年 DomQiu. All rights reserved.
+//
+
+#import "AlViewLayout.h"
+#import "AIUIView.h"
+
+@implementation AIUIView
+
+@synthesize view;
+
+- (id) initWithUIView : (UIView*) wrappedView
+{
+    self = [super init];
+    if (nil != self)
+    {
+        self.view = wrappedView;
+    }
+    return self;
+}
+
+- (void) doLayout
+{
+    view.frame = _alViewLayout->getRect();
+}
+
+@end

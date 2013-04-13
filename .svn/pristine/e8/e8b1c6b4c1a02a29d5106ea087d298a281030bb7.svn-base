@@ -1,0 +1,43 @@
+//
+//  AlViewContainerLayout.h
+//  MyUIView
+//
+//  Created by Li Kai on 13-3-28.
+//  Copyright (c) 2013年 DomQiu. All rights reserved.
+//
+
+#ifndef __MyUIView__AlViewContainerLayout__
+#define __MyUIView__AlViewContainerLayout__
+
+#include <map>
+
+#include "AlViewLayout.h"
+
+using namespace std;
+
+typedef struct
+{
+    AlViewLayout* child;
+    AlViewLayoutParameter parameter;
+} ChildPair;
+
+class AlViewContainerLayout : public AlViewLayout
+{
+public:
+    
+    //virtual AlViewContainerLayout (void);
+    //~AlViewContainerLayout (void);
+    
+    virtual void addChild (int id, AlViewLayout* child, AlViewLayoutParameter layoutParam);
+    
+    virtual void removeChild (int id);
+    
+    //virtual void onMeasure (AlViewLayoutParameter givenLayoutParam);
+
+protected:
+    
+    map<int, ChildPair> children;
+};
+
+
+#endif /* defined(__MyUIView__AlViewContainerLayout__) */

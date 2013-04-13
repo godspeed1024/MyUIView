@@ -7,7 +7,173 @@
 //
 
 #import "AppDelegate.h"
-#import "MainViewController.h"
+
+#import "BitMatrix.h"
+#import "AlViewRelativeLayout.h"
+
+
+#define VARS           4
+#define LE_CONDITIONS  6
+#define GE_CONDITIONS  6
+
+#define NA_VALUE       -1
+
+int ConditionAmountsOfLE [VARS] = {2, 1, 2, 1};
+int ConditionAmountsOfGE [VARS] = {1, 2, 1, 2};
+
+int ConditionsOfLE [LE_CONDITIONS][VARS + 1] = {
+    {0, 0, 0, 0,   0},
+    {0, 1, 0, 0,  -3},
+    
+    {0, 0, 1, 0,   0},
+    
+    {0, 1, 0, 0,   0},
+    {0, 0, 0, 1,  -3},
+    
+    {0, 0, 0, 0,   8}
+};
+
+int ConditionsOfGE [GE_CONDITIONS][VARS + 1] = {
+    {0, 0, 0, 0,   0},
+    
+    {1, 0, 0, 0,   3},
+    {0, 0, 1, 0,   0},
+    
+    {0, 1, 0, 0,   0},
+    
+    {0, 0, 1, 0,   3},
+    {0, 0, 0, 0,   8}
+};
+
+void calcRanges ()
+{
+    // Input data Preparation :
+    BitMatrix bmLEConditions = CreateBitMatrix(LE_CONDITIONS, VARS);
+    BitMatrix bmGEConditions = CreateBitMatrix(GE_CONDITIONS, VARS);
+    int ksOfLE[LE_CONDITIONS], ksOfGE[GE_CONDITIONS];
+    for (int row=0; row<LE_CONDITIONS; row++)
+    {
+        for (int col=0; col<VARS; col++)
+        {
+            SetBitInMatrix(&bmLEConditions, row, col, ConditionsOfLE[row][col]);
+        }
+        ksOfLE[row] = ConditionsOfLE[row][VARS];
+    }
+    for (int row=0; row<GE_CONDITIONS; row++)
+    {
+        for (int col=0; col<VARS; col++)
+        {
+            SetBitInMatrix(&bmGEConditions, row, col, ConditionsOfGE[row][col]);
+        }
+        ksOfGE[row] = ConditionsOfGE[row][VARS];
+    }
+    // : Input data Preparation
+    
+    int* rangesLow = (int*) malloc(sizeof(int) * VARS);
+    int* rangesHigh = (int*) malloc(sizeof(int) * VARS);
+    for (int i=0; i<VARS; i++)
+    {
+        rangesLow[i] = NA_VALUE;
+        rangesHigh[i] = NA_VALUE;
+    }
+    
+    // Every iteration, select one certain condition to update each related condition. Iter until no changes are made and no certain conditions exist :
+    bool isAnythingChanged;
+    do
+    {
+        isAnythingChanged = false;
+        
+        // Search in <= conditions :
+        int idOfLeftVar = 0;
+        int nextConditionsRangeLow = ConditionAmountsOfLE[0];
+        for (int row=0; row<LE_CONDITIONS; row++)
+        {
+            if (row == nextConditionsRangeLow && idOfLeftVar < VARS - 1)
+            {
+                nextConditionsRangeLow += ConditionAmountsOfLE[++idOfLeftVar];
+            }
+            
+            bool allDependenciesClear = true;
+            
+            int rangeValue = ksOfLE[row];
+            for (int col=0; col<VARS; col++)
+            {
+                if (GetBitInMatrix(&bmLEConditions, row, col))
+                {
+                    if (rangesHigh[col] != NA_VALUE)
+                    {
+                        rangeValue += rangesHigh[col];
+                    }
+                    else
+                    {
+                        allDependenciesClear = false;
+                        break;
+                    }
+                }
+            }
+            
+            if (allDependenciesClear)
+            {
+                if (NA_VALUE  == rangesHigh[idOfLeftVar] || rangeValue < rangesHigh[idOfLeftVar])
+                {
+                    rangesHigh[idOfLeftVar] = rangeValue;
+                    isAnythingChanged = true;
+                }
+            }
+        }
+        // : Search in <= conditions
+        
+        // Search in >= conditions :
+        idOfLeftVar = 0;
+        nextConditionsRangeLow = ConditionAmountsOfGE[0];
+        for (int row=0; row<GE_CONDITIONS; row++)
+        {
+            if (row == nextConditionsRangeLow && idOfLeftVar < VARS - 1)
+            {
+                nextConditionsRangeLow += ConditionAmountsOfGE[++idOfLeftVar];
+            }
+            
+            bool allDependenciesClear = true;
+            
+            int rangeValue = ksOfGE[row];
+            for (int col=0; col<VARS; col++)
+            {
+                if (GetBitInMatrix(&bmGEConditions, row, col))
+                {
+                    if (rangesLow[col] != NA_VALUE)
+                    {
+                        rangeValue += rangesLow[col];
+                    }
+                    else
+                    {
+                        allDependenciesClear = false;
+                        break;
+                    }
+                }
+            }
+            
+            if (allDependenciesClear)
+            {
+                if (NA_VALUE  == rangesLow[idOfLeftVar] || rangeValue > rangesLow[idOfLeftVar])
+                {
+                    rangesLow[idOfLeftVar] = rangeValue;
+                    isAnythingChanged = true;
+                }
+            }
+        }
+        // : Search in >= conditions
+    }
+    while (isAnythingChanged);
+    
+    // : Every iteration, select one certain condition to update each related condition. Iter until no changes are made and no certain conditions exist
+    
+    //free(rowsOfChosenConditionPath);
+    free(rangesHigh);
+    free(rangesLow);
+    
+    ReleaseBitMatrix(&bmGEConditions);
+    ReleaseBitMatrix(&bmLEConditions);
+}
 
 @implementation AppDelegate
 
@@ -30,7 +196,6 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    [self.window setRootViewController:[[[MainViewController alloc] init] autorelease]];
     /*
     BitMatrix bm = CreateBitMatrix(3, 5);
     SetBitInMatrix(&bm, 1, 2, 1);
@@ -43,6 +208,30 @@
     
     calcRanges();
     /*/
+    AlViewLayoutParameter lp;
+    AlViewRelativeLayout* parent = new AlViewRelativeLayout;
+    
+    AlViewLayout* c0 = new AlViewLayout;
+    lp.givenSize = CGSizeMake(2, 2);
+    parent->addChild(0, c0, lp);
+    
+    AlViewLayout* c1 = new AlViewLayout;
+    lp.givenSize = CGSizeMake(6, 6);
+    parent->addChild(1, c1, lp);
+    
+    parent->setLayoutRelation(1, 1, kLayoutRelationAlignParentBottom);
+    parent->setLayoutRelation(1, 0, kLayoutRelationAlignParentRight);
+    parent->setLayoutRelation(0, 1, kLayoutRelationAbove);
+    parent->setLayoutRelation(1, 0, kLayoutRelationToRightOf);
+    parent->setLayoutRelation(0, 1, kLayoutRelationAlignParentLeft);
+    parent->setLayoutRelation(0, 0, kLayoutRelationAlignParentTop);
+    
+    lp.givenSize = CGSizeMake(7, 7);
+    parent->onMeasure(lp);
+    
+    delete c1;
+    delete c0;
+    delete parent;
     //*/
     return YES;
 }

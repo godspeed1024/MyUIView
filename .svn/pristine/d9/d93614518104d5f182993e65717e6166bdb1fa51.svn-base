@@ -1,0 +1,15 @@
+#include "AlViewContainerLayout.h"
+
+void AlViewContainerLayout::addChild (int id, AlViewLayout* child, AlViewLayoutParameter layoutParam)
+{
+    ChildPair cp;
+    cp.child = child;
+    cp.parameter = layoutParam;
+    children.insert(make_pair(id, cp));
+}
+
+void AlViewContainerLayout::removeChild (int id)
+{
+    map<int, ChildPair>::iterator found = children.find(id);
+    children.erase(found);
+}

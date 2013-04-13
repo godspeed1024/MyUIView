@@ -1,0 +1,111 @@
+//
+//  AlViewLayout.cpp
+//  MyUIView
+//
+//  Created by Li Kai on 13-3-28.
+//  Copyright (c) 2013年 DomQiu. All rights reserved.
+//
+
+#include "AlViewLayout.h"
+
+AlViewLayout::AlViewLayout (void)
+{
+    _isMinimalSizeSet = true;
+    _isDesiredSizeSet = true;
+}
+
+AlViewLayout::~AlViewLayout (void)
+{
+    
+}
+
+CGRect AlViewLayout::getRect ()
+{
+    CGRect ret = _layoutedRect;
+    return ret;
+}
+
+CGSize AlViewLayout::getMinimalMeasuredSize ()
+{
+    return _minimalMeasuredSize;
+}
+
+CGSize AlViewLayout::getDesiredMeasuredSize ()
+{
+    return _desiredMeasuredSize;
+}
+
+void AlViewLayout::measure (AlViewLayoutParameter givenLayoutParam)
+{
+    _isMinimalSizeSet = false;
+    _isDesiredSizeSet = false;
+    
+    onMeasure(givenLayoutParam);
+    
+    if (!_isMinimalSizeSet)
+    {
+        throw "Minimal measured size not set in onMeasure method.";
+    }
+    if (!_isDesiredSizeSet)
+    {
+        throw "Desired measured size not set in onMeasure method.";
+    }
+}
+
+void AlViewLayout::setMinimalMeasuredSize (float width, float height)
+{
+    _minimalMeasuredSize.width = width;
+    _minimalMeasuredSize.height = height;
+    _isMinimalSizeSet = true;
+}
+
+void AlViewLayout::setDesiredMeasuredSize (float width, float height)
+{
+    _desiredMeasuredSize.width = width;
+    _desiredMeasuredSize.height = height;
+    _isDesiredSizeSet = true;
+}
+
+void AlViewLayout::onMeasure (AlViewLayoutParameter givenLayoutParam)
+{
+    
+    switch (givenLayoutParam.horizontalLayoutFlag)
+    {
+        case kLayoutFlagPrecise:
+            _minimalMeasuredSize.width = givenLayoutParam.givenSize.width;
+            _desiredMeasuredSize.width = givenLayoutParam.givenSize.width;
+            break;
+            
+        case kLayoutFlagFillParent:
+            _minimalMeasuredSize.width = 60.0f;
+            _desiredMeasuredSize.width = givenLayoutParam.givenSize.width;
+            break;
+            
+        case kLayoutFlagWrapContent:
+            _minimalMeasuredSize.width = 60.0f;
+            _desiredMeasuredSize.width = 60.0f;
+            break;
+    }
+    
+    switch (givenLayoutParam.verticalLayoutFlag)
+    {
+        case kLayoutFlagPrecise:
+            _minimalMeasuredSize.height = givenLayoutParam.givenSize.height;
+            _desiredMeasuredSize.height = givenLayoutParam.givenSize.height;
+            break;
+            
+        case kLayoutFlagFillParent:
+            _minimalMeasuredSize.height = 60.0f;
+            _desiredMeasuredSize.height = givenLayoutParam.givenSize.height;
+            break;
+            
+        case kLayoutFlagWrapContent:
+            _minimalMeasuredSize.height = 60.0f;
+            _desiredMeasuredSize.height = 60.0f;
+            break;
+    }
+    
+    setMinimalMeasuredSize(_minimalMeasuredSize.width, _minimalMeasuredSize.height);
+    
+    setDesiredMeasuredSize(_desiredMeasuredSize.width, _desiredMeasuredSize.height);
+}
