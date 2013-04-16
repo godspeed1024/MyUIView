@@ -102,7 +102,7 @@ public:
         clearRelationGraph(relationGraphs);
     }
     
-    void setLayoutRelation (int leftOperandID, int rightOperandID, int layoutRelation);
+    void addLayoutRelation (int leftOperandID, int rightOperandID, int layoutRelation);
     
     void onMeasure (AlViewLayoutParameter givenLayoutParam);
     
@@ -113,19 +113,19 @@ protected:
     
 private:
     
+    bool needsUpdateRelationGraph;
+    
     void interpretLayoutConstraint (LayoutConstraint originalLC);
     
     void interpretLayoutConstraint (list<LayoutConstraint>* reinterpretedConstraints, LayoutConstraint originalLC, CGSize bound);
     
     //void interpretLayoutConstraint (list<LayoutConstraint>* reinterpretedConstraints, LayoutConstraint originalLC, AlViewLayoutParameter layoutParam);
     
-    
+    void updateRelationGraphs (map<int, RelationGraphNode*>& graphs, list<LayoutConstraint>* constraints);
     
     map<int, RelationGraphNode*> relationGraphs;
     
     static void clearRelationGraph (map<int, RelationGraphNode*>& graph);
-    
-    static void createRelationGraphs (map<int, RelationGraphNode*>& graphs, list<LayoutConstraint>* constraints);
     
     static void recursiveTraverseRelationGraph (RelationGraphNode* startNode, int nodeCount,
                                                 void* param, CallbackInTraversingRelationGraph callback);
@@ -134,7 +134,7 @@ private:
     
     static void solveRelationGraphs (map<int, RelationGraphNode*>& graphs, int nodeCount);
     
-    static void decideRelationGraphs (map<int, RelationGraphNode*>& graphs, int nodeCount);
+    static void decideRelationGraphs (map<int, RelationGraphNode*>& graphs, int nodeCount, CGSize& parentBound);
 };
 
 #endif /* defined(__MyUIView__AlViewRelativeLayout__) */

@@ -75,13 +75,12 @@
     lp.givenSize = CGSizeMake(50, 50);
     parent->addChild(b, lp);
     
-    ///parent->setLayoutRelation(1, 1, kLayoutRelationAlignParentBottom);
-    
-    parent->setLayoutRelation(1, 0, kLayoutRelationAlignParentRight);
-    parent->setLayoutRelation(0, 1, kLayoutRelationAbove);
-    parent->setLayoutRelation(1, 0, kLayoutRelationToRightOf);
-    parent->setLayoutRelation(0, 1, kLayoutRelationAlignParentLeft);
-    parent->setLayoutRelation(0, 0, kLayoutRelationAlignParentTop);
+    //parent->addLayoutRelation(1, 1, kLayoutRelationAlignParentBottom);
+    //parent->addLayoutRelation(1, 0, kLayoutRelationAlignParentRight);
+    parent->addLayoutRelation(0, 1, kLayoutRelationAbove);
+    parent->addLayoutRelation(1, 0, kLayoutRelationToRightOf);
+    //parent->addLayoutRelation(0, 1, kLayoutRelationAlignParentLeft);
+    //parent->addLayoutRelation(0, 0, kLayoutRelationAlignParentTop);
     
     lp.givenSize = CGSizeMake(120, 200);
     parent->measure(lp);
