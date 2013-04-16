@@ -6,8 +6,6 @@
 //  Copyright (c) 2013年 DomQiu. All rights reserved.
 //
 
-#define HALF_CONSTRAINTS
-
 #include <stdlib.h>
 #include "AlViewRelativeLayout.h"
 
@@ -20,9 +18,35 @@ void AlViewRelativeLayout::addLayoutRelation (int leftOperandID, int rightOperan
     interpretLayoutConstraint(lc);
 }
 
+void AlViewRelativeLayout::addLayoutRelation (AlViewLayout* leftOperandChild, AlViewLayout* rightOperandChild, int layoutRelation)
+{
+    map<AlViewLayout*, int>::iterator leftOpr = child2IdMap.find(leftOperandChild);
+    if (child2IdMap.end() == leftOpr)
+    {
+        AlViewLayoutParameter lp;
+        addChild(leftOperandChild, lp);
+    }
+    map<AlViewLayout*, int>::iterator rightOpr = child2IdMap.find(const_cast<AlViewLayout*>(rightOperandChild));
+    if (child2IdMap.end() == rightOpr)
+    {
+        AlViewLayoutParameter lp;
+        addChild(rightOperandChild, lp);
+    }
+    
+    LayoutConstraint lc;
+    lc.leftOperandID = leftOpr->second;
+    lc.rightOperandID = rightOpr->second;
+    lc.relation = layoutRelation;
+    interpretLayoutConstraint(lc);
+}
+
 void AlViewRelativeLayout::interpretLayoutConstraint (LayoutConstraint originalLC)
 {
     LayoutConstraint lc = originalLC;
+    
+    map<int, ChildPair>::iterator leftChildPair = children.find(lc.leftOperandID);
+    map<int, ChildPair>::iterator rightChildPair = children.find(lc.rightOperandID);
+    
     lc.leftOperandID <<= 3;
     lc.rightOperandID <<= 3;
     lc.constant = 0;
@@ -30,92 +54,52 @@ void AlViewRelativeLayout::interpretLayoutConstraint (LayoutConstraint originalL
     switch (originalLC.relation)
     {
         case kLayoutRelationAbove:
-            // L.Bottom >= R.Top
+            // L.Bottom >= R.Top - (L.MarginBottom + R.MarginTop)
             lc.leftOperandID |= VAR_BOTTOM;
             lc.rightOperandID |= VAR_TOP;
+            lc.constant = - leftChildPair->second.parameter.marginBottom - rightChildPair->second.parameter.marginTop;
             lc.relation = 1;
             interpretedConstraints.push_back(lc);
             
-            // L.Bottom <= R.Top
+            // L.Bottom <= R.Top - (L.MarginBottom + R.MarginTop)
             lc.relation = 0;
             interpretedConstraints.push_back(lc);
-#ifndef HALF_CONSTRAINTS
-            // R.Top <= L.Bottom
-            lc.leftOperandID ^= lc.rightOperandID;
-            lc.rightOperandID ^= lc.leftOperandID;
-            lc.leftOperandID ^= lc.rightOperandID;
-            interpretedConstraints.push_back(lc);
-            
-            // R.Top >= L.Bottom
-            lc.relation = 1;
-            interpretedConstraints.push_back(lc);
-#endif
             break;
         case kLayoutRelationBelow:
-            // R.Bottom <= L.Top
+            // R.Bottom <= L.Top - (R.MarginBottom + L.MarginTop)
             lc.rightOperandID |= VAR_BOTTOM;
             lc.leftOperandID |= VAR_TOP;
+            lc.constant = leftChildPair->second.parameter.marginTop + rightChildPair->second.parameter.marginBottom;
             lc.relation = 1;
             interpretedConstraints.push_back(lc);
             
-            // R.Bottom >= L.Top
+            // R.Bottom >= L.Top - (R.MarginBottom + L.MarginTop)
             lc.relation = 0;
             interpretedConstraints.push_back(lc);
-#ifndef HALF_CONSTRAINTS
-            // L.Top >= R.Bottom
-            lc.leftOperandID ^= lc.rightOperandID;
-            lc.rightOperandID ^= lc.leftOperandID;
-            lc.leftOperandID ^= lc.rightOperandID;
-            interpretedConstraints.push_back(lc);
-            
-            // L.Top <= R.Bottom
-            lc.relation = 1;
-            interpretedConstraints.push_back(lc);
-#endif
             break;///
         case kLayoutRelationToLeftOf:
-            // L.Right >= R.Left
+            // L.Right >= R.Left - (L.MarginRight + R.MarginLeft)
             lc.leftOperandID |= VAR_RIGHT;
             lc.rightOperandID |= VAR_LEFT;
+            lc.constant = - leftChildPair->second.parameter.marginRight - rightChildPair->second.parameter.marginLeft;
             lc.relation = 1;
             interpretedConstraints.push_back(lc);
             
-            // L.Right <= R.Left
+            // L.Right <= R.Left - (L.MarginRight + R.MarginLeft)
             lc.relation = 0;
             interpretedConstraints.push_back(lc);
-#ifndef HALF_CONSTRAINTS
-            // R.Left <= L.Right
-            lc.leftOperandID ^= lc.rightOperandID;
-            lc.rightOperandID ^= lc.leftOperandID;
-            lc.leftOperandID ^= lc.rightOperandID;
-            interpretedConstraints.push_back(lc);
-            
-            // R.Left >= L.Right
-            lc.relation = 1;
-            interpretedConstraints.push_back(lc);
-#endif
             break;
         case kLayoutRelationToRightOf:
-            // R.Right <= L.Left
+            // R.Right <= L.Left - (R.MarginRight + L.MarginLeft)
             lc.rightOperandID |= VAR_RIGHT;
             lc.leftOperandID |= VAR_LEFT;
+            lc.constant = leftChildPair->second.parameter.marginLeft + rightChildPair->second.parameter.marginRight;
             lc.relation = 1;
             interpretedConstraints.push_back(lc);
             
-            // R.Right >= L.Left
+            // R.Right >= L.Left - (R.MarginRight + L.MarginLeft)
             lc.relation = 0;
             interpretedConstraints.push_back(lc);
-#ifndef HALF_CONSTRAINTS
-            // L.Left >= R.Right
-            lc.leftOperandID ^= lc.rightOperandID;
-            lc.rightOperandID ^= lc.leftOperandID;
-            lc.leftOperandID ^= lc.rightOperandID;
-            interpretedConstraints.push_back(lc);
-            
-            // L.Left <= R.Right
-            lc.relation = 1;
-            interpretedConstraints.push_back(lc);
-#endif
             break;
         case kLayoutRelationAlignTopWith:
             // L.Top >= R.Top
@@ -127,17 +111,6 @@ void AlViewRelativeLayout::interpretLayoutConstraint (LayoutConstraint originalL
             // L.Top <= R.Top
             lc.relation = 0;
             interpretedConstraints.push_back(lc);
-#ifndef HALF_CONSTRAINTS
-            // R.Top <= L.Top
-            lc.leftOperandID ^= lc.rightOperandID;
-            lc.rightOperandID ^= lc.leftOperandID;
-            lc.leftOperandID ^= lc.rightOperandID;
-            interpretedConstraints.push_back(lc);
-            
-            // R.Top >= L.Top
-            lc.relation = 1;
-            interpretedConstraints.push_back(lc);
-#endif
             break;
             
         case kLayoutRelationAlignBottomWith:
@@ -150,17 +123,6 @@ void AlViewRelativeLayout::interpretLayoutConstraint (LayoutConstraint originalL
             // L.Bottom <= R.Bottom
             lc.relation = 0;
             interpretedConstraints.push_back(lc);
-#ifndef HALF_CONSTRAINTS
-            // R.Bottom <= L.Bottom
-            lc.leftOperandID ^= lc.rightOperandID;
-            lc.rightOperandID ^= lc.leftOperandID;
-            lc.leftOperandID ^= lc.rightOperandID;
-            interpretedConstraints.push_back(lc);
-            
-            // R.Bottom >= L.Bottom
-            lc.relation = 1;
-            interpretedConstraints.push_back(lc);
-#endif
             break;
         case kLayoutRelationAlignLeftWith:
             // L.Left >= R.Left
@@ -172,17 +134,6 @@ void AlViewRelativeLayout::interpretLayoutConstraint (LayoutConstraint originalL
             // L.Left <= R.Left
             lc.relation = 0;
             interpretedConstraints.push_back(lc);
-#ifndef HALF_CONSTRAINTS
-            // R.Left <= L.Left
-            lc.leftOperandID ^= lc.rightOperandID;
-            lc.rightOperandID ^= lc.leftOperandID;
-            lc.leftOperandID ^= lc.rightOperandID;
-            interpretedConstraints.push_back(lc);
-            
-            // R.Left >= L.Left
-            lc.relation = 1;
-            interpretedConstraints.push_back(lc);
-#endif
             break;
         case kLayoutRelationAlignRightWith:
             // L.Right >= R.Right
@@ -194,40 +145,13 @@ void AlViewRelativeLayout::interpretLayoutConstraint (LayoutConstraint originalL
             // L.Right <= R.Right
             lc.relation = 0;
             interpretedConstraints.push_back(lc);
-#ifndef HALF_CONSTRAINTS
-            // R.Right <= L.Right
-            lc.leftOperandID ^= lc.rightOperandID;
-            lc.rightOperandID ^= lc.leftOperandID;
-            lc.leftOperandID ^= lc.rightOperandID;
-            interpretedConstraints.push_back(lc);
-            
-            // R.Right >= L.Right
-            lc.relation = 1;
-            interpretedConstraints.push_back(lc);
-#endif
             break;
             
         case kLayoutRelationAlignParentLeft:
-            lc.rightOperandID = NA_VAR;
-            lc.leftOperandID |= VAR_LEFT;
-            suspendingConstraints.push_back(lc);
-            
-            break;
         case kLayoutRelationAlignParentRight:
-            lc.rightOperandID = NA_VAR;
-            lc.leftOperandID |= VAR_RIGHT;
-            suspendingConstraints.push_back(lc);
-            
-            break;
         case kLayoutRelationAlignParentTop:
-            lc.rightOperandID = NA_VAR;
-            lc.leftOperandID |= VAR_TOP;
-            suspendingConstraints.push_back(lc);
-            
-            break;
         case kLayoutRelationAlignParentBottom:
             lc.rightOperandID = NA_VAR;
-            lc.leftOperandID |= VAR_BOTTOM;
             suspendingConstraints.push_back(lc);
             
             break;
@@ -239,52 +163,58 @@ void AlViewRelativeLayout::interpretLayoutConstraint (LayoutConstraint originalL
 void AlViewRelativeLayout::interpretLayoutConstraint (list<LayoutConstraint>* reinterpretedConstraints, LayoutConstraint originalLC, CGSize bound)
 {
     LayoutConstraint lc = originalLC;
+    map<int, ChildPair>::iterator leftChildPair = children.find(lc.leftOperandID >> 3);
+    
     switch (lc.relation)
     {
         case kLayoutRelationAlignParentLeft:
-            lc.constant = 0;
+            lc.leftOperandID |= VAR_LEFT;
+            lc.constant = leftChildPair->second.parameter.marginLeft;
 
-            // L.Left <= 0
+            // L.Left <= L.MarginLeft
             lc.relation = 0;
             reinterpretedConstraints->push_back(lc);
 
-            // L.Left >= 0
+            // L.Left >= L.MarginLeft
             lc.relation = 1;
             reinterpretedConstraints->push_back(lc);
             
             break;
         case kLayoutRelationAlignParentRight:
-            lc.constant = bound.width;
+            lc.leftOperandID |= VAR_RIGHT;
+            lc.constant = bound.width - leftChildPair->second.parameter.marginRight;
 
-            // L.Right <= 0
+            // L.Right <= Width - L.MarginRight
             lc.relation = 0;
             reinterpretedConstraints->push_back(lc);
 
-            // L.Right >= 0
+            // L.Right >= Width - L.MarginRight
             lc.relation = 1;
             reinterpretedConstraints->push_back(lc);
 
             break;
         case kLayoutRelationAlignParentTop:
-            lc.constant = 0;
+            lc.leftOperandID |= VAR_TOP;
+            lc.constant = leftChildPair->second.parameter.marginTop;
 
-            // L.Top <= 0
+            // L.Top <= L.MarginTop
             lc.relation = 0;
             reinterpretedConstraints->push_back(lc);
 
-            // L.Top >= 0
+            // L.Top >= L.MarginTop
             lc.relation = 1;
             reinterpretedConstraints->push_back(lc);
 
             break;
         case kLayoutRelationAlignParentBottom:
-            lc.constant = bound.height;
+            lc.leftOperandID |= VAR_BOTTOM;
+            lc.constant = bound.height - leftChildPair->second.parameter.marginBottom;
             
-            // L.Bottom <= HEIGHT
+            // L.Bottom <= HEIGHT - L.MarginBottom
             lc.relation = 0;
             reinterpretedConstraints->push_back(lc);
 
-            // L.Bottom >= 0
+            // L.Bottom >= HEIGHT - L.MarginBottom
             lc.relation = 1;
             reinterpretedConstraints->push_back(lc);
 
@@ -299,28 +229,14 @@ void AlViewRelativeLayout::interpretLayoutConstraint (list<LayoutConstraint>* re
             lc.constant = -bound.width;
             lc.relation = 0;
             reinterpretedConstraints->push_back(lc);
-#ifndef HALF_CONSTRAINTS
-            // L.Right >= R.Left + Width
-            lc.leftOperandID = shiftID | VAR_RIGHT;
-            lc.rightOperandID = shiftID | VAR_LEFT;
-            lc.constant = bound.width;
-            lc.relation = 1;
-            reinterpretedConstraints->push_back(lc);
-#endif
+            
             // L.Top <= R.Bottom - Height
             lc.leftOperandID = shiftID | VAR_TOP;
             lc.rightOperandID = shiftID | VAR_BOTTOM;
             lc.constant = -bound.height;
             lc.relation = 0;
             reinterpretedConstraints->push_back(lc);
-#ifndef HALF_CONSTRAINTS
-            // L.Bottom >= R.Top + Height
-            lc.leftOperandID = shiftID | VAR_BOTTOM;
-            lc.rightOperandID = shiftID | VAR_TOP;
-            lc.constant = bound.height;
-            lc.relation = 1;
-            reinterpretedConstraints->push_back(lc);
-#endif
+            
             break;
     }
 }

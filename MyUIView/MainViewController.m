@@ -69,19 +69,34 @@
     
     AlViewLayout* a = auvA.layouter;
     lp.givenSize = CGSizeMake(60, 60);
+    lp.marginLeft = 5;
+    lp.marginRight = 0;
+    lp.marginTop = 10;
+    lp.marginBottom = 0;
     parent->addChild(a, lp);
     
     AlViewLayout* b = auvB.layouter;
     lp.givenSize = CGSizeMake(50, 50);
+    lp.marginLeft = 5;
+    lp.marginRight = 0;
+    lp.marginTop = 10;
+    lp.marginBottom = 10;
     parent->addChild(b, lp);
-    
-    //parent->addLayoutRelation(1, 1, kLayoutRelationAlignParentBottom);
-    //parent->addLayoutRelation(1, 0, kLayoutRelationAlignParentRight);
+    //*
+    parent->addLayoutRelation(b, b, kLayoutRelationAlignParentBottom);
+    parent->addLayoutRelation(b, a, kLayoutRelationAlignParentRight);
+    parent->addLayoutRelation(a, b, kLayoutRelationAbove);
+    parent->addLayoutRelation(b, a, kLayoutRelationToRightOf);
+    parent->addLayoutRelation(a, b, kLayoutRelationAlignParentLeft);
+    parent->addLayoutRelation(a, a, kLayoutRelationAlignParentTop);
+    /*/
+    parent->addLayoutRelation(1, 1, kLayoutRelationAlignParentBottom);
+    parent->addLayoutRelation(1, 0, kLayoutRelationAlignParentRight);
     parent->addLayoutRelation(0, 1, kLayoutRelationAbove);
     parent->addLayoutRelation(1, 0, kLayoutRelationToRightOf);
-    //parent->addLayoutRelation(0, 1, kLayoutRelationAlignParentLeft);
-    //parent->addLayoutRelation(0, 0, kLayoutRelationAlignParentTop);
-    
+    parent->addLayoutRelation(0, 1, kLayoutRelationAlignParentLeft);
+    parent->addLayoutRelation(0, 0, kLayoutRelationAlignParentTop);
+    //*/
     lp.givenSize = CGSizeMake(120, 200);
     parent->measure(lp);
     parent->applyLayout();

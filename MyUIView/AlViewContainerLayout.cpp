@@ -20,7 +20,6 @@ void AlViewContainerLayout::addChild_nts (AlViewLayout* child, AlViewLayoutParam
     cp.child = child;
     cp.parameter = layoutParam;
     
-    
     children.insert(make_pair(currentUsableID, cp));
     child2IdMap.insert(make_pair(child, currentUsableID));
     currentUsableID++;
@@ -40,7 +39,18 @@ void AlViewContainerLayout::addChild (AlViewLayout* child, AlViewLayoutParameter
         {
             throw "Cannot add a layout child to other parent.";
         }
-        if (this == child->_parent) return;
+        
+        if (this == child->_parent)
+        {
+            map<AlViewLayout*, int>::iterator foundCID = child2IdMap.find(child);
+            children.erase(foundCID->second);
+            
+            ChildPair cp;
+            cp.child = child;
+            cp.parameter = layoutParam;
+            children.insert(make_pair(foundCID->second, cp));
+            return;
+        }
         
         child->_parent = this;
     }

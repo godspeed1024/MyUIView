@@ -104,6 +104,8 @@ public:
     
     void addLayoutRelation (int leftOperandID, int rightOperandID, int layoutRelation);
     
+    void addLayoutRelation (AlViewLayout* leftOperandChild, AlViewLayout* rightOperandChild, int layoutRelation);
+    
     void onMeasure (AlViewLayoutParameter givenLayoutParam);
     
 protected:
