@@ -93,7 +93,7 @@
     //parent->addLayoutRelation(a, b, kLayoutRelationAbove);
     //parent->addLayoutRelation(b, a, kLayoutRelationToRightOf);
     //parent->addLayoutRelation(a, b, kLayoutRelationAlignParentLeft);
-    parent->addLayoutRelation(a, a, kLayoutRelationAlignParentTop);
+    //parent->addLayoutRelation(a, a, kLayoutRelationAlignParentTop);
     
     parent->addLayoutRelation(a, a, kLayoutRelationCenterParentHorizontal);
     ///parent->addLayoutRelation(a, b, kLayoutRelationCenterHorizontalWith);
