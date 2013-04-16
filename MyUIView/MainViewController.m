@@ -39,9 +39,14 @@
     [_btnB setBackgroundColor:[UIColor blueColor]];
     _btnB.clipsToBounds = YES;
     
-    [self setView:_btnParent];
     [_btnParent addSubview:_btnA];
     [_btnParent addSubview:_btnB];
+    
+    UIView* rootView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [rootView setBackgroundColor:[UIColor blackColor]];
+    [self setView:rootView];
+    [rootView addSubview:_btnParent];
+    [rootView release];
 }
 
 - (void) dealloc
@@ -77,26 +82,23 @@
     
     AlViewLayout* b = auvB.layouter;
     lp.givenSize = CGSizeMake(50, 50);
-    lp.marginLeft = 5;
-    lp.marginRight = 0;
-    lp.marginTop = 10;
-    lp.marginBottom = 10;
-    parent->addChild(b, lp);
-    //*
-    parent->addLayoutRelation(b, b, kLayoutRelationAlignParentBottom);
-    parent->addLayoutRelation(b, a, kLayoutRelationAlignParentRight);
-    parent->addLayoutRelation(a, b, kLayoutRelationAbove);
-    parent->addLayoutRelation(b, a, kLayoutRelationToRightOf);
-    parent->addLayoutRelation(a, b, kLayoutRelationAlignParentLeft);
+    lp.marginLeft = 0;
+    lp.marginRight = 5;
+    lp.marginTop = 0;
+    lp.marginBottom = 5;
+    //parent->addChild(b, lp);
+
+    //parent->addLayoutRelation(b, b, kLayoutRelationAlignParentBottom);
+    //parent->addLayoutRelation(b, a, kLayoutRelationAlignParentRight);
+    //parent->addLayoutRelation(a, b, kLayoutRelationAbove);
+    //parent->addLayoutRelation(b, a, kLayoutRelationToRightOf);
+    //parent->addLayoutRelation(a, b, kLayoutRelationAlignParentLeft);
     parent->addLayoutRelation(a, a, kLayoutRelationAlignParentTop);
-    /*/
-    parent->addLayoutRelation(1, 1, kLayoutRelationAlignParentBottom);
-    parent->addLayoutRelation(1, 0, kLayoutRelationAlignParentRight);
-    parent->addLayoutRelation(0, 1, kLayoutRelationAbove);
-    parent->addLayoutRelation(1, 0, kLayoutRelationToRightOf);
-    parent->addLayoutRelation(0, 1, kLayoutRelationAlignParentLeft);
-    parent->addLayoutRelation(0, 0, kLayoutRelationAlignParentTop);
-    //*/
+    
+    parent->addLayoutRelation(a, a, kLayoutRelationCenterParentHorizontal);
+    ///parent->addLayoutRelation(a, b, kLayoutRelationCenterHorizontalWith);
+    parent->addLayoutRelation(a, a, kLayoutRelationCenterParentVertical);
+    
     lp.givenSize = CGSizeMake(120, 200);
     parent->measure(lp);
     parent->applyLayout();

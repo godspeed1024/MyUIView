@@ -28,22 +28,25 @@
 
 #define kLayoutRelationSetSelfBound         15
 
-#define kLayoutRelationCenterParentHorizontal  0x01
-#define kLayoutRelationCenterParentVertical    0x02
+#define kLayoutRelationCenterParentHorizontal  16
+#define kLayoutRelationCenterParentVertical    17
 
 #define VAR_LEFT    0
 #define VAR_TOP     1
 #define VAR_RIGHT   2
 #define VAR_BOTTOM  3
-#define VAR_HCENTER 4
-#define VAR_VCENTER 5
+
+#define RELATION_LESS_EQUAL      0
+#define RELATION_GREATER_EQUAL   1
+#define RELATION_LESS_EQUAL_N    2
+#define RELATION_GREATER_EQUAL_N 3
 
 #define RANGE_LOW_BOUND  0
 #define RANGE_HIGH_BOUND 1
 
 #define NA_VAR     -1
 
-#define NA_RANGE   INT_MIN
+#define NA_RANGE   (-32768.0f)
 
 #include <list>
 #include <map>
@@ -57,7 +60,7 @@ typedef struct
 {
     int leftOperandID;
     int rightOperandID;
-    int constant;
+    float constant;
     int relation;
 } LayoutConstraint;
 
@@ -83,9 +86,12 @@ public:
         rangeBounds[1] = NA_RANGE;
     }
     
-    // 0: this <= that;  1: this >= that
-    list<RelationGraphEdge> edgesFromMe[2];
-    int rangeBounds[2];
+    // 0: this <= that + k;
+    // 1: this >= that + k;
+    // 2: this <= k - that;
+    // 3: this >= k - that;
+    list<RelationGraphEdge> edgesFromMe[4];
+    float rangeBounds[2];
     int id;
 };
 

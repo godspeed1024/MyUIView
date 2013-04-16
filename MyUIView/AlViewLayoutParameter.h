@@ -23,10 +23,10 @@ typedef struct
     
     CGSize givenSize;
 
-    int marginLeft;
-    int marginTop;
-    int marginRight;
-    int marginBottom;
+    float marginLeft;
+    float marginTop;
+    float marginRight;
+    float marginBottom;
     
 } AlViewLayoutParameter;
 
