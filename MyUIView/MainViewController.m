@@ -83,23 +83,23 @@
     AlViewLayout* b = auvB.layouter;
     lp.givenSize = CGSizeMake(50, 50);
     lp.marginLeft = 5;
-    lp.marginRight = 5;
+    lp.marginRight = 0;
     lp.marginTop = 10;
     lp.marginBottom = 10;
-    //parent->addChild(b, lp);
+    parent->addChild(b, lp);
 
     parent->addLayoutRelation(b, b, kLayoutRelationAlignParentBottom);
     parent->addLayoutRelation(a, b, kLayoutRelationAlignParentRight);
     //parent->addLayoutRelation(a, b, kLayoutRelationAbove);
-    //parent->addLayoutRelation(b, a, kLayoutRelationToRightOf);
+    parent->addLayoutRelation(a, b, kLayoutRelationToRightOf);
     //parent->addLayoutRelation(a, b, kLayoutRelationAlignParentLeft);
-    //parent->addLayoutRelation(a, a, kLayoutRelationAlignParentTop);
+    parent->addLayoutRelation(a, a, kLayoutRelationAlignParentTop);
     
-    parent->addLayoutRelation(a, a, kLayoutRelationCenterParentHorizontal);
+    //parent->addLayoutRelation(a, a, kLayoutRelationCenterParentHorizontal);
     ///parent->addLayoutRelation(a, b, kLayoutRelationCenterHorizontalWith);
-    parent->addLayoutRelation(a, a, kLayoutRelationCenterParentVertical);
+    parent->addLayoutRelation(b, b, kLayoutRelationCenterParentVertical);
     
-    lp.givenSize = CGSizeMake(120, 200);
+    lp.givenSize = CGSizeMake(125, 200);
     parent->measure(lp);
     parent->applyLayout();
     

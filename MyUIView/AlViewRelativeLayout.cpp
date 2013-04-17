@@ -642,50 +642,51 @@ void AlViewRelativeLayout::decideRelationGraphs (map<int, RelationGraphNode*>& g
         // Find one node, at least one of which ranges can be confirmed :
         RelationGraphNode* node = iter->second;
         
-        int minAndMax[2];
+        
         if (NA_RANGE == node->rangeBounds[0] && NA_RANGE == node->rangeBounds[1])
         {
+            int minAndMax[2];
             node->rangeBounds[0] = 0;
             minAndMax[0] = 0;
             minAndMax[1] = 0;
-        }
-        else
-        {
-            minAndMax[0] = INT_MAX;
-            minAndMax[1] = INT_MIN;
-        }
-        recursiveTraverseRelationGraph(node, nodeCount, minAndMax, (CallbackInTraversingRelationGraph) (&AlViewRelativeLayout::decideRangeBounds));
-        
-        int offset = 0;
-        if (minAndMax[0] < 0)
-        {
-            offset = -minAndMax[0];
-        }
-        else
-        {
-            switch (node->id & 0x7)
+            
+            recursiveTraverseRelationGraph(node, nodeCount, minAndMax, (CallbackInTraversingRelationGraph) (&AlViewRelativeLayout::decideRangeBoundsArbitrarily));
+            
+            int offset = 0;
+            if (minAndMax[0] < 0)
             {
-                case VAR_LEFT:
-                case VAR_RIGHT:
-                    if (minAndMax[1] >= parentBound.width)
-                    {
-                        offset = parentBound.width - minAndMax[1];
-                    }
-                    
-                    break;
-                case VAR_TOP:
-                case VAR_BOTTOM:
-                    if (minAndMax[1] >= parentBound.height)
-                    {
-                        offset = parentBound.height - minAndMax[1];
-                    }
-                    break;
+                offset = -minAndMax[0];
+            }
+            else
+            {
+                switch (node->id & 0x7)
+                {
+                    case VAR_LEFT:
+                    case VAR_RIGHT:
+                        if (minAndMax[1] >= parentBound.width)
+                        {
+                            offset = parentBound.width - minAndMax[1];
+                        }
+                        
+                        break;
+                    case VAR_TOP:
+                    case VAR_BOTTOM:
+                        if (minAndMax[1] >= parentBound.height)
+                        {
+                            offset = parentBound.height - minAndMax[1];
+                        }
+                        break;
+                }
+            }
+            
+            if (0 != offset)
+            {
+                recursiveTraverseRelationGraph(node, nodeCount, &offset, (CallbackInTraversingRelationGraph) (&AlViewRelativeLayout::offsetRangeBounds));
             }
         }
-        
-        if (0 != offset)
+        else
         {
-            recursiveTraverseRelationGraph(node, nodeCount, &offset, (CallbackInTraversingRelationGraph) (&AlViewRelativeLayout::offsetRangeBounds));
+            recursiveTraverseRelationGraph(node, nodeCount, NULL, (CallbackInTraversingRelationGraph) (&AlViewRelativeLayout::decideRangeBounds));
         }
     }
 }
