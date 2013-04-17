@@ -7,8 +7,11 @@
 //
 
 #import "MainViewController.h"
-#import "AlUIView.h"
 #import "AlViewRelativeLayout.h"
+#import "UIAlLayouter.h"
+#import "UIRelativeLayouter.h"
+#import "UIView+AlViewLayout.h"
+
 
 @interface MainViewController ()
 
@@ -61,53 +64,53 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    AlViewRelativeLayout* parent = new AlViewRelativeLayout;
-    AlUIView* auvParent = [[AlUIView alloc] initWithUIView:_btnParent layouter:parent];
+    UIRelativeLayouter* layouterParent = [[UIRelativeLayouter alloc] initWithUIView:_btnParent];
+    [_btnParent setAlLayouter:layouterParent];
     
-    AlUIView* auvA = [[AlUIView alloc] initWithUIView:_btnA];
+    UIAlLayouter* layouterA = [[UIAlLayouter alloc] initWithUIView:_btnA layouter:NULL];
     
-    AlUIView* auvB = [[AlUIView alloc] initWithUIView:_btnB];
+    UIAlLayouter* layouterB = [[UIAlLayouter alloc] initWithUIView:_btnB layouter:NULL];
     
     AlViewLayoutParameter lp;
     lp.horizontalLayoutFlag = kLayoutFlagPrecise;
     lp.verticalLayoutFlag = kLayoutFlagPrecise;
     
-    AlViewLayout* a = auvA.layouter;
+    AlViewLayout* a = layouterA.layouter;
     lp.givenSize = CGSizeMake(60, 60);
     lp.marginLeft = 5;
     lp.marginRight = 5;
     lp.marginTop = 10;
     lp.marginBottom = 10;
-    parent->addChild(a, lp);
     
-    AlViewLayout* b = auvB.layouter;
+    AlViewRelativeLayout* alRelativeLayout = (AlViewRelativeLayout*) layouterParent.layouter;
+    alRelativeLayout->addChild(a, lp);
+    
+    AlViewLayout* b = layouterB.layouter;
     lp.givenSize = CGSizeMake(50, 50);
     lp.marginLeft = 5;
     lp.marginRight = 0;
     lp.marginTop = 10;
     lp.marginBottom = 10;
-    parent->addChild(b, lp);
+    alRelativeLayout->addChild(b, lp);
 
-    parent->addLayoutRelation(b, b, kLayoutRelationAlignParentBottom);
-    parent->addLayoutRelation(a, b, kLayoutRelationAlignParentRight);
-    //parent->addLayoutRelation(a, b, kLayoutRelationAbove);
-    parent->addLayoutRelation(a, b, kLayoutRelationToRightOf);
-    //parent->addLayoutRelation(a, b, kLayoutRelationAlignParentLeft);
-    parent->addLayoutRelation(a, a, kLayoutRelationAlignParentTop);
+    alRelativeLayout->addLayoutRelation(b, b, kLayoutRelationAlignParentBottom);
+    alRelativeLayout->addLayoutRelation(a, b, kLayoutRelationAlignParentRight);
+    //alRelativeLayout->addLayoutRelation(a, b, kLayoutRelationAbove);
+    alRelativeLayout->addLayoutRelation(a, b, kLayoutRelationToRightOf);
+    //alRelativeLayout->addLayoutRelation(a, b, kLayoutRelationAlignParentLeft);
+    alRelativeLayout->addLayoutRelation(a, a, kLayoutRelationAlignParentTop);
     
-    //parent->addLayoutRelation(a, a, kLayoutRelationCenterParentHorizontal);
-    ///parent->addLayoutRelation(a, b, kLayoutRelationCenterHorizontalWith);
-    parent->addLayoutRelation(b, b, kLayoutRelationCenterParentVertical);
+    //alRelativeLayout->addLayoutRelation(a, a, kLayoutRelationCenterParentHorizontal);
+    ///alRelativeLayout->addLayoutRelation(a, b, kLayoutRelationCenterHorizontalWith);
+    alRelativeLayout->addLayoutRelation(b, b, kLayoutRelationCenterParentVertical);
     
     lp.givenSize = CGSizeMake(125, 200);
-    parent->measure(lp);
-    parent->applyLayout();
+    alRelativeLayout->layout(lp);
+    alRelativeLayout->applyLayout();
     
-    delete parent;
-    
-    [auvParent release];
-    [auvA release];
-    [auvB release];
+    [layouterParent release];
+    [layouterA release];
+    [layouterB release];
 }
 
 - (void)didReceiveMemoryWarning

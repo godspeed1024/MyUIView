@@ -112,7 +112,7 @@ public:
     
     void addLayoutRelation (AlViewLayout* leftOperandChild, AlViewLayout* rightOperandChild, int layoutRelation);
     
-    void onMeasure (AlViewLayoutParameter givenLayoutParam);
+    void onLayout (AlViewLayoutParameter givenLayoutParam);
     
 protected:
     

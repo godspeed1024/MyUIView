@@ -288,7 +288,7 @@ void AlViewRelativeLayout::interpretLayoutConstraint (list<LayoutConstraint>* re
     }
 }
 
-void AlViewRelativeLayout::onMeasure (AlViewLayoutParameter givenLayoutParam)
+void AlViewRelativeLayout::onLayout (AlViewLayoutParameter givenLayoutParam)
 {
     CGSize myBound = givenLayoutParam.givenSize;
     
@@ -301,7 +301,7 @@ void AlViewRelativeLayout::onMeasure (AlViewLayoutParameter givenLayoutParam)
     for (map<int, ChildPair>::iterator iter = children.begin(); iter != children.end(); iter++)
     {
         ChildPair cp = iter->second;
-        cp.child->onMeasure(cp.parameter);
+        cp.child->onLayout(cp.parameter);
         lc.leftOperandID = iter->first;
         interpretLayoutConstraint(&constraints, lc, cp.child->getMinimalMeasuredSize());
     }

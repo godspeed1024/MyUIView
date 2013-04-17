@@ -1,5 +1,5 @@
 //
-//  AlUIView.h
+//  WrapAlLayouter.h
 //  MyUIView
 //
 //  Created by Li Kai on 13-3-28.
@@ -9,8 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "AlViewLayout.h"
 
-@interface AlUIView : NSObject
-
+@interface UIAlLayouter : NSObject
 {
     UIView* _view;
     AlViewLayout* _alViewLayout;
@@ -20,8 +19,6 @@
 
 @property (nonatomic, retain) UIView* view;
 @property (nonatomic, readonly) AlViewLayout* layouter;
-
-- (id) initWithUIView : (UIView*) wrappedView;
 
 - (id) initWithUIView : (UIView*) wrappedView
              layouter : (AlViewLayout*) viewLayouter;

@@ -1,5 +1,5 @@
 //
-//  AlUIView.m
+//  UIAlLayouter.m
 //  MyUIView
 //
 //  Created by Li Kai on 13-3-28.
@@ -7,33 +7,20 @@
 //
 
 #import "AlViewLayout.h"
-#import "AlUIView.h"
+#import "UIAlLayouter.h"
 
-@implementation AlUIView
+@implementation UIAlLayouter
 
 @synthesize view = _view;
 @synthesize layouter = _alViewLayout;
 
 void onSetFrame (void* ptr, CGRect frame)
 {
-    AlUIView* auv = (AlUIView*)ptr;
+    UIAlLayouter* auv = (UIAlLayouter*)ptr;
     if (NULL != auv)
     {
         [auv.view setFrame:frame];
     }
-}
-
-- (id) initWithUIView : (UIView*) wrappedView
-{
-    self = [super init];
-    if (nil != self)
-    {
-        self.view = wrappedView;
-        _alViewLayout = new AlViewLayout;
-        _alViewLayout->setDelegate(self, onSetFrame);
-        _isLayouterOwner = YES;
-    }
-    return self;
 }
 
 - (id) initWithUIView : (UIView*) wrappedView

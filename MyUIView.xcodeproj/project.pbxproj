@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		A238A832170BC4EC00F820D2 /* AlViewContainerLayout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A238A831170BC4EC00F820D2 /* AlViewContainerLayout.cpp */; };
 		A25B9E351717AC9300A1138D /* libpthread.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A25B9E341717AC9300A1138D /* libpthread.dylib */; };
+		A28FDB3C171E92F4001596DF /* UIView+AlViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A28FDB3B171E92F4001596DF /* UIView+AlViewLayout.m */; };
+		A28FDB3F171EA4D5001596DF /* UIRelativeLayouter.m in Sources */ = {isa = PBXBuildFile; fileRef = A28FDB3E171EA4D5001596DF /* UIRelativeLayouter.m */; };
 		A29CCC37170425B70068B119 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A29CCC36170425B70068B119 /* UIKit.framework */; };
 		A29CCC39170425B70068B119 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A29CCC38170425B70068B119 /* Foundation.framework */; };
 		A29CCC3B170425B70068B119 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A29CCC3A170425B70068B119 /* CoreGraphics.framework */; };
@@ -21,7 +23,7 @@
 		A29CCC4F170425B70068B119 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A29CCC4E170425B70068B119 /* Default-568h@2x.png */; };
 		A29CCC52170425B70068B119 /* MyUIView.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A29CCC50170425B70068B119 /* MyUIView.xcdatamodeld */; };
 		A29CCC5A170425E50068B119 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A29CCC59170425E50068B119 /* MainViewController.m */; };
-		A29CCC5E1704279E0068B119 /* AlUIView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A29CCC5D1704279E0068B119 /* AlUIView.mm */; };
+		A29CCC5E1704279E0068B119 /* UIAlLayouter.mm in Sources */ = {isa = PBXBuildFile; fileRef = A29CCC5D1704279E0068B119 /* UIAlLayouter.mm */; };
 		A29CCC6417042FC30068B119 /* AlViewLayout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A29CCC6217042FC30068B119 /* AlViewLayout.cpp */; };
 		A29CCC6B1704478B0068B119 /* AlViewRelativeLayout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A29CCC691704478A0068B119 /* AlViewRelativeLayout.cpp */; };
 		A2E3CA8B1709783C00968906 /* BitMatrix.c in Sources */ = {isa = PBXBuildFile; fileRef = A2E3CA8A1709783C00968906 /* BitMatrix.c */; };
@@ -30,6 +32,10 @@
 /* Begin PBXFileReference section */
 		A238A831170BC4EC00F820D2 /* AlViewContainerLayout.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AlViewContainerLayout.cpp; sourceTree = "<group>"; };
 		A25B9E341717AC9300A1138D /* libpthread.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpthread.dylib; path = usr/lib/libpthread.dylib; sourceTree = SDKROOT; };
+		A28FDB3A171E92F4001596DF /* UIView+AlViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AlViewLayout.h"; sourceTree = "<group>"; };
+		A28FDB3B171E92F4001596DF /* UIView+AlViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AlViewLayout.m"; sourceTree = "<group>"; };
+		A28FDB3D171EA4D5001596DF /* UIRelativeLayouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIRelativeLayouter.h; sourceTree = "<group>"; };
+		A28FDB3E171EA4D5001596DF /* UIRelativeLayouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIRelativeLayouter.m; sourceTree = "<group>"; };
 		A29CCC33170425B70068B119 /* MyUIView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyUIView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A29CCC36170425B70068B119 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A29CCC38170425B70068B119 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -47,8 +53,8 @@
 		A29CCC51170425B70068B119 /* MyUIView.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyUIView.xcdatamodel; sourceTree = "<group>"; };
 		A29CCC58170425E50068B119 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		A29CCC59170425E50068B119 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
-		A29CCC5C1704279E0068B119 /* AlUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlUIView.h; sourceTree = "<group>"; };
-		A29CCC5D1704279E0068B119 /* AlUIView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AlUIView.mm; sourceTree = "<group>"; };
+		A29CCC5C1704279E0068B119 /* UIAlLayouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAlLayouter.h; sourceTree = "<group>"; };
+		A29CCC5D1704279E0068B119 /* UIAlLayouter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UIAlLayouter.mm; sourceTree = "<group>"; };
 		A29CCC6217042FC30068B119 /* AlViewLayout.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AlViewLayout.cpp; sourceTree = "<group>"; };
 		A29CCC6317042FC30068B119 /* AlViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlViewLayout.h; sourceTree = "<group>"; };
 		A29CCC661704341E0068B119 /* AlViewContainerLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlViewContainerLayout.h; sourceTree = "<group>"; };
@@ -78,8 +84,12 @@
 		A238A833170C0BAB00F820D2 /* AlUIView */ = {
 			isa = PBXGroup;
 			children = (
-				A29CCC5C1704279E0068B119 /* AlUIView.h */,
-				A29CCC5D1704279E0068B119 /* AlUIView.mm */,
+				A29CCC5C1704279E0068B119 /* UIAlLayouter.h */,
+				A29CCC5D1704279E0068B119 /* UIAlLayouter.mm */,
+				A28FDB3A171E92F4001596DF /* UIView+AlViewLayout.h */,
+				A28FDB3B171E92F4001596DF /* UIView+AlViewLayout.m */,
+				A28FDB3D171EA4D5001596DF /* UIRelativeLayouter.h */,
+				A28FDB3E171EA4D5001596DF /* UIRelativeLayouter.m */,
 			);
 			name = AlUIView;
 			sourceTree = "<group>";
@@ -227,11 +237,13 @@
 				A29CCC49170425B70068B119 /* AppDelegate.m in Sources */,
 				A29CCC52170425B70068B119 /* MyUIView.xcdatamodeld in Sources */,
 				A29CCC5A170425E50068B119 /* MainViewController.m in Sources */,
-				A29CCC5E1704279E0068B119 /* AlUIView.mm in Sources */,
+				A29CCC5E1704279E0068B119 /* UIAlLayouter.mm in Sources */,
 				A29CCC6417042FC30068B119 /* AlViewLayout.cpp in Sources */,
 				A29CCC6B1704478B0068B119 /* AlViewRelativeLayout.cpp in Sources */,
 				A2E3CA8B1709783C00968906 /* BitMatrix.c in Sources */,
 				A238A832170BC4EC00F820D2 /* AlViewContainerLayout.cpp in Sources */,
+				A28FDB3C171E92F4001596DF /* UIView+AlViewLayout.m in Sources */,
+				A28FDB3F171EA4D5001596DF /* UIRelativeLayouter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

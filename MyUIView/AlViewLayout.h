@@ -30,13 +30,13 @@ public:
     
     CGRect getRect ();
     
-    void measure (AlViewLayoutParameter givenLayoutParam);
+    void layout (AlViewLayoutParameter givenLayoutParam);
     
     void setMinimalMeasuredSize (float width, float height);
     
     void setDesiredMeasuredSize (float width, float height);
     
-    virtual void onMeasure (AlViewLayoutParameter givenLayoutParam);
+    virtual void onLayout (AlViewLayoutParameter givenLayoutParam);
     
     CGSize getMinimalMeasuredSize ();
     CGSize getDesiredMeasuredSize ();

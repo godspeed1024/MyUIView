@@ -35,7 +35,8 @@ public:
     
     inline virtual ~AlViewContainerLayout (void)
     {
-        
+        children.clear();
+        child2IdMap.clear();
     }
     
     ///!!! Not thread-safe method !!!
