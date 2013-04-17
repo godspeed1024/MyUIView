@@ -89,7 +89,7 @@
     //parent->addChild(b, lp);
 
     //parent->addLayoutRelation(b, b, kLayoutRelationAlignParentBottom);
-    //parent->addLayoutRelation(b, a, kLayoutRelationAlignParentRight);
+    parent->addLayoutRelation(a, b, kLayoutRelationAlignParentRight);
     //parent->addLayoutRelation(a, b, kLayoutRelationAbove);
     //parent->addLayoutRelation(b, a, kLayoutRelationToRightOf);
     //parent->addLayoutRelation(a, b, kLayoutRelationAlignParentLeft);

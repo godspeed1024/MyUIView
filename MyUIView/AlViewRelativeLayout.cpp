@@ -181,14 +181,8 @@ void AlViewRelativeLayout::interpretLayoutConstraint (list<LayoutConstraint>* re
             
             break;
         case kLayoutRelationCenterParentHorizontal:
-            // L.Left <= (Width - L.Width) / 2
-            lc.leftOperandID |= VAR_LEFT;
-            lc.rightOperandID = NA_VAR;
-            lc.constant = (bound.width - leftChildPair->second.child->getMinimalMeasuredSize().width) / 2;
-            lc.relation = 0;
-            reinterpretedConstraints->push_back(lc);
-            
             // L.Left + L.Right = Width
+            lc.leftOperandID |= VAR_LEFT;
             lc.rightOperandID |= VAR_RIGHT;
             lc.constant = bound.width;
             lc.relation = RELATION_LESS_EQUAL_N;
@@ -196,21 +190,27 @@ void AlViewRelativeLayout::interpretLayoutConstraint (list<LayoutConstraint>* re
             lc.relation = RELATION_GREATER_EQUAL_N;
             reinterpretedConstraints->push_back(lc);
             
-            break;
-        case kLayoutRelationCenterParentVertical:
-            // L.Top <= (Height - L.Height) / 2
-            lc.leftOperandID |= VAR_TOP;
+            // L.Left <= (Width - L.Width) / 2
             lc.rightOperandID = NA_VAR;
-            lc.constant = (bound.height - leftChildPair->second.child->getMinimalMeasuredSize().height) / 2;
+            lc.constant = (bound.width - leftChildPair->second.child->getMinimalMeasuredSize().width) / 2;
             lc.relation = 0;
             reinterpretedConstraints->push_back(lc);
             
+            break;
+        case kLayoutRelationCenterParentVertical:
             // L.Top + L.Bottom = Height
+            lc.leftOperandID |= VAR_TOP;
             lc.rightOperandID |= VAR_BOTTOM;
             lc.constant = bound.height;
             lc.relation = RELATION_LESS_EQUAL_N;
             reinterpretedConstraints->push_back(lc);
             lc.relation = RELATION_GREATER_EQUAL_N;
+            reinterpretedConstraints->push_back(lc);
+            
+            // L.Top <= (Height - L.Height) / 2
+            lc.rightOperandID = NA_VAR;
+            lc.constant = (bound.height - leftChildPair->second.child->getMinimalMeasuredSize().height) / 2;
+            lc.relation = 0;
             reinterpretedConstraints->push_back(lc);
             
             break;
