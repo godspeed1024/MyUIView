@@ -95,13 +95,13 @@ public:
     int id;
 };
 
-// true : Skip
-typedef bool (*CallbackInTraversingRelationGraph) (RelationGraphNode* node, int direction, RelationGraphNode* fromNode, RelationGraphEdge* edge, void* param);
-
 
 class AlViewRelativeLayout : public AlViewContainerLayout
 {
 public:
+    
+    // true : Skip
+    typedef bool (AlViewRelativeLayout::*CallbackInTraversingRelationGraph) (RelationGraphNode* node, int direction, RelationGraphNode* fromNode, RelationGraphEdge* edge, void* param);
     
     inline virtual ~AlViewRelativeLayout (void)
     {
@@ -131,18 +131,29 @@ private:
     
     void updateRelationGraphs (map<int, RelationGraphNode*>& graphs, list<LayoutConstraint>* constraints);
     
-    map<int, RelationGraphNode*> relationGraphs;
+    void solveRelationGraphs (map<int, RelationGraphNode*>& graphs, int nodeCount);
+    
+    void decideRelationGraphs (map<int, RelationGraphNode*>& graphs, int nodeCount, CGSize& parentBound);
     
     static void clearRelationGraph (map<int, RelationGraphNode*>& graph);
     
-    static void recursiveTraverseRelationGraph (RelationGraphNode* startNode, int nodeCount,
+    map<int, RelationGraphNode*> relationGraphs;
+    
+    
+    bool updateRangeBounds (RelationGraphNode* node, int direction, RelationGraphNode* fromNode, RelationGraphEdge* edge, void* param);
+    
+    bool decideRangeBounds (RelationGraphNode* node, int direction, RelationGraphNode* fromNode, RelationGraphEdge* edge, void* param);
+    bool decideRangeBoundsArbitrarily (RelationGraphNode* node, int direction, RelationGraphNode* fromNode, RelationGraphEdge* edge, void* param);
+    
+    bool offsetRangeBounds (RelationGraphNode* node, int direction, RelationGraphNode* fromNode, RelationGraphEdge* edge, void* param);
+    
+    void recursiveTraverseRelationGraph (RelationGraphNode* startNode, int nodeCount,
                                                 void* param, CallbackInTraversingRelationGraph callback);
     
-    ///static void recursiveUpdateGraphNodes (RelationGraphNode* node, int direction, BitMatrix* stamps);
+    void doRecursiveTraverse (RelationGraphNode* curNode, int direction, RelationGraphNode* fromNode, RelationGraphEdge* edge,
+                              void* params, CallbackInTraversingRelationGraph callback);
     
-    static void solveRelationGraphs (map<int, RelationGraphNode*>& graphs, int nodeCount);
-    
-    static void decideRelationGraphs (map<int, RelationGraphNode*>& graphs, int nodeCount, CGSize& parentBound);
+    ///static void recursiveUpdateGraphNodes (RelationGraphNode* node, int direction, BitMatrix* stamps);    
 };
 
 #endif /* defined(__MyUIView__AlViewRelativeLayout__) */

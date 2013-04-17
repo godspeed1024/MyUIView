@@ -75,20 +75,20 @@
     AlViewLayout* a = auvA.layouter;
     lp.givenSize = CGSizeMake(60, 60);
     lp.marginLeft = 5;
-    lp.marginRight = 0;
+    lp.marginRight = 5;
     lp.marginTop = 10;
-    lp.marginBottom = 0;
+    lp.marginBottom = 10;
     parent->addChild(a, lp);
     
     AlViewLayout* b = auvB.layouter;
     lp.givenSize = CGSizeMake(50, 50);
-    lp.marginLeft = 0;
+    lp.marginLeft = 5;
     lp.marginRight = 5;
-    lp.marginTop = 0;
-    lp.marginBottom = 5;
+    lp.marginTop = 10;
+    lp.marginBottom = 10;
     //parent->addChild(b, lp);
 
-    //parent->addLayoutRelation(b, b, kLayoutRelationAlignParentBottom);
+    parent->addLayoutRelation(b, b, kLayoutRelationAlignParentBottom);
     parent->addLayoutRelation(a, b, kLayoutRelationAlignParentRight);
     //parent->addLayoutRelation(a, b, kLayoutRelationAbove);
     //parent->addLayoutRelation(b, a, kLayoutRelationToRightOf);
