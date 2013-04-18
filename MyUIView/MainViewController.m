@@ -93,16 +93,16 @@
     lp.marginBottom = 10;
     alRelativeLayout->addChild(b, lp);
 
-    //alRelativeLayout->addLayoutRelation(b, b, kLayoutRelationAlignParentBottom);
+    alRelativeLayout->addLayoutRelation(b, b, kLayoutRelationAlignParentBottom);
     //alRelativeLayout->addLayoutRelation(a, b, kLayoutRelationAlignParentRight);
-    //alRelativeLayout->addLayoutRelation(a, b, kLayoutRelationAbove);
+    alRelativeLayout->addLayoutRelation(a, b, kLayoutRelationAlignTopWith);
     alRelativeLayout->addLayoutRelation(a, b, kLayoutRelationToRightOf);
     //alRelativeLayout->addLayoutRelation(a, b, kLayoutRelationAlignParentLeft);
     //alRelativeLayout->addLayoutRelation(a, a, kLayoutRelationAlignParentTop);
     
     //alRelativeLayout->addLayoutRelation(a, a, kLayoutRelationCenterParentHorizontal);
     ///alRelativeLayout->addLayoutRelation(a, b, kLayoutRelationCenterHorizontalWith);
-    //alRelativeLayout->addLayoutRelation(b, b, kLayoutRelationCenterParentVertical);
+    alRelativeLayout->addLayoutRelation(b, b, kLayoutRelationCenterParentVertical);
     
     lp.givenSize = CGSizeMake(130, 200);
     alRelativeLayout->measure(lp);

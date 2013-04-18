@@ -9,6 +9,8 @@
 #include <stdlib.h>
 #include "AlViewRelativeLayout.h"
 
+#define DEBUG_OUTPUT
+
 void AlViewRelativeLayout::addLayoutRelation (int leftOperandID, int rightOperandID, int layoutRelation)
 {
     LayoutConstraint lc;
@@ -314,23 +316,23 @@ void AlViewRelativeLayout::onMeasure (AlViewLayoutParameter givenLayoutParam)
     updateRelationGraphs(relationGraphs, &constraints);
     
     solveRelationGraphs(relationGraphs, currentUsableID + 1);
-    
+#ifdef DEBUG_OUTPUT
     printf("\n");
     for (map<int, RelationGraphNode*>::iterator iter = relationGraphs.begin(); iter != relationGraphs.end(); iter++)
     {
         RelationGraphNode* curNode = iter->second;
         printf("Node#%d : [%f, %f]\n", iter->first, curNode->rangeBounds[0], curNode->rangeBounds[1]);
     }
-    
+#endif
     decideRelationGraphs(relationGraphs, currentUsableID + 1, myBound);
-    
+#ifdef DEBUG_OUTPUT
     printf("\n");
     for (map<int, RelationGraphNode*>::iterator iter = relationGraphs.begin(); iter != relationGraphs.end(); iter++)
     {
         RelationGraphNode* curNode = iter->second;
         printf("Node#%d : [%f, %f]\n", iter->first, curNode->rangeBounds[0], curNode->rangeBounds[1]);
     }
-    
+#endif
     for (map<int, ChildPair>::iterator iter = children.begin(); iter != children.end(); iter++)
     {
         ChildPair cp = iter->second;
@@ -663,14 +665,14 @@ void AlViewRelativeLayout::decideRelationGraphs (map<int, RelationGraphNode*>& g
             pastParams[1] = &max;
             
             recursiveTraverseRelationGraph(node, nodeCount, pastParams, (CallbackInTraversingRelationGraph) (&AlViewRelativeLayout::decideRangeBoundsArbitrarily), true);
-            
+#ifdef DEBUG_OUTPUT
             printf("\n\nAfter [decideRangeBoundsArbitrarily \n");///!!!For Debug
             for (map<int, RelationGraphNode*>::iterator iter = relationGraphs.begin(); iter != relationGraphs.end(); iter++)
             {
                 RelationGraphNode* curNode = iter->second;
                 printf("Node#%d : [%f, %f]\n", iter->first, curNode->rangeBounds[0], curNode->rangeBounds[1]);
             }
-            
+#endif
             int offset = 0;
             if (min < 0)
             {
@@ -715,14 +717,14 @@ void AlViewRelativeLayout::decideRelationGraphs (map<int, RelationGraphNode*>& g
                     }
                 }
             }
-            
+#ifdef DEBUG_OUTPUT
             printf("\n\nAfter [offsetRangeBounds \n");///!!!For Debug
             for (map<int, RelationGraphNode*>::iterator iter = relationGraphs.begin(); iter != relationGraphs.end(); iter++)
             {
                 RelationGraphNode* curNode = iter->second;
                 printf("Node#%d : [%f, %f]\n", iter->first, curNode->rangeBounds[0], curNode->rangeBounds[1]);
             }
-            
+#endif
             relevantNodes.clear();
         }
         else
