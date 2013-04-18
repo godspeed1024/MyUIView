@@ -114,6 +114,7 @@ void AlViewRelativeLayout::interpretLayoutConstraint (LayoutConstraint originalL
             // L.Top >= R.Top
             lc.leftOperandID |= VAR_TOP;
             lc.rightOperandID |= VAR_TOP;
+            lc.constant = 0;
             lc.relation = 1;
             interpretedConstraints.push_back(lc);
             
@@ -126,6 +127,7 @@ void AlViewRelativeLayout::interpretLayoutConstraint (LayoutConstraint originalL
             // L.Bottom >= R.Bottom
             lc.leftOperandID |= VAR_BOTTOM;
             lc.rightOperandID |= VAR_BOTTOM;
+            lc.constant = 0;
             lc.relation = 1;
             interpretedConstraints.push_back(lc);
             
@@ -137,6 +139,7 @@ void AlViewRelativeLayout::interpretLayoutConstraint (LayoutConstraint originalL
             // L.Left >= R.Left
             lc.leftOperandID |= VAR_LEFT;
             lc.rightOperandID |= VAR_LEFT;
+            lc.constant = 0;
             lc.relation = 1;
             interpretedConstraints.push_back(lc);
             
@@ -148,6 +151,7 @@ void AlViewRelativeLayout::interpretLayoutConstraint (LayoutConstraint originalL
             // L.Right >= R.Right
             lc.leftOperandID |= VAR_RIGHT;
             lc.rightOperandID |= VAR_RIGHT;
+            lc.constant = 0;
             lc.relation = 1;
             interpretedConstraints.push_back(lc);
             
@@ -367,14 +371,17 @@ void AlViewRelativeLayout::doRecursiveTraverse (RelationGraphNode* curNode, int 
             return;
         }
         
-        for (list<RelationGraphEdge>::iterator iter = curNode->edgesFromMe[direction].begin();
-             iter != curNode->edgesFromMe[direction].end(); iter++)
+        for (int d=0; d<4; d++)
+        {///!!!
+        for (list<RelationGraphEdge>::iterator iter = curNode->edgesFromMe[d].begin();
+             iter != curNode->edgesFromMe[d].end(); iter++)
         {
             RelationGraphNode* nextNode = iter->nextNode;
             if (NULL == nextNode) continue;
             if (1 == BitMatrixGet(pBitmap, 0, nextNode->id)) continue;
             
-            doRecursiveTraverse(nextNode, direction, curNode, (RelationGraphEdge*) &*iter, params, callback, allowReEnterInNode);
+            doRecursiveTraverse(nextNode, d, curNode, (RelationGraphEdge*) &*iter, params, callback, allowReEnterInNode);
+        }
         }
     }
     
@@ -441,7 +448,7 @@ bool AlViewRelativeLayout::updateRangeBounds (RelationGraphNode* node, int direc
         }
         else
         {
-            return true;
+            return true;///!!!false;///!!!
         }
     }
 }
