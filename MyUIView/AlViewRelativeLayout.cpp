@@ -387,25 +387,13 @@ void AlViewRelativeLayout::recursiveTraverseRelationGraph (RelationGraphNode* st
                                      bool allowReEnterInNode)
 {
     BitMatrix bm = CreateBitMatrix(1, nodeCount);
-    if (!allowReEnterInNode)
-    {
-        BitMatrixSetAllBits(&bm, 0);
-    }
-    
     void* params[2];
     params[0] = &bm;
     params[1] = param;
     
     for (int direction = 0; direction < 4; direction++)
     {
-        if (allowReEnterInNode)
-        {
-            BitMatrixSetAllBits(&bm, 0);
-        }
-        else if (1 == BitMatrixGet(&bm, 0, startNode->id))
-        {
-            continue;
-        }
+        BitMatrixSetAllBits(&bm, 0);
         
         doRecursiveTraverse(startNode, direction, NULL, NULL, params, callback, allowReEnterInNode);
     }
@@ -462,7 +450,7 @@ bool AlViewRelativeLayout::decideRangeBounds (RelationGraphNode* node, int direc
     {
         if (node->rangeBounds[1] == node->rangeBounds[0])
         {
-            return true;
+            return false;
         }
         else if (node->rangeBounds[0] != NA_RANGE)
         {
@@ -511,7 +499,12 @@ bool AlViewRelativeLayout::decideRangeBounds (RelationGraphNode* node, int direc
 
 bool AlViewRelativeLayout::decideRangeBoundsArbitrarily (RelationGraphNode* node, int direction, RelationGraphNode* fromNode, RelationGraphEdge* edge, void* param)
 {
-    int* minAndMax = (int*) param;
+    void** pastParams = (void**)param;
+    map<RelationGraphNode*, int>* pRelevantNodes = (map<RelationGraphNode*, int>*) pastParams[2];
+    int* pMin = ((int*) pastParams[0]);
+    int* pMax = ((int*) pastParams[1]);
+    
+    (*pRelevantNodes)[node] = 1;
     
     float margin0 = 0, margin1 = 0;
     map<int, ChildPair>::iterator foundChild = children.find(node->id >> 3);
@@ -536,40 +529,29 @@ bool AlViewRelativeLayout::decideRangeBoundsArbitrarily (RelationGraphNode* node
     
     if (NULL == fromNode)
     {
-        if (node->rangeBounds[1] == node->rangeBounds[0])
-        {
-            return true;
-        }
-        else if (node->rangeBounds[0] != NA_RANGE)
+        if (node->rangeBounds[0] != NA_RANGE)
         {
             node->rangeBounds[1] = node->rangeBounds[0];
-            
-            if (node->rangeBounds[0] + margin0 < minAndMax[0])
-            {
-                minAndMax[0] = node->rangeBounds[0] + margin0;
-            }
-            if (node->rangeBounds[0] + margin1 > minAndMax[1])
-            {
-                minAndMax[1] = node->rangeBounds[0] + margin1;
-            }
-            
-            return false;
         }
         else if (node->rangeBounds[1] != NA_RANGE)
         {
             node->rangeBounds[0] = node->rangeBounds[1];
-            
-            if (node->rangeBounds[1] + margin0 < minAndMax[0])
-            {
-                minAndMax[0] = node->rangeBounds[1] + margin0;
-            }
-            if (node->rangeBounds[1] + margin1 > minAndMax[1])
-            {
-                minAndMax[1] = node->rangeBounds[1] + margin1;
-            }
-            
-            return false;
         }
+        else
+        {
+            return true;
+        }
+        
+        if (node->rangeBounds[0] + margin0 < *pMin)
+        {
+            *pMin = node->rangeBounds[0] + margin0;
+        }
+        if (node->rangeBounds[0] + margin1 > *pMax)
+        {
+            *pMax = node->rangeBounds[0] + margin1;
+        }
+        
+        return false;
     }
     
     if (2 > direction)
@@ -583,13 +565,13 @@ bool AlViewRelativeLayout::decideRangeBoundsArbitrarily (RelationGraphNode* node
         {
             node->rangeBounds[direction] = newBoundValue;
             
-            if (newBoundValue + margin0 < minAndMax[0])
+            if (newBoundValue + margin0 < *pMin)
             {
-                minAndMax[0] = newBoundValue + margin0;
+                *pMin = newBoundValue + margin0;
             }
-            if (newBoundValue + margin1 > minAndMax[1])
+            if (newBoundValue + margin1 > *pMax)
             {
-                minAndMax[1] = newBoundValue + margin1;
+                *pMax = newBoundValue + margin1;
             }
             
             return false;///!!!
@@ -609,13 +591,13 @@ bool AlViewRelativeLayout::decideRangeBoundsArbitrarily (RelationGraphNode* node
         {
             node->rangeBounds[1 - direction] = newBoundValue;
             
-            if (newBoundValue + margin0 < minAndMax[0])
+            if (newBoundValue + margin0 < *pMin)
             {
-                minAndMax[0] = newBoundValue + margin0;
+                *pMin = newBoundValue + margin0;
             }
-            if (newBoundValue + margin1 > minAndMax[1])
+            if (newBoundValue + margin1 > *pMax)
             {
-                minAndMax[1] = newBoundValue + margin1;
+                *pMax = newBoundValue + margin1;
             }
             
             return false;///!!!
@@ -663,17 +645,30 @@ void AlViewRelativeLayout::decideRelationGraphs (map<int, RelationGraphNode*>& g
         
         if (NA_RANGE == node->rangeBounds[0] && NA_RANGE == node->rangeBounds[1])
         {
-            int minAndMax[2];
             node->rangeBounds[0] = 0;
-            minAndMax[0] = 0;
-            minAndMax[1] = 0;
+            node->rangeBounds[1] = 0;
             
-            recursiveTraverseRelationGraph(node, nodeCount, minAndMax, (CallbackInTraversingRelationGraph) (&AlViewRelativeLayout::decideRangeBoundsArbitrarily), true);
+            void* pastParams[3];
+            map<RelationGraphNode*, int> relevantNodes;
+            int min = 0;
+            int max = 0;
+            pastParams[2] = &relevantNodes;
+            pastParams[0] = &min;
+            pastParams[1] = &max;
+            
+            recursiveTraverseRelationGraph(node, nodeCount, pastParams, (CallbackInTraversingRelationGraph) (&AlViewRelativeLayout::decideRangeBoundsArbitrarily), true);
+            
+            printf("\n\nAfter [decideRangeBoundsArbitrarily \n");///!!!For Debug
+            for (map<int, RelationGraphNode*>::iterator iter = relationGraphs.begin(); iter != relationGraphs.end(); iter++)
+            {
+                RelationGraphNode* curNode = iter->second;
+                printf("Node#%d : [%f, %f]\n", iter->first, curNode->rangeBounds[0], curNode->rangeBounds[1]);
+            }
             
             int offset = 0;
-            if (minAndMax[0] < 0)
+            if (min < 0)
             {
-                offset = -minAndMax[0];
+                offset = -min;
             }
             else
             {
@@ -681,17 +676,17 @@ void AlViewRelativeLayout::decideRelationGraphs (map<int, RelationGraphNode*>& g
                 {
                     case VAR_LEFT:
                     case VAR_RIGHT:
-                        if (minAndMax[1] >= parentBound.width)
+                        if (max >= parentBound.width)
                         {
-                            offset = parentBound.width - minAndMax[1];
+                            offset = parentBound.width - max;
                         }
                         
                         break;
                     case VAR_TOP:
                     case VAR_BOTTOM:
-                        if (minAndMax[1] >= parentBound.height)
+                        if (max >= parentBound.height)
                         {
-                            offset = parentBound.height - minAndMax[1];
+                            offset = parentBound.height - max;
                         }
                         break;
                 }
@@ -699,8 +694,22 @@ void AlViewRelativeLayout::decideRelationGraphs (map<int, RelationGraphNode*>& g
             
             if (0 != offset)
             {
-                recursiveTraverseRelationGraph(node, nodeCount, &offset, (CallbackInTraversingRelationGraph) (&AlViewRelativeLayout::offsetRangeBounds), false);
+                for (map<RelationGraphNode*, int>::iterator iter = relevantNodes.begin(); iter != relevantNodes.end(); iter++)
+                {
+                    RelationGraphNode* nodeToAdust = iter->first;
+                    nodeToAdust->rangeBounds[0] += offset;
+                    nodeToAdust->rangeBounds[1] += offset;
+                }
             }
+            
+            printf("\n\nAfter [offsetRangeBounds \n");///!!!For Debug
+            for (map<int, RelationGraphNode*>::iterator iter = relationGraphs.begin(); iter != relationGraphs.end(); iter++)
+            {
+                RelationGraphNode* curNode = iter->second;
+                printf("Node#%d : [%f, %f]\n", iter->first, curNode->rangeBounds[0], curNode->rangeBounds[1]);
+            }
+            
+            relevantNodes.clear();
         }
         else
         {
