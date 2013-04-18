@@ -112,7 +112,7 @@ public:
     
     void addLayoutRelation (AlViewLayout* leftOperandChild, AlViewLayout* rightOperandChild, int layoutRelation);
     
-    void onLayout (AlViewLayoutParameter givenLayoutParam);
+    void onMeasure (AlViewLayoutParameter givenLayoutParam);
     
 protected:
     
@@ -148,10 +148,12 @@ private:
     bool offsetRangeBounds (RelationGraphNode* node, int direction, RelationGraphNode* fromNode, RelationGraphEdge* edge, void* param);
     
     void recursiveTraverseRelationGraph (RelationGraphNode* startNode, int nodeCount,
-                                                void* param, CallbackInTraversingRelationGraph callback);
+                                         void* param, CallbackInTraversingRelationGraph callback,
+                                         bool allowReEnterInNode);
     
     void doRecursiveTraverse (RelationGraphNode* curNode, int direction, RelationGraphNode* fromNode, RelationGraphEdge* edge,
-                              void* params, CallbackInTraversingRelationGraph callback);
+                              void* params, CallbackInTraversingRelationGraph callback,
+                              bool allowReEnterInNode);
     
     ///static void recursiveUpdateGraphNodes (RelationGraphNode* node, int direction, BitMatrix* stamps);    
 };

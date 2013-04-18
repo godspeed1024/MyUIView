@@ -36,12 +36,12 @@ CGSize AlViewLayout::getDesiredMeasuredSize ()
     return _desiredMeasuredSize;
 }
 
-void AlViewLayout::layout (AlViewLayoutParameter givenLayoutParam)
+void AlViewLayout::measure (AlViewLayoutParameter givenLayoutParam)
 {
     _isMinimalSizeSet = false;
     _isDesiredSizeSet = false;
     
-    onLayout(givenLayoutParam);
+    onMeasure(givenLayoutParam);
     
     if (!_isMinimalSizeSet)
     {
@@ -82,7 +82,7 @@ void AlViewLayout::applyLayout ()
     }
 }
 
-void AlViewLayout::onLayout (AlViewLayoutParameter givenLayoutParam)
+void AlViewLayout::onMeasure (AlViewLayoutParameter givenLayoutParam)
 {
     
     switch (givenLayoutParam.horizontalLayoutFlag)

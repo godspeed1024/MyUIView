@@ -288,7 +288,7 @@ void AlViewRelativeLayout::interpretLayoutConstraint (list<LayoutConstraint>* re
     }
 }
 
-void AlViewRelativeLayout::onLayout (AlViewLayoutParameter givenLayoutParam)
+void AlViewRelativeLayout::onMeasure (AlViewLayoutParameter givenLayoutParam)
 {
     CGSize myBound = givenLayoutParam.givenSize;
     
@@ -301,7 +301,7 @@ void AlViewRelativeLayout::onLayout (AlViewLayoutParameter givenLayoutParam)
     for (map<int, ChildPair>::iterator iter = children.begin(); iter != children.end(); iter++)
     {
         ChildPair cp = iter->second;
-        cp.child->onLayout(cp.parameter);
+        cp.child->onMeasure(cp.parameter);
         lc.leftOperandID = iter->first;
         interpretLayoutConstraint(&constraints, lc, cp.child->getMinimalMeasuredSize());
     }
@@ -349,12 +349,13 @@ void AlViewRelativeLayout::onLayout (AlViewLayoutParameter givenLayoutParam)
 }
 
 void AlViewRelativeLayout::doRecursiveTraverse (RelationGraphNode* curNode, int direction, RelationGraphNode* fromNode, RelationGraphEdge* edge,
-                          void* params, CallbackInTraversingRelationGraph callback)
+                                                void* params, CallbackInTraversingRelationGraph callback,
+                                                bool allowReEnterInNode)
 {
     BitMatrix* pBitmap = (BitMatrix*) ((void**) params)[0];
     void* callbackParam = ((void**) params)[1];
-    
     BitMatrixSetBit(pBitmap, 0, curNode->id, 1);
+    
     if (NULL != callback)
     {
         bool skip = (this->*callback)(curNode, direction, fromNode, edge, callbackParam);
@@ -371,16 +372,25 @@ void AlViewRelativeLayout::doRecursiveTraverse (RelationGraphNode* curNode, int 
             if (NULL == nextNode) continue;
             if (1 == BitMatrixGet(pBitmap, 0, nextNode->id)) continue;
             
-            doRecursiveTraverse(nextNode, direction, curNode, (RelationGraphEdge*) &*iter, params, callback);
+            doRecursiveTraverse(nextNode, direction, curNode, (RelationGraphEdge*) &*iter, params, callback, allowReEnterInNode);
         }
     }
-    BitMatrixSetBit(pBitmap, 0, curNode->id, 0);
+    
+    if (allowReEnterInNode)
+    {
+        BitMatrixSetBit(pBitmap, 0, curNode->id, 0);
+    }
 }
 
 void AlViewRelativeLayout::recursiveTraverseRelationGraph (RelationGraphNode* startNode, int nodeCount,
-                                     void* param, CallbackInTraversingRelationGraph callback)
+                                     void* param, CallbackInTraversingRelationGraph callback,
+                                     bool allowReEnterInNode)
 {
     BitMatrix bm = CreateBitMatrix(1, nodeCount);
+    if (!allowReEnterInNode)
+    {
+        BitMatrixSetAllBits(&bm, 0);
+    }
     
     void* params[2];
     params[0] = &bm;
@@ -388,8 +398,16 @@ void AlViewRelativeLayout::recursiveTraverseRelationGraph (RelationGraphNode* st
     
     for (int direction = 0; direction < 4; direction++)
     {
-        BitMatrixSetAllBits(&bm, 0);
-        doRecursiveTraverse(startNode, direction, NULL, NULL, params, callback);
+        if (allowReEnterInNode)
+        {
+            BitMatrixSetAllBits(&bm, 0);
+        }
+        else if (1 == BitMatrixGet(&bm, 0, startNode->id))
+        {
+            continue;
+        }
+        
+        doRecursiveTraverse(startNode, direction, NULL, NULL, params, callback, allowReEnterInNode);
     }
     
     ReleaseBitMatrix(&bm);
@@ -556,7 +574,7 @@ bool AlViewRelativeLayout::decideRangeBoundsArbitrarily (RelationGraphNode* node
     
     if (2 > direction)
     {
-        map<int, ChildPair>::iterator foundChild = children.find(node->id >> 3);
+        //map<int, ChildPair>::iterator foundChild = children.find(node->id >> 3);
         
         float newBoundValue = fromNode->rangeBounds[direction] - edge->weight;
         if (NA_RANGE == node->rangeBounds[direction] ||
@@ -631,7 +649,7 @@ void AlViewRelativeLayout::solveRelationGraphs (map<int, RelationGraphNode*>& gr
     {
         // Find one node, at least one of which ranges can be confirmed :
         RelationGraphNode* node = iter->second;
-        recursiveTraverseRelationGraph(node, nodeCount, &graphs, (CallbackInTraversingRelationGraph) (&AlViewRelativeLayout::updateRangeBounds));
+        recursiveTraverseRelationGraph(node, nodeCount, &graphs, (CallbackInTraversingRelationGraph) (&AlViewRelativeLayout::updateRangeBounds), true);
     }
 }
 
@@ -650,7 +668,7 @@ void AlViewRelativeLayout::decideRelationGraphs (map<int, RelationGraphNode*>& g
             minAndMax[0] = 0;
             minAndMax[1] = 0;
             
-            recursiveTraverseRelationGraph(node, nodeCount, minAndMax, (CallbackInTraversingRelationGraph) (&AlViewRelativeLayout::decideRangeBoundsArbitrarily));
+            recursiveTraverseRelationGraph(node, nodeCount, minAndMax, (CallbackInTraversingRelationGraph) (&AlViewRelativeLayout::decideRangeBoundsArbitrarily), true);
             
             int offset = 0;
             if (minAndMax[0] < 0)
@@ -681,12 +699,12 @@ void AlViewRelativeLayout::decideRelationGraphs (map<int, RelationGraphNode*>& g
             
             if (0 != offset)
             {
-                recursiveTraverseRelationGraph(node, nodeCount, &offset, (CallbackInTraversingRelationGraph) (&AlViewRelativeLayout::offsetRangeBounds));
+                recursiveTraverseRelationGraph(node, nodeCount, &offset, (CallbackInTraversingRelationGraph) (&AlViewRelativeLayout::offsetRangeBounds), false);
             }
         }
         else
         {
-            recursiveTraverseRelationGraph(node, nodeCount, NULL, (CallbackInTraversingRelationGraph) (&AlViewRelativeLayout::decideRangeBounds));
+            recursiveTraverseRelationGraph(node, nodeCount, NULL, (CallbackInTraversingRelationGraph) (&AlViewRelativeLayout::decideRangeBounds), true);
         }
     }
 }
