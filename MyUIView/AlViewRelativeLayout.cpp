@@ -613,15 +613,21 @@ bool AlViewRelativeLayout::offsetRangeBounds (RelationGraphNode* node, int direc
 {
     int offset = *((int*) param);
     
-    if (NA_RANGE == node->rangeBounds[1] && NA_RANGE == node->rangeBounds[0])
+    if (NA_RANGE != node->rangeBounds[0])
     {
-        return true;
+        node->rangeBounds[0] += offset;
+        node->rangeBounds[1] = node->rangeBounds[0];
+        return false;
+    }
+    else if (NA_RANGE != node->rangeBounds[1])
+    {
+        node->rangeBounds[1] += offset;
+        node->rangeBounds[0] = node->rangeBounds[1];
+        return false;
     }
     else
     {
-        node->rangeBounds[0] += offset;
-        node->rangeBounds[1] += offset;
-        return false;
+        return true;
     }
 }
 
@@ -697,8 +703,16 @@ void AlViewRelativeLayout::decideRelationGraphs (map<int, RelationGraphNode*>& g
                 for (map<RelationGraphNode*, int>::iterator iter = relevantNodes.begin(); iter != relevantNodes.end(); iter++)
                 {
                     RelationGraphNode* nodeToAdust = iter->first;
-                    nodeToAdust->rangeBounds[0] += offset;
-                    nodeToAdust->rangeBounds[1] += offset;
+                    if (NA_RANGE != nodeToAdust->rangeBounds[0])
+                    {
+                        nodeToAdust->rangeBounds[0] += offset;
+                        nodeToAdust->rangeBounds[1] = nodeToAdust->rangeBounds[0];
+                    }
+                    else if (NA_RANGE != nodeToAdust->rangeBounds[1])
+                    {
+                        nodeToAdust->rangeBounds[1] += offset;
+                        nodeToAdust->rangeBounds[0] = nodeToAdust->rangeBounds[1];
+                    }
                 }
             }
             
