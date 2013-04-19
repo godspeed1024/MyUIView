@@ -440,37 +440,49 @@ bool AlViewRelativeLayout::updateRangeBounds (RelationGraphNode* node, int direc
             return false;
     }
     
-    if (2 > direction)
+    float newBoundValue0 = NA_RANGE;
+    float newBoundValue1 = NA_RANGE;
+    switch (direction)
     {
-        float newBoundValue = fromNode->rangeBounds[direction] - edge->weight;
-        if (NA_RANGE == node->rangeBounds[direction] ||
-            (0 == direction && newBoundValue > node->rangeBounds[0]) ||
-            (1 == direction && newBoundValue < node->rangeBounds[1]))
-        {
-            node->rangeBounds[direction] = newBoundValue;
-            return false;///!!!
-        }
-        else
-        {
-            return true;
-        }
+        case RELATION_LESS_EQUAL:
+        case RELATION_GREATER_EQUAL:
+            if (NA_RANGE != fromNode->rangeBounds[0])
+            {
+                newBoundValue0 = fromNode->rangeBounds[0] - edge->weight;
+            }
+            if (NA_RANGE != fromNode->rangeBounds[1])
+            {
+                newBoundValue1 = fromNode->rangeBounds[1] - edge->weight;
+            }
+            break;
+            
+        case RELATION_LESS_EQUAL_N:
+        case RELATION_GREATER_EQUAL_N:
+            if (NA_RANGE != fromNode->rangeBounds[1])
+            {
+                newBoundValue0 = edge->weight - fromNode->rangeBounds[1];
+            }
+            if (NA_RANGE != fromNode->rangeBounds[0])
+            {
+                newBoundValue1 = edge->weight - fromNode->rangeBounds[0];
+            }
+            break;
     }
-    else
+    
+    if (NA_RANGE != newBoundValue0 &&
+        (NA_RANGE == node->rangeBounds[0] || newBoundValue0 > node->rangeBounds[0]))
     {
-        direction &= 0x01;
-        float newBoundValue = edge->weight - fromNode->rangeBounds[direction];
-        if (NA_RANGE == node->rangeBounds[1 - direction] ||
-            (1 == direction && newBoundValue > node->rangeBounds[0]) ||
-            (0 == direction && newBoundValue < node->rangeBounds[1]))
-        {
-            node->rangeBounds[1 - direction] = newBoundValue;
-            return false;///!!!
-        }
-        else
-        {
-            return true;///!!!false;///!!!
-        }
+        node->rangeBounds[0] = newBoundValue0;
+        return false;
     }
+    if (NA_RANGE != newBoundValue1 &&
+        (NA_RANGE == node->rangeBounds[1] || newBoundValue1 < node->rangeBounds[1]))
+    {
+        node->rangeBounds[1] = newBoundValue1;
+        return false;
+    }
+    
+    return true;
 }
 
 bool AlViewRelativeLayout::decideRangeBounds (RelationGraphNode* node, int direction, RelationGraphNode* fromNode, RelationGraphEdge* edge, void* param)
@@ -479,51 +491,63 @@ bool AlViewRelativeLayout::decideRangeBounds (RelationGraphNode* node, int direc
     {
         if (node->rangeBounds[1] == node->rangeBounds[0])
         {
-            return false;
+            return false;///!!! true ???
         }
         else if (node->rangeBounds[0] != NA_RANGE)
         {
             node->rangeBounds[1] = node->rangeBounds[0];
             return false;
         }
-        else if (node->rangeBounds[1] != NA_RANGE)
+        else ///!!! if (node->rangeBounds[1] != NA_RANGE)
         {
             node->rangeBounds[0] = node->rangeBounds[1];
             return false;
         }
     }
     
-    if (2 > direction)
+    float newBoundValue0 = NA_RANGE;
+    float newBoundValue1 = NA_RANGE;
+    switch (direction)
     {
-        float newBoundValue = fromNode->rangeBounds[direction] - edge->weight;
-        if (NA_RANGE == node->rangeBounds[direction] ||
-            (0 == direction && newBoundValue > node->rangeBounds[0]) ||
-            (1 == direction && newBoundValue < node->rangeBounds[1]))
-        {
-            node->rangeBounds[direction] = newBoundValue;
-            return false;///!!!
-        }
-        else
-        {
-            return true;
-        }
+        case RELATION_LESS_EQUAL:
+        case RELATION_GREATER_EQUAL:
+            if (NA_RANGE != fromNode->rangeBounds[0])
+            {
+                newBoundValue0 = fromNode->rangeBounds[0] - edge->weight;
+            }
+            if (NA_RANGE != fromNode->rangeBounds[1])
+            {
+                newBoundValue1 = fromNode->rangeBounds[1] - edge->weight;
+            }
+            break;
+            
+        case RELATION_LESS_EQUAL_N:
+        case RELATION_GREATER_EQUAL_N:
+            if (NA_RANGE != fromNode->rangeBounds[1])
+            {
+                newBoundValue0 = edge->weight - fromNode->rangeBounds[1];
+            }
+            if (NA_RANGE != fromNode->rangeBounds[0])
+            {
+                newBoundValue1 = edge->weight - fromNode->rangeBounds[0];
+            }
+            break;
     }
-    else
+    
+    if (NA_RANGE != newBoundValue0 &&
+        (NA_RANGE == node->rangeBounds[0] || newBoundValue0 > node->rangeBounds[0]))
     {
-        direction &= 0x01;
-        float newBoundValue = edge->weight - fromNode->rangeBounds[direction];
-        if (NA_RANGE == node->rangeBounds[1 - direction] ||
-            (1 == direction && newBoundValue > node->rangeBounds[0]) ||
-            (0 == direction && newBoundValue < node->rangeBounds[1]))
-        {
-            node->rangeBounds[1 - direction] = newBoundValue;
-            return false;///!!!
-        }
-        else
-        {
-            return true;
-        }
+        node->rangeBounds[0] = newBoundValue0;
+        return false;
     }
+    if (NA_RANGE != newBoundValue1 &&
+        (NA_RANGE == node->rangeBounds[1] || newBoundValue1 < node->rangeBounds[1]))
+    {
+        node->rangeBounds[1] = newBoundValue1;
+        return false;
+    }
+    
+    return true;
 }
 
 bool AlViewRelativeLayout::decideRangeBoundsArbitrarily (RelationGraphNode* node, int direction, RelationGraphNode* fromNode, RelationGraphEdge* edge, void* param)
@@ -583,59 +607,69 @@ bool AlViewRelativeLayout::decideRangeBoundsArbitrarily (RelationGraphNode* node
         return false;
     }
     
-    if (2 > direction)
+    float newBoundValue0 = NA_RANGE;
+    float newBoundValue1 = NA_RANGE;
+    switch (direction)
     {
-        //map<int, ChildPair>::iterator foundChild = children.find(node->id >> 3);
-        
-        float newBoundValue = fromNode->rangeBounds[direction] - edge->weight;
-        if (NA_RANGE == node->rangeBounds[direction] ||
-            (0 == direction && newBoundValue > node->rangeBounds[0]) ||
-            (1 == direction && newBoundValue < node->rangeBounds[1]))
-        {
-            node->rangeBounds[direction] = newBoundValue;
-            
-            if (newBoundValue + margin0 < *pMin)
+        case RELATION_LESS_EQUAL:
+        case RELATION_GREATER_EQUAL:
+            if (NA_RANGE != fromNode->rangeBounds[0])
             {
-                *pMin = newBoundValue + margin0;
+                newBoundValue0 = fromNode->rangeBounds[0] - edge->weight;
+                
+                if (newBoundValue0 + margin0 < *pMin)
+                {
+                    *pMin = newBoundValue0 + margin0;
+                }
             }
-            if (newBoundValue + margin1 > *pMax)
+            if (NA_RANGE != fromNode->rangeBounds[1])
             {
-                *pMax = newBoundValue + margin1;
+                newBoundValue1 = fromNode->rangeBounds[1] - edge->weight;
+                
+                if (newBoundValue1 + margin1 > *pMax)
+                {
+                    *pMax = newBoundValue1 + margin1;
+                }
             }
+            break;
             
-            return false;///!!!
-        }
-        else
-        {
-            return true;
-        }
+        case RELATION_LESS_EQUAL_N:
+        case RELATION_GREATER_EQUAL_N:
+            if (NA_RANGE != fromNode->rangeBounds[1])
+            {
+                newBoundValue0 = edge->weight - fromNode->rangeBounds[1];
+                
+                if (newBoundValue0 + margin0 < *pMin)
+                {
+                    *pMin = newBoundValue0 + margin0;
+                }
+            }
+            if (NA_RANGE != fromNode->rangeBounds[0])
+            {
+                newBoundValue1 = edge->weight - fromNode->rangeBounds[0];
+                
+                if (newBoundValue1 + margin1 > *pMax)
+                {
+                    *pMax = newBoundValue1 + margin1;
+                }
+            }
+            break;
     }
-    else
+    
+    if (NA_RANGE != newBoundValue0 &&
+        (NA_RANGE == node->rangeBounds[0] || newBoundValue0 > node->rangeBounds[0]))
     {
-        direction &= 0x01;
-        float newBoundValue = edge->weight - fromNode->rangeBounds[direction];
-        if (NA_RANGE == node->rangeBounds[1 - direction] ||
-            (1 == direction && newBoundValue > node->rangeBounds[0]) ||
-            (0 == direction && newBoundValue < node->rangeBounds[1]))
-        {
-            node->rangeBounds[1 - direction] = newBoundValue;
-            
-            if (newBoundValue + margin0 < *pMin)
-            {
-                *pMin = newBoundValue + margin0;
-            }
-            if (newBoundValue + margin1 > *pMax)
-            {
-                *pMax = newBoundValue + margin1;
-            }
-            
-            return false;///!!!
-        }
-        else
-        {
-            return true;
-        }
+        node->rangeBounds[0] = newBoundValue0;
+        return false;
     }
+    if (NA_RANGE != newBoundValue1 &&
+        (NA_RANGE == node->rangeBounds[1] || newBoundValue1 < node->rangeBounds[1]))
+    {
+        node->rangeBounds[1] = newBoundValue1;
+        return false;
+    }
+    
+    return true;
 }
 
 bool AlViewRelativeLayout::offsetRangeBounds (RelationGraphNode* node, int direction, RelationGraphNode* fromNode, RelationGraphEdge* edge, void* param)

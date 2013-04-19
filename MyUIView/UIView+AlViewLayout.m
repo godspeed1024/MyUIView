@@ -23,12 +23,13 @@ static const char* const kAlViewLayoutKey = "domqiu.AlViewLayout";
     {
         [layouter release];
     }
-    objc_setAssociatedObject(self, kAlViewLayoutKey, layouter, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, kAlViewLayoutKey, alLayouter, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    [alLayouter release];
 }
 
 - (UIAlLayouter*) alLayouter
 {
-    /*
+    //*
     Class viewClass = [self class];
     if (![NSStringFromClass(viewClass) hasPrefix:kClassNamePrefix])
     {
@@ -50,8 +51,23 @@ static const char* const kAlViewLayoutKey = "domqiu.AlViewLayout";
     {
         layouter = [[UIAlLayouter alloc] initWithUIView:self layouter:NULL];
         objc_setAssociatedObject(self, kAlViewLayoutKey, layouter, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        [layouter release];
     }
     return layouter;
+}
+
+static void alview_dealloc(UIView *self, SEL _cmd)
+{
+	Class superclass = class_getSuperclass([self class]);
+	IMP superDealloc = class_getMethodImplementation(superclass, _cmd);
+    
+    id layouter = objc_getAssociatedObject(self, kAlViewLayoutKey);
+    if (nil != layouter)
+    {
+        [layouter release];
+    }
+    
+    superDealloc(self, _cmd);
 }
 
 @end
