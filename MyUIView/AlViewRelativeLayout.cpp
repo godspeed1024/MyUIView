@@ -371,17 +371,37 @@ void AlViewRelativeLayout::doRecursiveTraverse (RelationGraphNode* curNode, int 
             return;
         }
         
-        for (int d=0; d<4; d++)
-        {///!!!
-        for (list<RelationGraphEdge>::iterator iter = curNode->edgesFromMe[d].begin();
-             iter != curNode->edgesFromMe[d].end(); iter++)
+        int nextDirections[2];
+        switch (direction)
         {
-            RelationGraphNode* nextNode = iter->nextNode;
-            if (NULL == nextNode) continue;
-            if (1 == BitMatrixGet(pBitmap, 0, nextNode->id)) continue;
-            
-            doRecursiveTraverse(nextNode, d, curNode, (RelationGraphEdge*) &*iter, params, callback, allowReEnterInNode);
+            case RELATION_LESS_EQUAL:
+                nextDirections[0] = RELATION_LESS_EQUAL;
+                nextDirections[1] = RELATION_LESS_EQUAL_N;
+                break;
+            case RELATION_GREATER_EQUAL:
+                nextDirections[0] = RELATION_GREATER_EQUAL;
+                nextDirections[1] = RELATION_GREATER_EQUAL_N;
+                break;
+            case RELATION_LESS_EQUAL_N:
+                nextDirections[0] = RELATION_GREATER_EQUAL;
+                nextDirections[1] = RELATION_GREATER_EQUAL_N;
+                break;
+            case RELATION_GREATER_EQUAL_N:
+                nextDirections[0] = RELATION_LESS_EQUAL;
+                nextDirections[1] = RELATION_LESS_EQUAL_N;
+                break;
         }
+        for (int iD=0; iD<2; iD++)
+        {///!!!
+            for (list<RelationGraphEdge>::iterator iter = curNode->edgesFromMe[nextDirections[iD]].begin();
+                 iter != curNode->edgesFromMe[nextDirections[iD]].end(); iter++)
+            {
+                RelationGraphNode* nextNode = iter->nextNode;
+                if (NULL == nextNode) continue;
+                if (1 == BitMatrixGet(pBitmap, 0, nextNode->id)) continue;
+                
+                doRecursiveTraverse(nextNode, nextDirections[iD], curNode, (RelationGraphEdge*) &*iter, params, callback, allowReEnterInNode);
+            }
         }
     }
     
