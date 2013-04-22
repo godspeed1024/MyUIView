@@ -9,19 +9,289 @@
 #include <stdlib.h>
 #include "AlViewRelativeLayout.h"
 
-#define DEBUG_OUTPUT
 
 void AlViewRelativeLayout::addLayoutRelation (int leftOperandID, int rightOperandID, int layoutRelation)
 {
+#ifdef V2
+    map<int, ChildPair>::iterator itrLeftOpr = children.find(leftOperandID);
+    map<int, ChildPair>::iterator itrRightOpr = children.find(rightOperandID);
+    AlViewLayout* thisOperand = (children.end() == itrLeftOpr ? NULL : itrLeftOpr->second.child);
+    AlViewLayout* dependencyOperand = (children.end() == itrRightOpr ? NULL : itrRightOpr->second.child);
+    if (NULL == thisOperand) return;
+    
+    map<AlViewLayout*, LayoutChainNode*>* pLayoutChains;
+    map<LayoutChainNode*, AlViewLayout*>* pLayoutChainRoots;
+    switch (layoutRelation)
+    {
+        case kLayoutRelationToLeftOf:
+        case kLayoutRelationToRightOf:
+        case kLayoutRelationAlignLeftWith:
+        case kLayoutRelationAlignRightWith:
+        case kLayoutRelationCenterParentHorizontal:
+        case kLayoutRelationAlignParentLeft:
+        case kLayoutRelationAlignParentRight:
+            pLayoutChains = &horizontalLayoutChains;
+            pLayoutChainRoots = &horizontalLayoutChainRoots;
+            
+            break;
+        case kLayoutRelationAbove:
+        case kLayoutRelationBelow:
+        case kLayoutRelationAlignTopWith:
+        case kLayoutRelationAlignBottomWith:
+        case kLayoutRelationCenterParentVertical:
+        case kLayoutRelationAlignParentBottom:
+        case kLayoutRelationAlignParentTop:
+            pLayoutChains = &verticalLayoutChains;
+            pLayoutChainRoots = &verticalLayoutChainRoots;
+            
+            break;
+    }
+    
+    LayoutChainNode* thisNode;
+    map<AlViewLayout*, LayoutChainNode*>::iterator itrThisNode = pLayoutChains->find(thisOperand);
+    if (pLayoutChains->end() == itrThisNode)
+    {
+        thisNode = new LayoutChainNode;
+        thisNode->layouter = thisOperand;
+        pLayoutChains->insert(make_pair(thisOperand, thisNode));
+    }
+    else
+    {
+        thisNode = itrThisNode->second;
+    }
+    
+    LayoutChainNode* dependencyNode;
+    map<AlViewLayout*, LayoutChainNode*>::iterator itrDependencyNode = pLayoutChains->find(dependencyOperand);
+    if (pLayoutChains->end() == itrDependencyNode)
+    {
+        dependencyNode = new LayoutChainNode;
+        dependencyNode->layouter = dependencyOperand;
+        pLayoutChains->insert(make_pair(dependencyOperand, dependencyNode));
+    }
+    else
+    {
+        dependencyNode = itrDependencyNode->second;
+    }
+    
+    switch (layoutRelation)
+    {
+        case kLayoutRelationCenterParentHorizontal:
+        case kLayoutRelationCenterParentVertical:
+            pLayoutChainRoots->insert(make_pair(thisNode, thisNode->layouter));
+            
+            if (layoutFlagsOfNode.end() == layoutFlagsOfNode.find(thisNode))
+            {
+                layoutFlagsOfNode.insert(make_pair(thisNode, layoutRelation));
+            }
+            else
+            {
+                layoutFlagsOfNode.insert(make_pair(thisNode, (layoutRelation | layoutFlagsOfNode[thisNode])));
+            }
+            
+            break;
+        case kLayoutRelationAlignParentLeft:
+        case kLayoutRelationAlignParentTop:
+        case kLayoutRelationAlignParentRight:
+        case kLayoutRelationAlignParentBottom:
+            pLayoutChainRoots->insert(make_pair(thisNode, thisNode->layouter));
+
+            if (layoutFlagsOfNode.end() == layoutFlagsOfNode.find(thisNode))
+            {
+                layoutFlagsOfNode.insert(make_pair(thisNode, layoutRelation));
+            }
+            else
+            {
+                layoutFlagsOfNode.insert(make_pair(thisNode, (layoutRelation | layoutFlagsOfNode[thisNode])));
+            }
+            
+            break;
+        case kLayoutRelationToLeftOf:
+        case kLayoutRelationAbove:
+            thisNode->nextNodes[1].insert(make_pair(dependencyNode, dependencyNode->layouter));
+            dependencyNode->nextNodes[0].insert(make_pair(thisNode, thisNode->layouter));
+            
+            break;
+        case kLayoutRelationToRightOf:
+        case kLayoutRelationBelow:
+            thisNode->nextNodes[0].insert(make_pair(dependencyNode, dependencyNode->layouter));
+            dependencyNode->nextNodes[1].insert(make_pair(thisNode, thisNode->layouter));
+            
+            break;
+        case kLayoutRelationAlignLeftWith:
+        case kLayoutRelationAlignTopWith:
+            for (map<LayoutChainNode*, AlViewLayout*>::iterator iter = thisNode->nextNodes[0].begin();
+                 iter != thisNode->nextNodes[0].end(); iter++)
+            {
+                iter->first->nextNodes[1].insert(make_pair(dependencyNode, dependencyNode->layouter));
+            }
+            for (map<LayoutChainNode*, AlViewLayout*>::iterator iter = dependencyNode->nextNodes[0].begin();
+                 iter != dependencyNode->nextNodes[0].end(); iter++)
+            {
+                iter->first->nextNodes[1].insert(make_pair(thisNode, thisNode->layouter));
+            }
+            
+            break;
+        case kLayoutRelationAlignRightWith:
+        case kLayoutRelationAlignBottomWith:
+            for (map<LayoutChainNode*, AlViewLayout*>::iterator iter = thisNode->nextNodes[1].begin();
+                 iter != thisNode->nextNodes[1].end(); iter++)
+            {
+                iter->first->nextNodes[0].insert(make_pair(dependencyNode, dependencyNode->layouter));
+            }
+            for (map<LayoutChainNode*, AlViewLayout*>::iterator iter = dependencyNode->nextNodes[1].begin();
+                 iter != dependencyNode->nextNodes[1].end(); iter++)
+            {
+                iter->first->nextNodes[0].insert(make_pair(thisNode, thisNode->layouter));
+            }
+            
+            break;
+    }
+    
+#else
     LayoutConstraint lc;
     lc.leftOperandID = leftOperandID;
     lc.rightOperandID = rightOperandID;
     lc.relation = layoutRelation;
     interpretLayoutConstraint(lc);
+#endif
 }
 
 void AlViewRelativeLayout::addLayoutRelation (AlViewLayout* leftOperandChild, AlViewLayout* rightOperandChild, int layoutRelation)
 {
+#ifdef V2
+    AlViewLayout* thisOperand = leftOperandChild;
+    AlViewLayout* dependencyOperand = rightOperandChild;
+    if (NULL == thisOperand) return;
+    
+    map<AlViewLayout*, LayoutChainNode*>* pLayoutChains;
+    map<LayoutChainNode*, AlViewLayout*>* pLayoutChainRoots;
+    switch (layoutRelation)
+    {
+        case kLayoutRelationToLeftOf:
+        case kLayoutRelationToRightOf:
+        case kLayoutRelationAlignLeftWith:
+        case kLayoutRelationAlignRightWith:
+        case kLayoutRelationCenterParentHorizontal:
+        case kLayoutRelationAlignParentLeft:
+        case kLayoutRelationAlignParentRight:
+            pLayoutChains = &horizontalLayoutChains;
+            pLayoutChainRoots = &horizontalLayoutChainRoots;
+            
+            break;
+        case kLayoutRelationAbove:
+        case kLayoutRelationBelow:
+        case kLayoutRelationAlignTopWith:
+        case kLayoutRelationAlignBottomWith:
+        case kLayoutRelationCenterParentVertical:
+        case kLayoutRelationAlignParentBottom:
+        case kLayoutRelationAlignParentTop:
+            pLayoutChains = &verticalLayoutChains;
+            pLayoutChainRoots = &verticalLayoutChainRoots;
+            
+            break;
+    }
+    
+    LayoutChainNode* thisNode;
+    map<AlViewLayout*, LayoutChainNode*>::iterator itrThisNode = pLayoutChains->find(thisOperand);
+    if (pLayoutChains->end() == itrThisNode)
+    {
+        thisNode = new LayoutChainNode;
+        thisNode->layouter = thisOperand;
+        pLayoutChains->insert(make_pair(thisOperand, thisNode));
+    }
+    else
+    {
+        thisNode = itrThisNode->second;
+    }
+    
+    LayoutChainNode* dependencyNode;
+    map<AlViewLayout*, LayoutChainNode*>::iterator itrDependencyNode = pLayoutChains->find(dependencyOperand);
+    if (pLayoutChains->end() == itrDependencyNode)
+    {
+        dependencyNode = new LayoutChainNode;
+        dependencyNode->layouter = dependencyOperand;
+        pLayoutChains->insert(make_pair(dependencyOperand, dependencyNode));///!!!???
+    }
+    else
+    {
+        dependencyNode = itrDependencyNode->second;
+    }
+    
+    switch (layoutRelation)
+    {
+        case kLayoutRelationCenterParentHorizontal:
+        case kLayoutRelationCenterParentVertical:
+            pLayoutChainRoots->insert(make_pair(thisNode, thisNode->layouter));
+            
+            if (layoutFlagsOfNode.end() == layoutFlagsOfNode.find(thisNode))
+            {
+                layoutFlagsOfNode.insert(make_pair(thisNode, layoutRelation));
+            }
+            else
+            {
+                layoutFlagsOfNode.insert(make_pair(thisNode, (layoutRelation | layoutFlagsOfNode[thisNode])));
+            }
+            
+            break;
+        case kLayoutRelationAlignParentLeft:
+        case kLayoutRelationAlignParentTop:
+        case kLayoutRelationAlignParentRight:
+        case kLayoutRelationAlignParentBottom:
+            pLayoutChainRoots->insert(make_pair(thisNode, thisNode->layouter));
+            
+            if (layoutFlagsOfNode.end() == layoutFlagsOfNode.find(thisNode))
+            {
+                layoutFlagsOfNode.insert(make_pair(thisNode, layoutRelation));
+            }
+            else
+            {
+                layoutFlagsOfNode.insert(make_pair(thisNode, (layoutRelation | layoutFlagsOfNode[thisNode])));
+            }
+            
+            break;
+        case kLayoutRelationToLeftOf:
+        case kLayoutRelationAbove:
+            thisNode->nextNodes[1].insert(make_pair(dependencyNode, dependencyNode->layouter));
+            dependencyNode->nextNodes[0].insert(make_pair(thisNode, thisNode->layouter));
+            
+            break;
+        case kLayoutRelationToRightOf:
+        case kLayoutRelationBelow:
+            thisNode->nextNodes[0].insert(make_pair(dependencyNode, dependencyNode->layouter));
+            dependencyNode->nextNodes[1].insert(make_pair(thisNode, thisNode->layouter));
+            break;
+            
+        case kLayoutRelationAlignLeftWith:
+        case kLayoutRelationAlignTopWith:
+            for (map<LayoutChainNode*, AlViewLayout*>::iterator iter = thisNode->nextNodes[0].begin();
+                 iter != thisNode->nextNodes[0].end(); iter++)
+            {
+                iter->first->nextNodes[1].insert(make_pair(dependencyNode, dependencyNode->layouter));
+            }
+            for (map<LayoutChainNode*, AlViewLayout*>::iterator iter = dependencyNode->nextNodes[0].begin();
+                 iter != dependencyNode->nextNodes[0].end(); iter++)
+            {
+                iter->first->nextNodes[1].insert(make_pair(thisNode, thisNode->layouter));
+            }
+            
+            break;
+        case kLayoutRelationAlignRightWith:
+        case kLayoutRelationAlignBottomWith:
+            for (map<LayoutChainNode*, AlViewLayout*>::iterator iter = thisNode->nextNodes[1].begin();
+                 iter != thisNode->nextNodes[1].end(); iter++)
+            {
+                iter->first->nextNodes[0].insert(make_pair(dependencyNode, dependencyNode->layouter));
+            }
+            for (map<LayoutChainNode*, AlViewLayout*>::iterator iter = dependencyNode->nextNodes[1].begin();
+                 iter != dependencyNode->nextNodes[1].end(); iter++)
+            {
+                iter->first->nextNodes[0].insert(make_pair(thisNode, thisNode->layouter));
+            }
+            
+            break;
+    }
+    
+#else
     map<AlViewLayout*, int>::iterator leftOpr = child2IdMap.find(leftOperandChild);
     if (child2IdMap.end() == leftOpr && NULL != leftOperandChild)
     {
@@ -40,6 +310,7 @@ void AlViewRelativeLayout::addLayoutRelation (AlViewLayout* leftOperandChild, Al
     lc.rightOperandID = rightOpr->second;
     lc.relation = layoutRelation;
     interpretLayoutConstraint(lc);
+#endif
 }
 
 void AlViewRelativeLayout::interpretLayoutConstraint (LayoutConstraint originalLC)
@@ -51,6 +322,7 @@ void AlViewRelativeLayout::interpretLayoutConstraint (LayoutConstraint originalL
     
     lc.leftOperandID <<= 3;
     lc.rightOperandID <<= 3;
+    lc.coefficient = 1;
     lc.constant = 0;
 
     switch (originalLC.relation)
@@ -172,149 +444,699 @@ void AlViewRelativeLayout::interpretLayoutConstraint (LayoutConstraint originalL
     }
 }
 
-
-void AlViewRelativeLayout::interpretLayoutConstraint (list<LayoutConstraint>* reinterpretedConstraints, LayoutConstraint originalLC, CGSize bound)
+void AlViewRelativeLayout::interpretConstraintsWithParentsBound (list<LayoutConstraint>* reinterpretedConstraints, LayoutConstraint originalLC, AlViewLayoutParameter layoutParam)
 {
     LayoutConstraint lc = originalLC;
     map<int, ChildPair>::iterator leftChildPair = children.find(lc.leftOperandID >> 3);
     map<int, ChildPair>::iterator rightChildPair;
     
-    switch (lc.relation)
+    if (kLayoutFlagPrecise == layoutParam.horizontalLayoutFlag)
     {
-        case kLayoutRelationCenterHorizontalWith:
-        case kLayoutRelationCenterVerticalWith:
-            ///!!!
-            
-            break;
-        case kLayoutRelationCenterParentHorizontal:
-            // L.Left + L.Right = Width
-            lc.leftOperandID |= VAR_LEFT;
-            lc.rightOperandID |= VAR_RIGHT;
-            lc.constant = bound.width;
-            lc.relation = RELATION_LESS_EQUAL_N;
-            reinterpretedConstraints->push_back(lc);
-            lc.relation = RELATION_GREATER_EQUAL_N;
-            reinterpretedConstraints->push_back(lc);
-            
-            // L.Left <= (Width - L.Width) / 2
-            lc.rightOperandID = NA_VAR;
-            lc.constant = (bound.width - leftChildPair->second.child->getMinimalMeasuredSize().width) / 2;
-            lc.relation = 0;
-            reinterpretedConstraints->push_back(lc);
-            
-            break;
-        case kLayoutRelationCenterParentVertical:
-            // L.Top + L.Bottom = Height
-            lc.leftOperandID |= VAR_TOP;
-            lc.rightOperandID |= VAR_BOTTOM;
-            lc.constant = bound.height;
-            lc.relation = RELATION_LESS_EQUAL_N;
-            reinterpretedConstraints->push_back(lc);
-            lc.relation = RELATION_GREATER_EQUAL_N;
-            reinterpretedConstraints->push_back(lc);
-            
-            // L.Top <= (Height - L.Height) / 2
-            lc.rightOperandID = NA_VAR;
-            lc.constant = (bound.height - leftChildPair->second.child->getMinimalMeasuredSize().height) / 2;
-            lc.relation = 0;
-            reinterpretedConstraints->push_back(lc);
-            
-            break;
-        case kLayoutRelationAlignParentLeft:
-            lc.leftOperandID |= VAR_LEFT;
-            lc.constant = leftChildPair->second.parameter.marginLeft;
+        lc.coefficient = 1;
+        switch (lc.relation)
+        {
+            case kLayoutRelationCenterHorizontalWith:
+            case kLayoutRelationCenterVerticalWith:
+                ///!!!
+                
+                break;
+            case kLayoutRelationCenterParentHorizontal:
+                
+                // L.Left + L.Right = Width
+                lc.leftOperandID |= VAR_LEFT;
+                lc.rightOperandID |= VAR_RIGHT;
+                lc.constant = layoutParam.givenSize.width;
+                lc.relation = RELATION_LESS_EQUAL_N;
+                reinterpretedConstraints->push_back(lc);
+                lc.relation = RELATION_GREATER_EQUAL_N;
+                reinterpretedConstraints->push_back(lc);
+                
+                // L.Left <= (Width - L.Width) / 2
+                lc.rightOperandID = NA_VAR;
+                lc.constant = (layoutParam.givenSize.width - leftChildPair->second.child->getMinimalMeasuredSize().width) / 2;
+                lc.relation = 0;
+                reinterpretedConstraints->push_back(lc);
+                break;
+            case kLayoutRelationCenterParentVertical:
+                // L.Top + L.Bottom = Height
+                lc.leftOperandID |= VAR_TOP;
+                lc.rightOperandID |= VAR_BOTTOM;
+                lc.constant = layoutParam.givenSize.height;
+                lc.relation = RELATION_LESS_EQUAL_N;
+                reinterpretedConstraints->push_back(lc);
+                lc.relation = RELATION_GREATER_EQUAL_N;
+                reinterpretedConstraints->push_back(lc);
+                
+                // L.Top <= (Height - L.Height) / 2
+                lc.rightOperandID = NA_VAR;
+                lc.constant = (layoutParam.givenSize.height - leftChildPair->second.child->getMinimalMeasuredSize().height) / 2;
+                lc.relation = 0;
+                reinterpretedConstraints->push_back(lc);
+                
+                break;
+            case kLayoutRelationAlignParentLeft:
+                lc.leftOperandID |= VAR_LEFT;
+                lc.constant = leftChildPair->second.parameter.marginLeft;
+                
+                // L.Left <= L.MarginLeft
+                lc.relation = 0;
+                reinterpretedConstraints->push_back(lc);
+                
+                // L.Left >= L.MarginLeft
+                lc.relation = 1;
+                reinterpretedConstraints->push_back(lc);
+                
+                break;
+            case kLayoutRelationAlignParentRight:
+                lc.leftOperandID |= VAR_RIGHT;
+                lc.constant = layoutParam.givenSize.width - leftChildPair->second.parameter.marginRight;
+                
+                // L.Right <= Width - L.MarginRight
+                lc.relation = 0;
+                reinterpretedConstraints->push_back(lc);
+                
+                // L.Right >= Width - L.MarginRight
+                lc.relation = 1;
+                reinterpretedConstraints->push_back(lc);
+                
+                break;
+            case kLayoutRelationAlignParentTop:
+                lc.leftOperandID |= VAR_TOP;
+                lc.constant = leftChildPair->second.parameter.marginTop;
+                
+                // L.Top <= L.MarginTop
+                lc.relation = 0;
+                reinterpretedConstraints->push_back(lc);
+                
+                // L.Top >= L.MarginTop
+                lc.relation = 1;
+                reinterpretedConstraints->push_back(lc);
+                
+                break;
+            case kLayoutRelationAlignParentBottom:
+                lc.leftOperandID |= VAR_BOTTOM;
+                lc.constant = layoutParam.givenSize.height - leftChildPair->second.parameter.marginBottom;
+                
+                // L.Bottom <= HEIGHT - L.MarginBottom
+                lc.relation = 0;
+                reinterpretedConstraints->push_back(lc);
+                
+                // L.Bottom >= HEIGHT - L.MarginBottom
+                lc.relation = 1;
+                reinterpretedConstraints->push_back(lc);
+                
+                break;
+        }
+    }
+    else
+    {
+        
+    }
+}
 
-            // L.Left <= L.MarginLeft
-            lc.relation = 0;
-            reinterpretedConstraints->push_back(lc);
+void AlViewRelativeLayout::interpretConstraintsWithChildsBound (list<LayoutConstraint>* reinterpretedConstraints, LayoutConstraint originalLC, CGSize bound)
+{
+    LayoutConstraint lc = originalLC;
+    lc.coefficient = 1;
+    map<int, ChildPair>::iterator leftChildPair = children.find(lc.leftOperandID >> 3);
+    map<int, ChildPair>::iterator rightChildPair;
+    
+    int shiftID = lc.leftOperandID << 3;
+    
+    // L.Left <= R.Right - Width
+    lc.leftOperandID = shiftID | VAR_LEFT;
+    lc.rightOperandID = shiftID | VAR_RIGHT;
+    lc.constant = -bound.width;
+    lc.relation = 0;
+    reinterpretedConstraints->push_back(lc);
+    
+    // L.Top <= R.Bottom - Height
+    lc.leftOperandID = shiftID | VAR_TOP;
+    lc.rightOperandID = shiftID | VAR_BOTTOM;
+    lc.constant = -bound.height;
+    lc.relation = 0;
+    reinterpretedConstraints->push_back(lc);
+}
 
-            // L.Left >= L.MarginLeft
-            lc.relation = 1;
-            reinterpretedConstraints->push_back(lc);
-            
-            break;
-        case kLayoutRelationAlignParentRight:
-            lc.leftOperandID |= VAR_RIGHT;
-            lc.constant = bound.width - leftChildPair->second.parameter.marginRight;
+float AlViewRelativeLayout::recursiveFindMaxWidthOfHorizontalChain (LayoutChainNode* curNode, byte direction,
+                                                          float curPosition, map<AlViewLayout*, CGRect>& framesOfChildren)
+{
+    map<AlViewLayout*, int>::iterator iterChildID = child2IdMap.find(curNode->layouter);
+    if (child2IdMap.end() == iterChildID)
+    {
+        return 0.0f;
+    }
+    
+    map<int, ChildPair>::iterator iterChildPair = children.find(iterChildID->second);
+    if (children.end() == iterChildPair)
+    {
+        return 0.0f;
+    }
+    
+    float mySize = curNode->layouter->getDesiredMeasuredSize().width;
+    mySize += iterChildPair->second.parameter.marginLeft;
+    mySize += iterChildPair->second.parameter.marginRight;
+    
+    CGRect frame;
+    map<AlViewLayout*, CGRect>::iterator iterFrameOfChild = framesOfChildren.find(curNode->layouter);
+    if (framesOfChildren.end() != iterFrameOfChild)
+    {
+        frame = iterFrameOfChild->second;
+    }
+    else
+    {
+        frame = CGRectMake(0, NA_RANGE, 0, NA_RANGE);
+    }
+    
+    if (0 == direction)
+    {
+        frame.origin.x = curPosition - iterChildPair->second.parameter.marginRight - curNode->layouter->getDesiredMeasuredSize().width;
+        frame.size.width = curNode->layouter->getDesiredMeasuredSize().width;
+        
+        curPosition -= mySize;
+    }
+    else
+    {
+        frame.origin.x = curPosition + iterChildPair->second.parameter.marginLeft;
+        frame.size.width = curNode->layouter->getDesiredMeasuredSize().width;
+        
+        curPosition += mySize;
+    }
+    framesOfChildren.insert(make_pair(curNode->layouter, frame));
+    
+    float maxSubTotalSize = 0;
+    for (map<LayoutChainNode*, AlViewLayout*>::iterator nextNode = curNode->nextNodes[direction].begin();
+         nextNode != curNode->nextNodes[direction].end();
+         nextNode++)
+    {
+        float subTotalSize = recursiveFindMaxWidthOfHorizontalChain(nextNode->first, direction, curPosition, framesOfChildren);
+        
+        if (subTotalSize > maxSubTotalSize)
+        {
+            maxSubTotalSize = subTotalSize;
+        }
+    }
+    
+    return mySize + maxSubTotalSize;
+}
 
-            // L.Right <= Width - L.MarginRight
-            lc.relation = 0;
-            reinterpretedConstraints->push_back(lc);
+float AlViewRelativeLayout::recursiveFindMaxHeightOfVerticalChain (LayoutChainNode* curNode, byte direction,
+                                                                    float curPosition, map<AlViewLayout*, CGRect>& framesOfChildren)
+{
+    map<AlViewLayout*, int>::iterator iterChildID = child2IdMap.find(curNode->layouter);
+    if (child2IdMap.end() == iterChildID)
+    {
+        return 0.0f;
+    }
+    
+    map<int, ChildPair>::iterator iterChildPair = children.find(iterChildID->second);
+    if (children.end() == iterChildPair)
+    {
+        return 0.0f;
+    }
+    
+    float mySize = curNode->layouter->getDesiredMeasuredSize().height;
+    mySize += iterChildPair->second.parameter.marginTop;
+    mySize += iterChildPair->second.parameter.marginBottom;
+    
+    CGRect frame;
+    map<AlViewLayout*, CGRect>::iterator iterFrameOfChild = framesOfChildren.find(curNode->layouter);
+    if (framesOfChildren.end() != iterFrameOfChild)
+    {
+        frame = iterFrameOfChild->second;
+    }
+    else
+    {
+        frame = CGRectMake(NA_RANGE, 0, NA_RANGE, 0);
+    }
+    
+    if (0 == direction)
+    {
+        frame.origin.y = curPosition - iterChildPair->second.parameter.marginBottom - curNode->layouter->getDesiredMeasuredSize().height;
+        frame.size.height = curNode->layouter->getDesiredMeasuredSize().height;
+        
+        curPosition -= mySize;
+    }
+    else
+    {
+        frame.origin.y = curPosition + iterChildPair->second.parameter.marginTop;
+        frame.size.height = curNode->layouter->getDesiredMeasuredSize().height;
+        
+        curPosition += mySize;
+    }
+    framesOfChildren.insert(make_pair(curNode->layouter, frame));
+    
+    float maxSubTotalSize = 0;
+    for (map<LayoutChainNode*, AlViewLayout*>::iterator nextNode = curNode->nextNodes[direction].begin();
+         nextNode != curNode->nextNodes[direction].end();
+         nextNode++)
+    {
+        float subTotalSize = recursiveFindMaxHeightOfVerticalChain(nextNode->first, direction, curPosition, framesOfChildren);
+        
+        if (subTotalSize > maxSubTotalSize)
+        {
+            maxSubTotalSize = subTotalSize;
+        }
+    }
+    
+    return mySize + maxSubTotalSize;
+}
 
-            // L.Right >= Width - L.MarginRight
-            lc.relation = 1;
-            reinterpretedConstraints->push_back(lc);
+void AlViewRelativeLayout::recursiveOffsetHorizontalChains (LayoutChainNode* curNode, int direction,
+                                                            float offset, map<AlViewLayout*, CGRect>& framesOfChildren)
+{
+    if (NULL == curNode) return;
+    
+    CGRect frame = framesOfChildren[curNode->layouter];
+    frame.origin.x += offset;
+    framesOfChildren.insert(make_pair(curNode->layouter, frame));
+    
+    for (map<LayoutChainNode*, AlViewLayout*>::iterator nextNode = curNode->nextNodes[direction].begin();
+         nextNode != curNode->nextNodes[direction].end();
+         nextNode++)
+    {
+        recursiveOffsetHorizontalChains(nextNode->first, direction, offset, framesOfChildren);
+    }
+}
 
-            break;
-        case kLayoutRelationAlignParentTop:
-            lc.leftOperandID |= VAR_TOP;
-            lc.constant = leftChildPair->second.parameter.marginTop;
+void AlViewRelativeLayout::recursiveOffsetVerticalChains (LayoutChainNode* curNode, int direction,
+                                                          float offset, map<AlViewLayout*, CGRect>& framesOfChildren)
+{
+    if (NULL == curNode) return;
+    
+    CGRect frame = framesOfChildren[curNode->layouter];
+    frame.origin.y += offset;
+    framesOfChildren.insert(make_pair(curNode->layouter, frame));
+    
+    for (map<LayoutChainNode*, AlViewLayout*>::iterator nextNode = curNode->nextNodes[direction].begin();
+         nextNode != curNode->nextNodes[direction].end();
+         nextNode++)
+    {
+        recursiveOffsetVerticalChains(nextNode->first, direction, offset, framesOfChildren);
+    }
+}
 
-            // L.Top <= L.MarginTop
-            lc.relation = 0;
-            reinterpretedConstraints->push_back(lc);
+bool AlViewRelativeLayout::canBeLayoutChainRootCandidate (LayoutChainNode* node)
+{
+    if (NULL == node)
+    {
+        return false;
+    }
+    
+    if (node->nextNodes[0].size() == 0)
+    {
+        for (map<LayoutChainNode*, AlViewLayout*>::iterator iter = node->nextNodes[1].begin();
+             iter != node->nextNodes[1].end();
+             iter++)
+        {
+            if (iter->first->nextNodes[0].size() > 1)
+            {
+                return false;
+            }
+        }
+    }
+    else if (node->nextNodes[1].size() == 0)
+    {
+        for (map<LayoutChainNode*, AlViewLayout*>::iterator iter = node->nextNodes[0].begin();
+             iter != node->nextNodes[0].end();
+             iter++)
+        {
+            if (iter->first->nextNodes[1].size() > 1)
+            {
+                return false;
+            }
+        }
+    }
+    else
+    {
+        return false;
+    }
+    
+    return true;
+}
 
-            // L.Top >= L.MarginTop
-            lc.relation = 1;
-            reinterpretedConstraints->push_back(lc);
-
-            break;
-        case kLayoutRelationAlignParentBottom:
-            lc.leftOperandID |= VAR_BOTTOM;
-            lc.constant = bound.height - leftChildPair->second.parameter.marginBottom;
-            
-            // L.Bottom <= HEIGHT - L.MarginBottom
-            lc.relation = 0;
-            reinterpretedConstraints->push_back(lc);
-
-            // L.Bottom >= HEIGHT - L.MarginBottom
-            lc.relation = 1;
-            reinterpretedConstraints->push_back(lc);
-
-            break;
-            
-        case kLayoutRelationSetSelfBound:
-            int shiftID = lc.leftOperandID << 3;
-            
-            // L.Left <= R.Right - Width
-            lc.leftOperandID = shiftID | VAR_LEFT;
-            lc.rightOperandID = shiftID | VAR_RIGHT;
-            lc.constant = -bound.width;
-            lc.relation = 0;
-            reinterpretedConstraints->push_back(lc);
-            
-            // L.Top <= R.Bottom - Height
-            lc.leftOperandID = shiftID | VAR_TOP;
-            lc.rightOperandID = shiftID | VAR_BOTTOM;
-            lc.constant = -bound.height;
-            lc.relation = 0;
-            reinterpretedConstraints->push_back(lc);
-            
-            break;
+void AlViewRelativeLayout::clearLayoutChainGraph (map<AlViewLayout*, LayoutChainNode*>& graph)
+{
+    for (map<AlViewLayout*, LayoutChainNode*>::iterator iter = graph.begin();
+         iter != graph.end();
+         iter++)
+    {
+        if (NULL != iter->second)
+        {
+            delete iter->second;
+        }
     }
 }
 
 void AlViewRelativeLayout::onMeasure (AlViewLayoutParameter givenLayoutParam)
 {
+#ifdef V2
+    
+    // Measure all children :
+    for (map<int, ChildPair>::iterator iter = children.begin(); iter != children.end(); iter++)
+    {
+        ChildPair cp = iter->second;
+        cp.child->onMeasure(cp.parameter);
+    }
+    
+    // Use this map for both recording children's frame, and to mark if a child is reached in traversing a chain :
+    map<AlViewLayout*, CGRect> framesOfChildren;
+    
+    // Horizontal :
+    
+        // Measure max width of all chains:
+    float widthNeeded = 0.0f;
+    
+    for (map<LayoutChainNode*, AlViewLayout*>::iterator itrRoot = horizontalLayoutChainRoots.begin();
+         itrRoot != horizontalLayoutChainRoots.end();
+         itrRoot++)
+    {
+        float widthOfThisChain;
+        map<LayoutChainNode*, int>::iterator itrLayoutFlag = layoutFlagsOfNode.find(itrRoot->first);
+        if (layoutFlagsOfNode.end() != itrLayoutFlag)
+        {
+            if (itrLayoutFlag->second & kLayoutRelationAlignParentRight)
+            {
+                widthOfThisChain = recursiveFindMaxWidthOfHorizontalChain(itrRoot->first, 0, 0.0f, framesOfChildren);
+            }
+            else if (itrLayoutFlag->second & kLayoutRelationCenterParentHorizontal)
+            {
+                map<AlViewLayout*, int>::iterator iterChildID = child2IdMap.find(itrRoot->first->layouter);
+                if (child2IdMap.end() == iterChildID)
+                {
+                    throw "Not gonna happen! #0";
+                }
+                map<int, ChildPair>::iterator iterChildPair = children.find(iterChildID->second);
+                if (children.end() == iterChildPair)
+                {
+                    throw "Not gonna happen! #1";
+                }
+                float boundWidthOfRoot = itrRoot->first->layouter->getDesiredMeasuredSize().width;
+                boundWidthOfRoot += iterChildPair->second.parameter.marginLeft;
+                boundWidthOfRoot += iterChildPair->second.parameter.marginRight;
+                
+                float halfWidth0 = recursiveFindMaxWidthOfHorizontalChain(itrRoot->first, 0, boundWidthOfRoot, framesOfChildren)
+                                    - itrRoot->first->layouter->getDesiredMeasuredSize().width / 2
+                                    - iterChildPair->second.parameter.marginRight;
+                float halfWidth1 = recursiveFindMaxWidthOfHorizontalChain(itrRoot->first, 1, 0.0f, framesOfChildren)
+                                    - itrRoot->first->layouter->getDesiredMeasuredSize().width / 2
+                                    - iterChildPair->second.parameter.marginLeft;
+                if (halfWidth0 > halfWidth1)
+                {
+                    widthOfThisChain = halfWidth0 * 2;
+                }
+                else
+                {
+                    widthOfThisChain = halfWidth1 * 2;
+                }
+            }
+            else
+            {
+                widthOfThisChain = recursiveFindMaxWidthOfHorizontalChain(itrRoot->first, 1, 0.0f, framesOfChildren);
+            }
+        }
+        else
+        {
+            widthOfThisChain = recursiveFindMaxWidthOfHorizontalChain(itrRoot->first, 1, 0.0f, framesOfChildren);
+        }
+        
+        if (widthOfThisChain > widthNeeded)
+        {
+            widthNeeded = widthOfThisChain;
+        }
+    }
+    
+        // Find in other chains, root of which not exists in horizontalLayoutChainRoots :
+    for (map<AlViewLayout*, LayoutChainNode*>::iterator itrRoot = horizontalLayoutChains.begin();
+         itrRoot != horizontalLayoutChains.end();
+         itrRoot++)
+    {
+        if (!canBeLayoutChainRootCandidate(itrRoot->second))
+        {
+            continue;
+        }
+        
+        if (horizontalLayoutChainRoots.find(itrRoot->second) != horizontalLayoutChainRoots.end())
+        {
+            continue;
+        }
+        
+        map<AlViewLayout*, CGRect>::iterator iterFrameOfChild = framesOfChildren.find(itrRoot->second->layouter);
+        if (framesOfChildren.end() != iterFrameOfChild && iterFrameOfChild->second.origin.x >= 0.0f)
+        {
+            continue;
+        }
+        
+        horizontalLayoutChainRoots.insert(make_pair(itrRoot->second, itrRoot->first));
+        float widthOfThisChain = recursiveFindMaxWidthOfHorizontalChain(itrRoot->second, 1, 0.0f, framesOfChildren);
+        if (widthOfThisChain > widthNeeded)
+        {
+            widthNeeded = widthOfThisChain;
+        }
+    }
+    
+        // Layout in horizontal :    
+    for (map<LayoutChainNode*, AlViewLayout*>::iterator itrRoot = horizontalLayoutChainRoots.begin();
+         itrRoot != horizontalLayoutChainRoots.end();
+         itrRoot++)
+    {
+        if (NULL == itrRoot->first) continue;
+        
+        float offset;
+        int direction = 1;
+        
+        map<AlViewLayout*, int>::iterator iterChildID = child2IdMap.find(itrRoot->first->layouter);
+        if (child2IdMap.end() == iterChildID)
+        {
+            throw "Not gonna happen! #2";
+        }
+        map<int, ChildPair>::iterator iterChildPair = children.find(iterChildID->second);
+        if (children.end() == iterChildPair)
+        {
+            throw "Not gonna happen! #3";
+        }
+        map<AlViewLayout*, CGRect>::iterator iterFrameOfChild = framesOfChildren.find(itrRoot->first->layouter);
+        if (framesOfChildren.end() == iterFrameOfChild)
+        {
+            throw "Not gonna happen! #4";
+        }
+        
+        map<LayoutChainNode*, int>::iterator itrLayoutFlag = layoutFlagsOfNode.find(itrRoot->first);
+        if (layoutFlagsOfNode.end() != itrLayoutFlag)
+        {
+            if (itrLayoutFlag->second & kLayoutRelationAlignParentRight)
+            {
+                offset = widthNeeded - iterChildPair->second.parameter.marginRight - iterFrameOfChild->second.size.width
+                        - iterFrameOfChild->second.origin.x;
+                direction = 0;
+            }
+            else if (itrLayoutFlag->second & kLayoutRelationCenterParentHorizontal)
+            {
+                offset = (widthNeeded - iterFrameOfChild->second.size.width) / 2
+                        - iterFrameOfChild->second.origin.x;
+                
+                CGRect offsettedRect = iterFrameOfChild->second;
+                offsettedRect.origin.x -= offset;
+                recursiveOffsetHorizontalChains(itrRoot->first, 0, offset, framesOfChildren);
+            }
+            else
+            {
+                offset = iterChildPair->second.parameter.marginLeft - iterFrameOfChild->second.origin.x;
+            }
+        }
+        else
+        {
+            offset = iterChildPair->second.parameter.marginLeft - iterFrameOfChild->second.origin.x;
+        }
+        
+        recursiveOffsetHorizontalChains(itrRoot->first, direction, offset, framesOfChildren);
+    }
+    
+    /////////////
+    // Vertical :
+    
+        // Measure max height of all chains:
+    float heightNeeded = 0.0f;
+    
+    for (map<LayoutChainNode*, AlViewLayout*>::iterator itrRoot = verticalLayoutChainRoots.begin();
+         itrRoot != verticalLayoutChainRoots.end();
+         itrRoot++)
+    {
+        if (NULL == itrRoot->first) continue;
+        
+        float heightOfThisChain;
+        map<LayoutChainNode*, int>::iterator itrLayoutFlag = layoutFlagsOfNode.find(itrRoot->first);
+        if (layoutFlagsOfNode.end() != itrLayoutFlag)
+        {
+            if (itrLayoutFlag->second & kLayoutRelationAlignParentBottom)
+            {
+                heightOfThisChain = recursiveFindMaxHeightOfVerticalChain(itrRoot->first, 0, 0.0f, framesOfChildren);
+            }
+            else if (itrLayoutFlag->second & kLayoutRelationCenterParentVertical)
+            {
+                map<AlViewLayout*, int>::iterator iterChildID = child2IdMap.find(itrRoot->first->layouter);
+                if (child2IdMap.end() == iterChildID)
+                {
+                    throw "Not gonna happen! #0";
+                }
+                map<int, ChildPair>::iterator iterChildPair = children.find(iterChildID->second);
+                if (children.end() == iterChildPair)
+                {
+                    throw "Not gonna happen! #1";
+                }
+                float boundHeightOfRoot = itrRoot->first->layouter->getDesiredMeasuredSize().height;
+                boundHeightOfRoot += iterChildPair->second.parameter.marginTop;
+                boundHeightOfRoot += iterChildPair->second.parameter.marginBottom;
+                
+                float halfHeight0 = recursiveFindMaxHeightOfVerticalChain(itrRoot->first, 0, boundHeightOfRoot, framesOfChildren)
+                                    - itrRoot->first->layouter->getDesiredMeasuredSize().height / 2
+                                    - iterChildPair->second.parameter.marginBottom;
+                float halfHeight1 = recursiveFindMaxHeightOfVerticalChain(itrRoot->first, 1, 0.0f, framesOfChildren)
+                                    - itrRoot->first->layouter->getDesiredMeasuredSize().height / 2
+                                    - iterChildPair->second.parameter.marginTop;
+                
+                if (halfHeight0 > halfHeight1)
+                {
+                    heightOfThisChain = halfHeight0 * 2;
+                }
+                else
+                {
+                    heightOfThisChain = halfHeight1 * 2;
+                }
+            }
+            else
+            {
+                heightOfThisChain = recursiveFindMaxHeightOfVerticalChain(itrRoot->first, 1, 0.0f, framesOfChildren);
+            }
+        }
+        else
+        {
+            heightOfThisChain = recursiveFindMaxHeightOfVerticalChain(itrRoot->first, 1, 0.0f, framesOfChildren);
+        }
+        
+        if (heightOfThisChain > heightNeeded)
+        {
+            heightNeeded = heightOfThisChain;
+        }
+    }
+    
+        // Find in other chains, root of which not exists in verticalLayoutChainRoots :
+    for (map<AlViewLayout*, LayoutChainNode*>::iterator itrRoot = verticalLayoutChains.begin();
+         itrRoot != verticalLayoutChains.end();
+         itrRoot++)
+    {
+        if (!canBeLayoutChainRootCandidate(itrRoot->second))
+        {
+            continue;
+        }
+        
+        if (verticalLayoutChainRoots.find(itrRoot->second) != verticalLayoutChainRoots.end())
+        {
+            continue;
+        }
+        
+        map<AlViewLayout*, CGRect>::iterator iterFrameOfChild = framesOfChildren.find(itrRoot->second->layouter);
+        if (framesOfChildren.end() != iterFrameOfChild && iterFrameOfChild->second.origin.y >= 0.0f)
+        {
+            continue;
+        }
+        
+        verticalLayoutChainRoots.insert(make_pair(itrRoot->second, itrRoot->first));
+        float heightOfThisChain = recursiveFindMaxHeightOfVerticalChain(itrRoot->second, 1, 0.0f, framesOfChildren);
+        if (heightOfThisChain > heightNeeded)
+        {
+            heightNeeded = heightOfThisChain;
+        }
+    }
+    
+        // Layout in vertical :
+    for (map<LayoutChainNode*, AlViewLayout*>::iterator itrRoot = verticalLayoutChainRoots.begin();
+         itrRoot != verticalLayoutChainRoots.end();
+         itrRoot++)
+    {
+        if (NULL == itrRoot->first) continue;
+        
+        float offset;
+        int direction = 1;
+        
+        map<AlViewLayout*, int>::iterator iterChildID = child2IdMap.find(itrRoot->first->layouter);
+        if (child2IdMap.end() == iterChildID)
+        {
+            throw "Not gonna happen! #2";
+        }
+        map<int, ChildPair>::iterator iterChildPair = children.find(iterChildID->second);
+        if (children.end() == iterChildPair)
+        {
+            throw "Not gonna happen! #3";
+        }
+        map<AlViewLayout*, CGRect>::iterator iterFrameOfChild = framesOfChildren.find(itrRoot->first->layouter);
+        if (framesOfChildren.end() == iterFrameOfChild)
+        {
+            throw "Not gonna happen! #4";
+        }
+        
+        map<LayoutChainNode*, int>::iterator itrLayoutFlag = layoutFlagsOfNode.find(itrRoot->first);
+        if (layoutFlagsOfNode.end() != itrLayoutFlag)
+        {
+            if (itrLayoutFlag->second & kLayoutRelationAlignParentBottom)
+            {
+                offset = heightNeeded - iterChildPair->second.parameter.marginBottom - iterFrameOfChild->second.size.width
+                        - iterFrameOfChild->second.origin.y;
+                direction = 0;
+            }
+            else if (itrLayoutFlag->second & kLayoutRelationCenterParentVertical)
+            {
+                offset = (heightNeeded - iterFrameOfChild->second.size.height) / 2
+                        - iterFrameOfChild->second.origin.y;
+                
+                CGRect offsettedRect = iterFrameOfChild->second;
+                offsettedRect.origin.y -= offset;
+                recursiveOffsetVerticalChains(itrRoot->first, 0, offset, framesOfChildren);
+            }
+            else
+            {
+                offset = iterChildPair->second.parameter.marginTop - iterFrameOfChild->second.origin.y;
+            }
+        }
+        else
+        {
+            offset = iterChildPair->second.parameter.marginTop - iterFrameOfChild->second.origin.y;
+        }
+        
+        recursiveOffsetVerticalChains(itrRoot->first, direction, offset, framesOfChildren);
+    }
+    
+    ////////
+    for (map<int, ChildPair>::iterator iter = children.begin(); iter != children.end(); iter++)
+    {
+        ChildPair cp = iter->second;
+        
+        cp.child->_layoutedRect = framesOfChildren[cp.child];
+        cp.child->applyLayout();///!!!
+    }
+    
+#else
+    
     CGSize myBound = givenLayoutParam.givenSize;
     
+    // 已决的条件：
     list<LayoutConstraint> constraints;
     constraints.splice(constraints.end(), interpretedConstraints);
     
+    // 未决的条件——子布局的最小尺寸：
     LayoutConstraint lc;
     lc.relation = kLayoutRelationSetSelfBound;
-    
     for (map<int, ChildPair>::iterator iter = children.begin(); iter != children.end(); iter++)
     {
         ChildPair cp = iter->second;
         cp.child->onMeasure(cp.parameter);
         lc.leftOperandID = iter->first;
-        interpretLayoutConstraint(&constraints, lc, cp.child->getMinimalMeasuredSize());
+        interpretConstraintsWithChildsBound(&constraints, lc, cp.child->getMinimalMeasuredSize());
     }
     
     for (list<LayoutConstraint>::iterator iter = suspendingConstraints.begin(); iter != suspendingConstraints.end(); iter++)
     {
-        interpretLayoutConstraint(&constraints, *iter, myBound);
+        interpretConstraintsWithParentsBound(&constraints, *iter, givenLayoutParam);
     }
     
     updateRelationGraphs(relationGraphs, &constraints);
@@ -349,9 +1171,11 @@ void AlViewRelativeLayout::onMeasure (AlViewLayoutParameter givenLayoutParam)
         cp.child->applyLayout();///!!!
     }
     
-    setMinimalMeasuredSize(givenLayoutParam.givenSize.width, givenLayoutParam.givenSize.height);
-    setDesiredMeasuredSize(givenLayoutParam.givenSize.width, givenLayoutParam.givenSize.height);
-    _layoutedRect = CGRectMake(0, 0, _minimalMeasuredSize.width, _minimalMeasuredSize.height);
+#endif // V2
+    
+    setMinimalMeasuredSize(widthNeeded, givenLayoutParam.givenSize.height);
+    setDesiredMeasuredSize(widthNeeded, givenLayoutParam.givenSize.height);
+    _layoutedRect = CGRectMake(0, 0, widthNeeded, _minimalMeasuredSize.height);
 }
 
 void AlViewRelativeLayout::doRecursiveTraverse (RelationGraphNode* curNode, int direction, RelationGraphNode* fromNode, RelationGraphEdge* edge,
@@ -878,4 +1702,3 @@ void AlViewRelativeLayout::updateRelationGraphs (map<int, RelationGraphNode*>& g
     
     delete[] nodes;
 }
-

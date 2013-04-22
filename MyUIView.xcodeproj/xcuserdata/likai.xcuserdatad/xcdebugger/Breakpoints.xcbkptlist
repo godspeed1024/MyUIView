@@ -34,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/AlViewRelativeLayout.cpp"
-         timestampString = "387977514.449532"
+         timestampString = "388321806.562052"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "172"
-         endingLineNumber = "172"
+         startingLineNumber = "443"
+         endingLineNumber = "443"
          landmarkName = "AlViewRelativeLayout::interpretLayoutConstraint (LayoutConstraint originalLC)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -190,36 +190,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/AlViewRelativeLayout.cpp"
-         timestampString = "387977514.449532"
+         timestampString = "388321806.562052"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "265"
-         endingLineNumber = "265"
-         landmarkName = "AlViewRelativeLayout::interpretLayoutConstraint (list&lt;LayoutConstraint&gt;* reinterpretedConstraints, LayoutConstraint originalLC, CGSize bound)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "MyUIView/AlViewRelativeLayout.cpp"
-         timestampString = "388044788.773553"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "553"
-         endingLineNumber = "553">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "MyUIView/AlViewRelativeLayout.cpp"
-         timestampString = "387977514.449532"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "291"
-         endingLineNumber = "291"
-         landmarkName = "AlViewRelativeLayout::interpretLayoutConstraint (list&lt;LayoutConstraint&gt;* reinterpretedConstraints, LayoutConstraint originalLC, CGSize bound)"
+         startingLineNumber = "1354"
+         endingLineNumber = "1354"
+         landmarkName = "AlViewRelativeLayout::decideRangeBounds (RelationGraphNode* node, int direction, RelationGraphNode* fromNode, RelationGraphEdge* edge, void* param)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -240,24 +216,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/AlViewRelativeLayout.cpp"
-         timestampString = "387977514.449532"
+         timestampString = "388321806.562052"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "331"
-         endingLineNumber = "331"
-         landmarkName = "AlViewRelativeLayout::onMeasure (AlViewLayoutParameter givenLayoutParam)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "MyUIView/AlViewRelativeLayout.cpp"
-         timestampString = "387977514.449532"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "340"
-         endingLineNumber = "340"
+         startingLineNumber = "1139"
+         endingLineNumber = "1139"
          landmarkName = "AlViewRelativeLayout::onMeasure (AlViewLayoutParameter givenLayoutParam)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -279,12 +242,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/AlViewRelativeLayout.cpp"
-         timestampString = "388044788.773553"
+         timestampString = "388321806.562052"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "814"
-         endingLineNumber = "814"
-         landmarkName = "AlViewRelativeLayout::updateRelationGraphs (map&lt;int, RelationGraphNode*&gt;&amp; graphs, list&lt;LayoutConstraint&gt;* constraints)"
+         startingLineNumber = "1615"
+         endingLineNumber = "1615"
+         landmarkName = "AlViewRelativeLayout::decideRelationGraphs (map&lt;int, RelationGraphNode*&gt;&amp; graphs, int nodeCount, CGSize&amp; parentBound)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -292,12 +255,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/AlViewRelativeLayout.cpp"
-         timestampString = "388044788.773553"
+         timestampString = "388321806.562052"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "816"
-         endingLineNumber = "816"
-         landmarkName = "AlViewRelativeLayout::updateRelationGraphs (map&lt;int, RelationGraphNode*&gt;&amp; graphs, list&lt;LayoutConstraint&gt;* constraints)"
+         startingLineNumber = "1617"
+         endingLineNumber = "1617"
+         landmarkName = "AlViewRelativeLayout::decideRelationGraphs (map&lt;int, RelationGraphNode*&gt;&amp; graphs, int nodeCount, CGSize&amp; parentBound)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -305,25 +268,23 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/AlViewRelativeLayout.cpp"
-         timestampString = "388044788.773553"
+         timestampString = "388321806.562052"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "821"
-         endingLineNumber = "821"
-         landmarkName = "AlViewRelativeLayout::updateRelationGraphs (map&lt;int, RelationGraphNode*&gt;&amp; graphs, list&lt;LayoutConstraint&gt;* constraints)"
-         landmarkType = "5">
+         startingLineNumber = "1622"
+         endingLineNumber = "1622">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/AlViewRelativeLayout.cpp"
-         timestampString = "388044788.773553"
+         timestampString = "388321806.562052"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "682"
-         endingLineNumber = "682"
-         landmarkName = "AlViewRelativeLayout::offsetRangeBounds (RelationGraphNode* node, int direction, RelationGraphNode* fromNode, RelationGraphEdge* edge, void* param)"
+         startingLineNumber = "1483"
+         endingLineNumber = "1483"
+         landmarkName = "AlViewRelativeLayout::decideRangeBoundsArbitrarily (RelationGraphNode* node, int direction, RelationGraphNode* fromNode, RelationGraphEdge* edge, void* param)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -331,11 +292,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/AlViewRelativeLayout.cpp"
-         timestampString = "387972796.230133"
+         timestampString = "388321806.562052"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "25"
-         endingLineNumber = "25"
+         startingLineNumber = "295"
+         endingLineNumber = "295"
          landmarkName = "AlViewRelativeLayout::addLayoutRelation (AlViewLayout* leftOperandChild, AlViewLayout* rightOperandChild, int layoutRelation)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -344,11 +305,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/AlViewRelativeLayout.cpp"
-         timestampString = "387972796.230133"
+         timestampString = "388321806.562052"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "19"
-         endingLineNumber = "19"
+         startingLineNumber = "154"
+         endingLineNumber = "154"
          landmarkName = "AlViewRelativeLayout::addLayoutRelation (int leftOperandID, int rightOperandID, int layoutRelation)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -370,11 +331,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/AlViewRelativeLayout.cpp"
-         timestampString = "387972796.230133"
+         timestampString = "388321806.562052"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "105"
-         endingLineNumber = "105"
+         startingLineNumber = "376"
+         endingLineNumber = "376"
          landmarkName = "AlViewRelativeLayout::interpretLayoutConstraint (LayoutConstraint originalLC)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -383,11 +344,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/AlViewRelativeLayout.cpp"
-         timestampString = "387972796.230133"
+         timestampString = "388321806.562052"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "93"
-         endingLineNumber = "93"
+         startingLineNumber = "364"
+         endingLineNumber = "364"
          landmarkName = "AlViewRelativeLayout::interpretLayoutConstraint (LayoutConstraint originalLC)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -396,12 +357,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/AlViewRelativeLayout.cpp"
-         timestampString = "387977514.449532"
+         timestampString = "388321806.562052"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "182"
-         endingLineNumber = "182"
-         landmarkName = "AlViewRelativeLayout::interpretLayoutConstraint (list&lt;LayoutConstraint&gt;* reinterpretedConstraints, LayoutConstraint originalLC, CGSize bound)"
+         startingLineNumber = "453"
+         endingLineNumber = "453"
+         landmarkName = "AlViewRelativeLayout::interpretConstraintsWithParentsBound (list&lt;LayoutConstraint&gt;* reinterpretedConstraints, LayoutConstraint originalLC, AlViewLayoutParameter layoutParam)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -409,11 +370,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/AlViewRelativeLayout.cpp"
-         timestampString = "387972796.230133"
+         timestampString = "388321806.562052"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "56"
-         endingLineNumber = "56"
+         startingLineNumber = "327"
+         endingLineNumber = "327"
          landmarkName = "AlViewRelativeLayout::interpretLayoutConstraint (LayoutConstraint originalLC)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -422,11 +383,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/AlViewRelativeLayout.cpp"
-         timestampString = "387977514.449532"
+         timestampString = "388321806.562052"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "320"
-         endingLineNumber = "320"
+         startingLineNumber = "1128"
+         endingLineNumber = "1128"
          landmarkName = "AlViewRelativeLayout::onMeasure (AlViewLayoutParameter givenLayoutParam)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -435,12 +396,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/AlViewRelativeLayout.cpp"
-         timestampString = "388044788.773553"
+         timestampString = "388321806.562052"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "824"
-         endingLineNumber = "824"
-         landmarkName = "AlViewRelativeLayout::updateRelationGraphs (map&lt;int, RelationGraphNode*&gt;&amp; graphs, list&lt;LayoutConstraint&gt;* constraints)"
+         startingLineNumber = "1625"
+         endingLineNumber = "1625"
+         landmarkName = "AlViewRelativeLayout::clearRelationGraph (map&lt;int, RelationGraphNode*&gt;&amp; graph)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -448,11 +409,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/AlViewRelativeLayout.cpp"
-         timestampString = "387977514.449532"
+         timestampString = "388321806.562052"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "322"
-         endingLineNumber = "322"
+         startingLineNumber = "1130"
+         endingLineNumber = "1130"
          landmarkName = "AlViewRelativeLayout::onMeasure (AlViewLayoutParameter givenLayoutParam)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -461,12 +422,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/AlViewRelativeLayout.cpp"
-         timestampString = "387977514.449532"
+         timestampString = "388321806.562052"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "367"
-         endingLineNumber = "367"
-         landmarkName = "AlViewRelativeLayout::doRecursiveTraverse (RelationGraphNode* curNode, int direction, RelationGraphNode* fromNode, RelationGraphEdge* edge, void* params, CallbackInTraversingRelationGraph callback, bool allowReEnterInNode)"
+         startingLineNumber = "1166"
+         endingLineNumber = "1166"
+         landmarkName = "AlViewRelativeLayout::onMeasure (AlViewLayoutParameter givenLayoutParam)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -487,11 +448,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/AlViewRelativeLayout.cpp"
-         timestampString = "388044788.773553"
+         timestampString = "388321806.562052"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "767"
-         endingLineNumber = "767"
+         startingLineNumber = "1568"
+         endingLineNumber = "1568"
          landmarkName = "AlViewRelativeLayout::decideRelationGraphs (map&lt;int, RelationGraphNode*&gt;&amp; graphs, int nodeCount, CGSize&amp; parentBound)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -500,12 +461,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/AlViewRelativeLayout.cpp"
-         timestampString = "387977514.449532"
+         timestampString = "388321806.562052"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "370"
-         endingLineNumber = "370"
-         landmarkName = "AlViewRelativeLayout::doRecursiveTraverse (RelationGraphNode* curNode, int direction, RelationGraphNode* fromNode, RelationGraphEdge* edge, void* params, CallbackInTraversingRelationGraph callback, bool allowReEnterInNode)"
+         startingLineNumber = "1169"
+         endingLineNumber = "1169"
+         landmarkName = "AlViewRelativeLayout::onMeasure (AlViewLayoutParameter givenLayoutParam)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -513,11 +474,24 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/AlViewRelativeLayout.cpp"
-         timestampString = "388044788.773553"
+         timestampString = "388321806.562052"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "728"
-         endingLineNumber = "728"
+         startingLineNumber = "1529"
+         endingLineNumber = "1529"
+         landmarkName = "AlViewRelativeLayout::solveRelationGraphs (map&lt;int, RelationGraphNode*&gt;&amp; graphs, int nodeCount)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyUIView/AlViewRelativeLayout.cpp"
+         timestampString = "388321806.562052"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1594"
+         endingLineNumber = "1594"
          landmarkName = "AlViewRelativeLayout::decideRelationGraphs (map&lt;int, RelationGraphNode*&gt;&amp; graphs, int nodeCount, CGSize&amp; parentBound)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -526,12 +500,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/AlViewRelativeLayout.cpp"
-         timestampString = "388044788.773553"
+         timestampString = "388321806.562052"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "793"
-         endingLineNumber = "793"
-         landmarkName = "AlViewRelativeLayout::decideRelationGraphs (map&lt;int, RelationGraphNode*&gt;&amp; graphs, int nodeCount, CGSize&amp; parentBound)"
+         startingLineNumber = "1291"
+         endingLineNumber = "1291"
+         landmarkName = "AlViewRelativeLayout::updateRangeBounds (RelationGraphNode* node, int direction, RelationGraphNode* fromNode, RelationGraphEdge* edge, void* param)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -539,11 +513,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/AlViewRelativeLayout.cpp"
-         timestampString = "388044788.773553"
+         timestampString = "388321806.562052"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "490"
-         endingLineNumber = "490"
+         startingLineNumber = "1365"
+         endingLineNumber = "1365"
          landmarkName = "AlViewRelativeLayout::decideRangeBounds (RelationGraphNode* node, int direction, RelationGraphNode* fromNode, RelationGraphEdge* edge, void* param)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -552,11 +526,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/AlViewRelativeLayout.cpp"
-         timestampString = "388044788.773553"
+         timestampString = "388321806.562052"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "564"
-         endingLineNumber = "564"
+         startingLineNumber = "1408"
+         endingLineNumber = "1408"
          landmarkName = "AlViewRelativeLayout::decideRangeBoundsArbitrarily (RelationGraphNode* node, int direction, RelationGraphNode* fromNode, RelationGraphEdge* edge, void* param)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -565,24 +539,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/AlViewRelativeLayout.cpp"
-         timestampString = "388044788.773553"
+         timestampString = "388321806.562052"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "607"
-         endingLineNumber = "607"
-         landmarkName = "AlViewRelativeLayout::decideRangeBoundsArbitrarily (RelationGraphNode* node, int direction, RelationGraphNode* fromNode, RelationGraphEdge* edge, void* param)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "MyUIView/AlViewRelativeLayout.cpp"
-         timestampString = "388044788.773553"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "583"
-         endingLineNumber = "583"
+         startingLineNumber = "1384"
+         endingLineNumber = "1384"
          landmarkName = "AlViewRelativeLayout::decideRangeBoundsArbitrarily (RelationGraphNode* node, int direction, RelationGraphNode* fromNode, RelationGraphEdge* edge, void* param)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -591,11 +552,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/AlViewRelativeLayout.cpp"
-         timestampString = "388044788.773553"
+         timestampString = "388321806.562052"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "595"
-         endingLineNumber = "595"
+         startingLineNumber = "1396"
+         endingLineNumber = "1396"
          landmarkName = "AlViewRelativeLayout::decideRangeBoundsArbitrarily (RelationGraphNode* node, int direction, RelationGraphNode* fromNode, RelationGraphEdge* edge, void* param)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -604,11 +565,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/AlViewRelativeLayout.cpp"
-         timestampString = "388044788.773553"
+         timestampString = "388321806.562052"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "737"
-         endingLineNumber = "737"
+         startingLineNumber = "1538"
+         endingLineNumber = "1538"
          landmarkName = "AlViewRelativeLayout::decideRelationGraphs (map&lt;int, RelationGraphNode*&gt;&amp; graphs, int nodeCount, CGSize&amp; parentBound)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -617,12 +578,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/AlViewRelativeLayout.cpp"
-         timestampString = "388044788.773553"
+         timestampString = "388321806.562052"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "560"
-         endingLineNumber = "560"
-         landmarkName = "AlViewRelativeLayout::decideRangeBoundsArbitrarily (RelationGraphNode* node, int direction, RelationGraphNode* fromNode, RelationGraphEdge* edge, void* param)"
+         startingLineNumber = "1361"
+         endingLineNumber = "1361"
+         landmarkName = "AlViewRelativeLayout::decideRangeBounds (RelationGraphNode* node, int direction, RelationGraphNode* fromNode, RelationGraphEdge* edge, void* param)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -630,11 +591,50 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/AlViewRelativeLayout.cpp"
-         timestampString = "388031274.800965"
+         timestampString = "388321806.562052"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "435"
-         endingLineNumber = "435"
+         startingLineNumber = "1236"
+         endingLineNumber = "1236"
+         landmarkName = "AlViewRelativeLayout::doRecursiveTraverse (RelationGraphNode* curNode, int direction, RelationGraphNode* fromNode, RelationGraphEdge* edge, void* params, CallbackInTraversingRelationGraph callback, bool allowReEnterInNode)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyUIView/AlViewRelativeLayout.cpp"
+         timestampString = "388321806.562052"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1239"
+         endingLineNumber = "1239"
+         landmarkName = "AlViewRelativeLayout::recursiveTraverseRelationGraph (RelationGraphNode* startNode, int nodeCount, void* param, CallbackInTraversingRelationGraph callback, bool allowReEnterInNode)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyUIView/AlViewRelativeLayout.cpp"
+         timestampString = "388321806.562052"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1241"
+         endingLineNumber = "1241"
+         landmarkName = "AlViewRelativeLayout::recursiveTraverseRelationGraph (RelationGraphNode* startNode, int nodeCount, void* param, CallbackInTraversingRelationGraph callback, bool allowReEnterInNode)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyUIView/AlViewRelativeLayout.cpp"
+         timestampString = "388321806.562052"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1274"
+         endingLineNumber = "1274"
          landmarkName = "AlViewRelativeLayout::updateRangeBounds (RelationGraphNode* node, int direction, RelationGraphNode* fromNode, RelationGraphEdge* edge, void* param)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -643,12 +643,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/AlViewRelativeLayout.cpp"
-         timestampString = "388031274.800965"
+         timestampString = "388321806.562052"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "438"
-         endingLineNumber = "438"
-         landmarkName = "AlViewRelativeLayout::updateRangeBounds (RelationGraphNode* node, int direction, RelationGraphNode* fromNode, RelationGraphEdge* edge, void* param)"
+         startingLineNumber = "1240"
+         endingLineNumber = "1240"
+         landmarkName = "AlViewRelativeLayout::recursiveTraverseRelationGraph (RelationGraphNode* startNode, int nodeCount, void* param, CallbackInTraversingRelationGraph callback, bool allowReEnterInNode)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -656,63 +656,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/AlViewRelativeLayout.cpp"
-         timestampString = "388031274.800965"
+         timestampString = "388321806.562052"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "440"
-         endingLineNumber = "440"
-         landmarkName = "AlViewRelativeLayout::updateRangeBounds (RelationGraphNode* node, int direction, RelationGraphNode* fromNode, RelationGraphEdge* edge, void* param)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "MyUIView/AlViewRelativeLayout.cpp"
-         timestampString = "387978316.622162"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "208"
-         endingLineNumber = "208"
-         landmarkName = "AlViewRelativeLayout::interpretLayoutConstraint (list&lt;LayoutConstraint&gt;* reinterpretedConstraints, LayoutConstraint originalLC, CGSize bound)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "MyUIView/AlViewRelativeLayout.cpp"
-         timestampString = "388044788.773553"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "473"
-         endingLineNumber = "473"
-         landmarkName = "AlViewRelativeLayout::updateRangeBounds (RelationGraphNode* node, int direction, RelationGraphNode* fromNode, RelationGraphEdge* edge, void* param)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "MyUIView/AlViewRelativeLayout.cpp"
-         timestampString = "388031274.800965"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "439"
-         endingLineNumber = "439"
-         landmarkName = "AlViewRelativeLayout::updateRangeBounds (RelationGraphNode* node, int direction, RelationGraphNode* fromNode, RelationGraphEdge* edge, void* param)"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "MyUIView/AlViewRelativeLayout.cpp"
-         timestampString = "388044788.773553"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "476"
-         endingLineNumber = "476"
+         startingLineNumber = "1277"
+         endingLineNumber = "1277"
          landmarkName = "AlViewRelativeLayout::updateRangeBounds (RelationGraphNode* node, int direction, RelationGraphNode* fromNode, RelationGraphEdge* edge, void* param)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -792,6 +740,123 @@
          startingLineNumber = "58"
          endingLineNumber = "58"
          landmarkName = "-dealloc"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyUIView/AlViewRelativeLayout.cpp"
+         timestampString = "388321806.562052"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "803"
+         endingLineNumber = "803"
+         landmarkName = "AlViewRelativeLayout::onMeasure (AlViewLayoutParameter givenLayoutParam)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyUIView/AlViewRelativeLayout.cpp"
+         timestampString = "388321806.562052"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "808"
+         endingLineNumber = "808"
+         landmarkName = "AlViewRelativeLayout::onMeasure (AlViewLayoutParameter givenLayoutParam)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyUIView/MainViewController.m"
+         timestampString = "388317776.760045"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "99"
+         endingLineNumber = "99"
+         landmarkName = "-viewDidLoad"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyUIView/AlViewRelativeLayout.cpp"
+         timestampString = "388321806.562052"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "168"
+         endingLineNumber = "168"
+         landmarkName = "AlViewRelativeLayout::addLayoutRelation (AlViewLayout* leftOperandChild, AlViewLayout* rightOperandChild, int layoutRelation)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyUIView/AlViewRelativeLayout.cpp"
+         timestampString = "388321806.562052"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "224"
+         endingLineNumber = "224"
+         landmarkName = "AlViewRelativeLayout::addLayoutRelation (AlViewLayout* leftOperandChild, AlViewLayout* rightOperandChild, int layoutRelation)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyUIView/AlViewRelativeLayout.cpp"
+         timestampString = "388321806.562052"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "810"
+         endingLineNumber = "810"
+         landmarkName = "AlViewRelativeLayout::onMeasure (AlViewLayoutParameter givenLayoutParam)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyUIView/AlViewRelativeLayout.cpp"
+         timestampString = "388320255.727748"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "80"
+         endingLineNumber = "80"
+         landmarkName = "AlViewRelativeLayout::addLayoutRelation (int leftOperandID, int rightOperandID, int layoutRelation)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyUIView/AlViewRelativeLayout.cpp"
+         timestampString = "388320259.040929"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "96"
+         endingLineNumber = "96"
+         landmarkName = "AlViewRelativeLayout::addLayoutRelation (int leftOperandID, int rightOperandID, int layoutRelation)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyUIView/AlViewRelativeLayout.cpp"
+         timestampString = "388321806.562052"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "240"
+         endingLineNumber = "240"
+         landmarkName = "AlViewRelativeLayout::addLayoutRelation (AlViewLayout* leftOperandChild, AlViewLayout* rightOperandChild, int layoutRelation)"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
