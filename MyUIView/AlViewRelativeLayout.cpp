@@ -937,6 +937,7 @@ void AlViewRelativeLayout::onMeasure (AlViewLayoutParameter givenLayoutParam)
                 
                 CGRect offsettedRect = iterFrameOfChild->second;
                 offsettedRect.origin.x -= offset;
+                framesOfChildren[itrRoot->first->layouter] = offsettedRect;
                 recursiveOffsetHorizontalChains(itrRoot->first, 0, offset, framesOfChildren);
             }
             else
@@ -1091,6 +1092,7 @@ void AlViewRelativeLayout::onMeasure (AlViewLayoutParameter givenLayoutParam)
                 
                 CGRect offsettedRect = iterFrameOfChild->second;
                 offsettedRect.origin.y -= offset;
+                framesOfChildren[itrRoot->first->layouter] = offsettedRect;
                 recursiveOffsetVerticalChains(itrRoot->first, 0, offset, framesOfChildren);
             }
             else
