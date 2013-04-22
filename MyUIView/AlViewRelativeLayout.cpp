@@ -622,7 +622,7 @@ float AlViewRelativeLayout::recursiveFindMaxWidthOfHorizontalChain (LayoutChainN
         
         curPosition += mySize;
     }
-    framesOfChildren.insert(make_pair(curNode->layouter, frame));
+    framesOfChildren[curNode->layouter] = frame;
     
     float maxSubTotalSize = 0;
     for (map<LayoutChainNode*, AlViewLayout*>::iterator nextNode = curNode->nextNodes[direction].begin();
@@ -684,7 +684,7 @@ float AlViewRelativeLayout::recursiveFindMaxHeightOfVerticalChain (LayoutChainNo
         
         curPosition += mySize;
     }
-    framesOfChildren.insert(make_pair(curNode->layouter, frame));
+    framesOfChildren[curNode->layouter] = frame;
     
     float maxSubTotalSize = 0;
     for (map<LayoutChainNode*, AlViewLayout*>::iterator nextNode = curNode->nextNodes[direction].begin();
@@ -709,7 +709,7 @@ void AlViewRelativeLayout::recursiveOffsetHorizontalChains (LayoutChainNode* cur
     
     CGRect frame = framesOfChildren[curNode->layouter];
     frame.origin.x += offset;
-    framesOfChildren.insert(make_pair(curNode->layouter, frame));
+    framesOfChildren[curNode->layouter] = frame;
     
     for (map<LayoutChainNode*, AlViewLayout*>::iterator nextNode = curNode->nextNodes[direction].begin();
          nextNode != curNode->nextNodes[direction].end();
@@ -726,7 +726,7 @@ void AlViewRelativeLayout::recursiveOffsetVerticalChains (LayoutChainNode* curNo
     
     CGRect frame = framesOfChildren[curNode->layouter];
     frame.origin.y += offset;
-    framesOfChildren.insert(make_pair(curNode->layouter, frame));
+    framesOfChildren[curNode->layouter] = frame;
     
     for (map<LayoutChainNode*, AlViewLayout*>::iterator nextNode = curNode->nextNodes[direction].begin();
          nextNode != curNode->nextNodes[direction].end();
@@ -882,7 +882,7 @@ void AlViewRelativeLayout::onMeasure (AlViewLayoutParameter givenLayoutParam)
         }
         
         map<AlViewLayout*, CGRect>::iterator iterFrameOfChild = framesOfChildren.find(itrRoot->second->layouter);
-        if (framesOfChildren.end() != iterFrameOfChild && iterFrameOfChild->second.origin.x >= 0.0f)
+        if (framesOfChildren.end() != iterFrameOfChild && iterFrameOfChild->second.origin.x != NA_RANGE)
         {
             continue;
         }
@@ -1036,7 +1036,7 @@ void AlViewRelativeLayout::onMeasure (AlViewLayoutParameter givenLayoutParam)
         }
         
         map<AlViewLayout*, CGRect>::iterator iterFrameOfChild = framesOfChildren.find(itrRoot->second->layouter);
-        if (framesOfChildren.end() != iterFrameOfChild && iterFrameOfChild->second.origin.y >= 0.0f)
+        if (framesOfChildren.end() != iterFrameOfChild && iterFrameOfChild->second.origin.y != NA_RANGE)
         {
             continue;
         }
