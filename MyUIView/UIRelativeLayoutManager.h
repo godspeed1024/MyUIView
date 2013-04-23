@@ -57,12 +57,12 @@
 
 typedef enum
 {
-    ParentLeft,
-    ParentTop,
-    ParentRight,
-    ParentBottom,
-    ParentHorizontalCenter,
-    ParentVerticalCenter,
+    ParentLeft = 0x01,
+    ParentTop = 0x02,
+    ParentRight = 0x04,
+    ParentBottom = 0x08,
+    ParentHorizontalCenter = 0x10,
+    ParentVerticalCenter = 0x20,
     
 } EnumLayoutAnchor;
 
