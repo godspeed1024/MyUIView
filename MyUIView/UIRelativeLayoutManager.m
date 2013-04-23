@@ -454,11 +454,11 @@ static NSString* KEY_LAYOUT_FLAG = @"KEY_layoutFlag";
         if (nil != nnLayoutFlag)
         {
             int layoutFlag = [nnLayoutFlag intValue];
-            if (layoutFlag & kLayoutRelationAlignParentRight)
+            if (layoutFlag & ParentRight)
             {
                 widthOfThisChain = [self recursiveFindMaxWidthOfHorizontalChain:node direction:0 curPosition:0.0f];
             }
-            else if (layoutFlag & kLayoutRelationCenterParentHorizontal)
+            else if (layoutFlag & ParentHorizontalCenter)
             {
                 AlLayoutParameter* lp = [node.subView valueOfKVPair:KEY_LAYOUTPARAMETER];
                 float boundWidthOfRoot = [node.subView measuredPreferSize].width;
@@ -551,13 +551,13 @@ static NSString* KEY_LAYOUT_FLAG = @"KEY_layoutFlag";
         if (nil != nnLayoutFlag)
         {
             int layoutFlag = [nnLayoutFlag intValue];
-            if (layoutFlag & kLayoutRelationAlignParentRight)
+            if (layoutFlag & ParentRight)
             {
                 offset = widthNeeded - lp.marginRight - [nvFrame CGRectValue].size.width
                         - [nvFrame CGRectValue].origin.x;
                 direction = 0;
             }
-            else if (layoutFlag & kLayoutRelationCenterParentHorizontal)
+            else if (layoutFlag & ParentHorizontalCenter)
             {
                 offset = (widthNeeded - [nvFrame CGRectValue].size.width) / 2
                         - [nvFrame CGRectValue].origin.x;
@@ -569,7 +569,7 @@ static NSString* KEY_LAYOUT_FLAG = @"KEY_layoutFlag";
                 
                 [self recursiveOffsetHorizontalChains:node direction:0 offset:offset];
             }
-            else if (layoutFlag & kLayoutRelationAlignParentLeft)
+            else if (layoutFlag & ParentLeft)
             {
                 offset = lp.marginLeft - [nvFrame CGRectValue].origin.x;
             }
@@ -617,11 +617,11 @@ static NSString* KEY_LAYOUT_FLAG = @"KEY_layoutFlag";
         if (nil != nnLayoutFlag)
         {
             int layoutFlag = [nnLayoutFlag intValue];
-            if (layoutFlag & kLayoutRelationAlignParentBottom)
+            if (layoutFlag & ParentBottom)
             {
                 heightOfThisChain = [self recursiveFindMaxHeightOfVerticalChain:node direction:0 curPosition:0.0f];
             }
-            else if (layoutFlag & kLayoutRelationCenterParentVertical)
+            else if (layoutFlag & ParentVerticalCenter)
             {
                 AlLayoutParameter* lp = [node.subView valueOfKVPair:KEY_LAYOUTPARAMETER];
                 float boundHeightOfRoot = [node.subView measuredPreferSize].height;
@@ -713,13 +713,13 @@ static NSString* KEY_LAYOUT_FLAG = @"KEY_layoutFlag";
         if (nil != nnLayoutFlag)
         {
             int layoutFlag = [nnLayoutFlag intValue];
-            if (layoutFlag & kLayoutRelationAlignParentBottom)
+            if (layoutFlag & ParentBottom)
             {
                 offset = heightNeeded - lp.marginBottom - [nvFrame CGRectValue].size.height
                         - [nvFrame CGRectValue].origin.y;
                 direction = 0;
             }
-            else if (layoutFlag & kLayoutRelationCenterParentVertical)
+            else if (layoutFlag & ParentVerticalCenter)
             {
                 offset = (heightNeeded - [nvFrame CGRectValue].size.height) / 2
                         - [nvFrame CGRectValue].origin.y;
@@ -731,7 +731,7 @@ static NSString* KEY_LAYOUT_FLAG = @"KEY_layoutFlag";
                 
                 [self recursiveOffsetVerticalChains:node direction:0 offset:offset];
             }
-            else if (layoutFlag & kLayoutRelationAlignParentTop)
+            else if (layoutFlag & ParentTop)
             {
                 offset = lp.marginTop - [nvFrame CGRectValue].origin.y;
             }

@@ -137,7 +137,7 @@
     [_btnWest setMeasuredPreferSize:CGSizeMake(60, 60)];
     [layoutManager addSubView:_btnWest layoutParameter:lp];
     [lp release];
-/*
+//*
     lp = [[AlLayoutParameter alloc] init];
     lp.marginLeft = 5;
     lp.marginRight = 5;
@@ -202,6 +202,8 @@
     [lp release];
 //*/
     
+    //[layoutManager setLayoutConstraintOfSubView:_btnWest toLeftOf:_btnNorth];
+    
     [layoutManager setLayoutConstraintOfSubView:_btnWest toLeftOf:_btnCenter];
     [layoutManager setLayoutConstraintOfSubView:_btnCenter toLeftOf:_btnEast];
     
@@ -211,7 +213,7 @@
     //[layoutManager setLayoutConstraintOfSubView:_btnWestSouth toLeftOf:_btnSouth];
     //[layoutManager setLayoutConstraintOfSubView:_btnEastSouth toRightOf:_btnSouth];
 
-    //[layoutManager setLayoutConstraintOfSubView:_btnCenter below:_btnNorth];
+    [layoutManager setLayoutConstraintOfSubView:_btnCenter below:_btnNorth];
     //[layoutManager setLayoutConstraintOfSubView:_btnWestNorth above:_btnWest];
 
     //[layoutManager setLayoutConstraintOfSubView:_btnEastSouth below:_btnEast];
@@ -219,11 +221,11 @@
     
     //[layoutManager setLayoutConstraintOfSubView:_btnWest above:_btnWestSouth];
 
-    //[layoutManager setLayoutConstraintOfSubView:_btnCenter withAnchor:ParentHorizontalCenter];
+    [layoutManager setLayoutConstraintOfSubView:_btnNorth withAnchor:ParentHorizontalCenter];
     //[layoutManager setLayoutConstraintOfSubView:_btnCenter withAnchor:ParentVerticalCenter];
 
 //    [layoutManager setLayoutConstraintOfSubView:_btnWest withAnchor:ParentLeft];
-    //[layoutManager setLayoutConstraintOfSubView:_btnNorth withAnchor:ParentTop];
+    [layoutManager setLayoutConstraintOfSubView:_btnNorth withAnchor:ParentTop];
 //    [layoutManager setLayoutConstraintOfSubView:_btnEast withAnchor:ParentRight];
     //[layoutManager setLayoutConstraintOfSubView:_btnSouth withAnchor:ParentBottom];
     
