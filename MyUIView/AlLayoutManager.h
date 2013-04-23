@@ -1,5 +1,5 @@
 //
-//  UILayoutManager.h
+//  AlLayoutManager.h
 //  MyUIView
 //
 //  Created by DomQiu on 13-4-23.
@@ -11,7 +11,7 @@
 
 static NSString* KEY_LAYOUTPARAMETER = @"lp";
 
-@interface UILayoutManager : NSObject
+@interface AlLayoutManager : NSObject
 {
     NSMutableArray* _subViews;
     

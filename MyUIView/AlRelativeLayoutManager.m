@@ -6,7 +6,7 @@
 //  Copyright (c) 2013年 DomQiu. All rights reserved.
 //
 
-#import "UIRelativeLayoutManager.h"
+#import "AlRelativeLayoutManager.h"
 #import "AlLayoutChainNode.h"
 #import "UIView+AlViewLayout.h"
 #import "NSObject_KVContainer.h"
@@ -14,7 +14,7 @@
 static NSString* KEY_LAYOUT_FRAME = @"KEY_layoutFrame";
 static NSString* KEY_LAYOUT_FLAG = @"KEY_layoutFlag";
 
-@implementation UIRelativeLayoutManager
+@implementation AlRelativeLayoutManager
 
 - (id) init
 {
@@ -31,7 +31,6 @@ static NSString* KEY_LAYOUT_FLAG = @"KEY_layoutFlag";
 
 - (void) dealloc
 {
-    [super dealloc];
     [_horizontalLayoutChainRoots removeAllObjects];
     [_verticalLayoutChainRoots removeAllObjects];
     [_horizontalLayoutChains removeAllObjects];
@@ -422,6 +421,7 @@ static NSString* KEY_LAYOUT_FLAG = @"KEY_layoutFlag";
     // Measure all children & Create nodes for children that not exist in any constraints :
     for (UIView* subView in _subViews)
     {
+        [subView setKVPair:nil key:KEY_LAYOUT_FRAME];
         
         NSValue* nvPointer = [NSValue valueWithPointer:(void*)subView];
         AlLayoutChainNode* node = [_horizontalLayoutChains objectForKey:nvPointer];
@@ -429,7 +429,6 @@ static NSString* KEY_LAYOUT_FLAG = @"KEY_layoutFlag";
         {
             node = [[AlLayoutChainNode alloc] initWithSubView:subView];
             [_horizontalLayoutChains setObject:node forKey:nvPointer];
-            [node release];
         }
         
         node = [_verticalLayoutChains objectForKey:nvPointer];
@@ -437,7 +436,6 @@ static NSString* KEY_LAYOUT_FLAG = @"KEY_layoutFlag";
         {
             node = [[AlLayoutChainNode alloc] initWithSubView:subView];
             [_verticalLayoutChains setObject:node forKey:nvPointer];
-            [node release];
         }
     }
     

@@ -52,7 +52,7 @@
 #define NA_RANGE   (-32768.0f)
 
 
-#import "UILayoutManager.h"
+#import "AlLayoutManager.h"
 
 
 typedef enum
@@ -69,7 +69,7 @@ typedef enum
 @class AlLayoutChainNode;
 
 
-@interface UIRelativeLayoutManager : UILayoutManager
+@interface AlRelativeLayoutManager : AlLayoutManager
 
 {
     //map<AlViewLayout*, LayoutChainNode*> horizontalLayoutChains;

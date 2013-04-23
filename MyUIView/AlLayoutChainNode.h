@@ -22,8 +22,8 @@ typedef struct LayoutChainNodeStruct
     NSArray*        _nextNodes;
 }
 
-@property (nonatomic, retain, readonly) UIView* subView;
-@property (nonatomic, retain, readonly) NSArray* nextNodes;
+@property (nonatomic, strong, readonly) UIView* subView;
+@property (nonatomic, strong, readonly) NSArray* nextNodes;
 
 - (id) initWithSubView : (UIView*) subView;
 

@@ -10,7 +10,7 @@
 #import "AlViewRelativeLayout.h"
 #import "UIAlLayouter.h"
 #import "UIView+AlViewLayout.h"
-#import "UIRelativeLayoutManager.h"
+#import "AlRelativeLayoutManager.h"
 
 @interface MainViewController ()
 
@@ -84,29 +84,14 @@
     [rootView setBackgroundColor:[UIColor blackColor]];
     [self setView:rootView];
     [rootView addSubview:_btnParent];
-    [rootView release];
 }
 
-- (void) dealloc
-{
-    [super dealloc];
-    [_btnParent release];
-    [_btnWestNorth release];
-    [_btnEastNorth release];
-    [_btnWestSouth release];
-    [_btnWest release];
-    [_btnNorth release];
-    [_btnEast release];
-    [_btnEastSouth release];
-    [_btnSouth release];
-    [_btnCenter release];
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    UIRelativeLayoutManager* layoutManager = [[UIRelativeLayoutManager alloc] init];
+    AlRelativeLayoutManager* layoutManager = [[AlRelativeLayoutManager alloc] init];
     /*
     UIAlLayouter* layouterWestNorth = [_btnWestNorth alLayouter];///[[UIAlLayouter alloc] initWithUIView:_btnA layouter:NULL];
     UIAlLayouter* layouterWestSouth = [_btnWestSouth alLayouter];
@@ -127,7 +112,6 @@
     lp.marginBottom = 5;
     [_btnCenter setMeasuredPreferSize:CGSizeMake(60, 60)];
     [layoutManager addSubView:_btnCenter layoutParameter:lp];
-    [lp release];
     
     lp = [[AlLayoutParameter alloc] init];
     lp.marginLeft = 5;
@@ -136,7 +120,6 @@
     lp.marginBottom = 5;
     [_btnWest setMeasuredPreferSize:CGSizeMake(60, 60)];
     [layoutManager addSubView:_btnWest layoutParameter:lp];
-    [lp release];
 //*
     lp = [[AlLayoutParameter alloc] init];
     lp.marginLeft = 5;
@@ -145,7 +128,6 @@
     lp.marginBottom = 5;
     [_btnNorth setMeasuredPreferSize:CGSizeMake(60, 60)];
     [layoutManager addSubView:_btnNorth layoutParameter:lp];
-    [lp release];
 //*/
     lp = [[AlLayoutParameter alloc] init];
     lp.marginLeft = 5;
@@ -154,8 +136,7 @@
     lp.marginBottom = 5;
     [_btnEast setMeasuredPreferSize:CGSizeMake(60, 60)];
     [layoutManager addSubView:_btnEast layoutParameter:lp];
-    [lp release];
-/*
+
     lp = [[AlLayoutParameter alloc] init];
     lp.marginLeft = 5;
     lp.marginRight = 5;
@@ -163,7 +144,6 @@
     lp.marginBottom = 5;
     [_btnSouth setMeasuredPreferSize:CGSizeMake(60, 60)];
     [layoutManager addSubView:_btnSouth layoutParameter:lp];
-    [lp release];
 //*/
     lp = [[AlLayoutParameter alloc] init];
     lp.marginLeft = 5;
@@ -172,7 +152,6 @@
     lp.marginBottom = 5;
     [_btnWestNorth setMeasuredPreferSize:CGSizeMake(60, 60)];
     [layoutManager addSubView:_btnWestNorth layoutParameter:lp];
-    [lp release];
     
     lp = [[AlLayoutParameter alloc] init];
     lp.marginLeft = 5;
@@ -181,8 +160,7 @@
     lp.marginBottom = 5;
     [_btnEastNorth setMeasuredPreferSize:CGSizeMake(60, 60)];
     [layoutManager addSubView:_btnEastNorth layoutParameter:lp];
-    [lp release];
-/*
+
     lp = [[AlLayoutParameter alloc] init];
     lp.marginLeft = 5;
     lp.marginRight = 5;
@@ -190,7 +168,6 @@
     lp.marginBottom = 5;
     [_btnEastSouth setMeasuredPreferSize:CGSizeMake(60, 60)];
     [layoutManager addSubView:_btnEastSouth layoutParameter:lp];
-    [lp release];
     
     lp = [[AlLayoutParameter alloc] init];
     lp.marginLeft = 5;
@@ -199,7 +176,6 @@
     lp.marginBottom = 5;
     [_btnWestSouth setMeasuredPreferSize:CGSizeMake(60, 60)];
     [layoutManager addSubView:_btnWestSouth layoutParameter:lp];
-    [lp release];
 //*/
     
     //[layoutManager setLayoutConstraintOfSubView:_btnWest toLeftOf:_btnNorth];
@@ -210,16 +186,16 @@
     [layoutManager setLayoutConstraintOfSubView:_btnNorth toRightOf:_btnWestNorth];
     [layoutManager setLayoutConstraintOfSubView:_btnEastNorth toRightOf:_btnNorth];
 
-    //[layoutManager setLayoutConstraintOfSubView:_btnWestSouth toLeftOf:_btnSouth];
-    //[layoutManager setLayoutConstraintOfSubView:_btnEastSouth toRightOf:_btnSouth];
+    [layoutManager setLayoutConstraintOfSubView:_btnWestSouth toLeftOf:_btnSouth];
+    [layoutManager setLayoutConstraintOfSubView:_btnEastSouth toRightOf:_btnSouth];
 
     [layoutManager setLayoutConstraintOfSubView:_btnCenter below:_btnNorth];
     [layoutManager setLayoutConstraintOfSubView:_btnWestNorth above:_btnWest];
     [layoutManager setLayoutConstraintOfSubView:_btnEastNorth above:_btnEast];
 
-    //[layoutManager setLayoutConstraintOfSubView:_btnEastSouth below:_btnEast];
+    [layoutManager setLayoutConstraintOfSubView:_btnEastSouth below:_btnEast];
     
-    //[layoutManager setLayoutConstraintOfSubView:_btnWest above:_btnWestSouth];
+    [layoutManager setLayoutConstraintOfSubView:_btnWest above:_btnWestSouth];
 
     [layoutManager setLayoutConstraintOfSubView:_btnNorth withAnchor:ParentHorizontalCenter];
     //[layoutManager setLayoutConstraintOfSubView:_btnCenter withAnchor:ParentVerticalCenter];
@@ -227,24 +203,24 @@
 //    [layoutManager setLayoutConstraintOfSubView:_btnWest withAnchor:ParentLeft];
     [layoutManager setLayoutConstraintOfSubView:_btnNorth withAnchor:ParentTop];///!!!
 //    [layoutManager setLayoutConstraintOfSubView:_btnEast withAnchor:ParentRight];
-    //[layoutManager setLayoutConstraintOfSubView:_btnSouth withAnchor:ParentBottom];
+    [layoutManager setLayoutConstraintOfSubView:_btnSouth withAnchor:ParentBottom];
     
     //[layoutManager setLayoutConstraintOfSubView:_btnWestNorth withAnchor:ParentLeft];
-    //[layoutManager setLayoutConstraintOfSubView:_btnWestSouth withAnchor:ParentLeft];
+    [layoutManager setLayoutConstraintOfSubView:_btnWestSouth withAnchor:ParentLeft];
     
     //[layoutManager setLayoutConstraintOfSubView:_btnEastNorth withAnchor:ParentRight];
-    //[layoutManager setLayoutConstraintOfSubView:_btnEastSouth withAnchor:ParentRight];
+    [layoutManager setLayoutConstraintOfSubView:_btnEastSouth withAnchor:ParentRight];
     
     //[layoutManager setLayoutConstraintOfSubView:_btnWestNorth withAnchor:ParentTop];
     //[layoutManager setLayoutConstraintOfSubView:_btnEastNorth withAnchor:ParentTop];
     
-    //[layoutManager setLayoutConstraintOfSubView:_btnEastSouth withAnchor:ParentBottom];
-    //[layoutManager setLayoutConstraintOfSubView:_btnWestSouth withAnchor:ParentBottom];
+    [layoutManager setLayoutConstraintOfSubView:_btnEastSouth withAnchor:ParentBottom];
+    [layoutManager setLayoutConstraintOfSubView:_btnWestSouth withAnchor:ParentBottom];
     
     
     [layoutManager onLayout];
+    [layoutManager onLayout];
     [_btnParent setFrame:CGRectMake(0, 0, [layoutManager measuredPreferSize].width, [layoutManager measuredPreferSize].height)];
-    ///!!![layoutManager autorelease];
 }
 
 - (void)didReceiveMemoryWarning
