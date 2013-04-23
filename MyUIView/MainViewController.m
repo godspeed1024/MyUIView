@@ -137,7 +137,7 @@
     [_btnWest setMeasuredPreferSize:CGSizeMake(60, 60)];
     [layoutManager addSubView:_btnWest layoutParameter:lp];
     [lp release];
-    /*
+/*
     lp = [[AlLayoutParameter alloc] init];
     lp.marginLeft = 5;
     lp.marginRight = 5;
@@ -146,7 +146,7 @@
     [_btnNorth setMeasuredPreferSize:CGSizeMake(60, 60)];
     [layoutManager addSubView:_btnNorth layoutParameter:lp];
     [lp release];
-    //*/
+//*/
     lp = [[AlLayoutParameter alloc] init];
     lp.marginLeft = 5;
     lp.marginRight = 5;
@@ -182,7 +182,7 @@
     [_btnEastNorth setMeasuredPreferSize:CGSizeMake(60, 60)];
     [layoutManager addSubView:_btnEastNorth layoutParameter:lp];
     [lp release];
-    //*
+/*
     lp = [[AlLayoutParameter alloc] init];
     lp.marginLeft = 5;
     lp.marginRight = 5;
@@ -200,49 +200,46 @@
     [_btnWestSouth setMeasuredPreferSize:CGSizeMake(60, 60)];
     [layoutManager addSubView:_btnWestSouth layoutParameter:lp];
     [lp release];
-    //*/
+//*/
     
     [layoutManager setLayoutConstraintOfSubView:_btnWest toLeftOf:_btnCenter];
     [layoutManager setLayoutConstraintOfSubView:_btnCenter toLeftOf:_btnEast];
     
-    ///[layoutManager setLayoutConstraintOfSubView:_btnNorth toRightOf:_btnWestNorth];
-    ///[layoutManager setLayoutConstraintOfSubView:_btnEastNorth toRightOf:_btnNorth];
-    /*
-    alRelativeLayout->addLayoutRelation(westSouth, south, kLayoutRelationToLeftOf);
-    alRelativeLayout->addLayoutRelation(eastSouth, south, kLayoutRelationToRightOf);
+    //[layoutManager setLayoutConstraintOfSubView:_btnNorth toRightOf:_btnWestNorth];
+    //[layoutManager setLayoutConstraintOfSubView:_btnEastNorth toRightOf:_btnNorth];
+
+    //[layoutManager setLayoutConstraintOfSubView:_btnWestSouth toLeftOf:_btnSouth];
+    //[layoutManager setLayoutConstraintOfSubView:_btnEastSouth toRightOf:_btnSouth];
+
+    //[layoutManager setLayoutConstraintOfSubView:_btnCenter below:_btnNorth];
+    //[layoutManager setLayoutConstraintOfSubView:_btnWestNorth above:_btnWest];
+
+    //[layoutManager setLayoutConstraintOfSubView:_btnEastSouth below:_btnEast];
+    //[layoutManager setLayoutConstraintOfSubView:_btnEast below:_btnEastNorth];
     
-    alRelativeLayout->addLayoutRelation(center, north, kLayoutRelationBelow);
-    alRelativeLayout->addLayoutRelation(westNorth, west, kLayoutRelationAbove);
+    //[layoutManager setLayoutConstraintOfSubView:_btnWest above:_btnWestSouth];
+
+    //[layoutManager setLayoutConstraintOfSubView:_btnCenter withAnchor:ParentHorizontalCenter];
+    //[layoutManager setLayoutConstraintOfSubView:_btnCenter withAnchor:ParentVerticalCenter];
+
+//    [layoutManager setLayoutConstraintOfSubView:_btnWest withAnchor:ParentLeft];
+    //[layoutManager setLayoutConstraintOfSubView:_btnNorth withAnchor:ParentTop];
+//    [layoutManager setLayoutConstraintOfSubView:_btnEast withAnchor:ParentRight];
+    //[layoutManager setLayoutConstraintOfSubView:_btnSouth withAnchor:ParentBottom];
     
-    alRelativeLayout->addLayoutRelation(eastSouth, east, kLayoutRelationBelow);
-    alRelativeLayout->addLayoutRelation(east, eastNorth, kLayoutRelationBelow);
+    //[layoutManager setLayoutConstraintOfSubView:_btnWestNorth withAnchor:ParentLeft];
+    //[layoutManager setLayoutConstraintOfSubView:_btnWestSouth withAnchor:ParentLeft];
     
-    alRelativeLayout->addLayoutRelation(west, westSouth, kLayoutRelationAbove);
+    //[layoutManager setLayoutConstraintOfSubView:_btnEastNorth withAnchor:ParentRight];
+    //[layoutManager setLayoutConstraintOfSubView:_btnEastSouth withAnchor:ParentRight];
     
-    alRelativeLayout->addLayoutRelation(center, center, kLayoutRelationCenterParentHorizontal);
-    alRelativeLayout->addLayoutRelation(center, center, kLayoutRelationCenterParentVertical);
+    //[layoutManager setLayoutConstraintOfSubView:_btnWestNorth withAnchor:ParentTop];
+    //[layoutManager setLayoutConstraintOfSubView:_btnEastNorth withAnchor:ParentTop];
     
-    alRelativeLayout->addLayoutRelation(west, NULL, kLayoutRelationAlignParentLeft);
-    alRelativeLayout->addLayoutRelation(north, NULL, kLayoutRelationAlignParentTop);
-    alRelativeLayout->addLayoutRelation(east, NULL, kLayoutRelationAlignParentRight);
-    alRelativeLayout->addLayoutRelation(south, NULL, kLayoutRelationAlignParentBottom);
+    //[layoutManager setLayoutConstraintOfSubView:_btnEastSouth withAnchor:ParentBottom];
+    //[layoutManager setLayoutConstraintOfSubView:_btnWestSouth withAnchor:ParentBottom];
     
-    alRelativeLayout->addLayoutRelation(westNorth, NULL, kLayoutRelationAlignParentLeft);
-    alRelativeLayout->addLayoutRelation(westSouth, west, kLayoutRelationAlignParentLeft);
     
-    alRelativeLayout->addLayoutRelation(eastNorth, eastSouth, kLayoutRelationAlignParentRight);
-    alRelativeLayout->addLayoutRelation(eastSouth, east, kLayoutRelationAlignParentRight);
-    
-    alRelativeLayout->addLayoutRelation(westNorth, eastNorth, kLayoutRelationAlignParentTop);
-    alRelativeLayout->addLayoutRelation(eastNorth, north, kLayoutRelationAlignParentTop);
-    
-    alRelativeLayout->addLayoutRelation(eastSouth, eastSouth, kLayoutRelationAlignParentBottom);
-    alRelativeLayout->addLayoutRelation(westSouth, westSouth, kLayoutRelationAlignParentBottom);
-    
-     lp.givenSize = CGSizeMake(320, 360);
-    alRelativeLayout->measure(lp);
-    alRelativeLayout->applyLayout();
-     //*/
     [layoutManager onLayout];
     [_btnParent setFrame:CGRectMake(0, 0, [layoutManager measuredPreferSize].width, [layoutManager measuredPreferSize].height)];
     ///!!![layoutManager autorelease];
