@@ -11,8 +11,15 @@
 @interface MainViewController : UIViewController
 {
     UIButton* _btnParent;
-    UIButton* _btnA;
-    UIButton* _btnB;
+    UIButton* _btnCenter;
+    UIButton* _btnWest;
+    UIButton* _btnNorth;
+    UIButton* _btnEast;
+    UIButton* _btnSouth;
+    UIButton* _btnWestNorth;
+    UIButton* _btnEastNorth;
+    UIButton* _btnEastSouth;
+    UIButton* _btnWestSouth;
 }
 
 @end

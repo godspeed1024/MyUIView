@@ -792,12 +792,31 @@ void AlViewRelativeLayout::onMeasure (AlViewLayoutParameter givenLayoutParam)
 {
 #ifdef V2
     
-    // Measure all children :
+    // Measure all children & Create nodes for children that not exist in any constraints :
     for (map<int, ChildPair>::iterator iter = children.begin(); iter != children.end(); iter++)
     {
         ChildPair cp = iter->second;
         cp.child->onMeasure(cp.parameter);
+        
+        map<AlViewLayout*, LayoutChainNode*>::iterator itrNode = horizontalLayoutChains.find(cp.child);
+        if (horizontalLayoutChains.end() == itrNode)
+        {
+            LayoutChainNode* node = new LayoutChainNode;
+            node->layouter = cp.child;
+            horizontalLayoutChains.insert(make_pair(cp.child, node));
+        }
+        
+        itrNode = verticalLayoutChains.find(cp.child);
+        if (verticalLayoutChains.end() == itrNode)
+        {
+            LayoutChainNode* node = new LayoutChainNode;
+            node->layouter = cp.child;
+            verticalLayoutChains.insert(make_pair(cp.child, node));
+        }
     }
+    
+    // 
+    
     
     // Use this map for both recording children's frame, and to mark if a child is reached in traversing a chain :
     map<AlViewLayout*, CGRect> framesOfChildren;
@@ -1077,11 +1096,11 @@ void AlViewRelativeLayout::onMeasure (AlViewLayoutParameter givenLayoutParam)
         float heightOfThisChain;
         if (0 == itrRoot->second->nextNodes[0].size())
         {
-            heightOfThisChain = recursiveFindMaxWidthOfHorizontalChain(itrRoot->second, 1, 0.0f, framesOfChildren);
+            heightOfThisChain = recursiveFindMaxHeightOfVerticalChain(itrRoot->second, 1, 0.0f, framesOfChildren);
         }
         else
         {
-            heightOfThisChain = recursiveFindMaxWidthOfHorizontalChain(itrRoot->second, 0, 0.0f, framesOfChildren);
+            heightOfThisChain = recursiveFindMaxHeightOfVerticalChain(itrRoot->second, 0, 0.0f, framesOfChildren);
         }
         if (heightOfThisChain > heightNeeded)
         {
@@ -1161,7 +1180,7 @@ void AlViewRelativeLayout::onMeasure (AlViewLayoutParameter givenLayoutParam)
             else
             {
                 offset = heightNeeded - iterChildPair->second.parameter.marginBottom - iterFrameOfChild->second.size.height
-                - iterFrameOfChild->second.origin.y;
+                        - iterFrameOfChild->second.origin.y;
                 direction = 0;
             }
         }
