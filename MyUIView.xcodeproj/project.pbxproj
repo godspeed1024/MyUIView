@@ -10,7 +10,7 @@
 		A238A832170BC4EC00F820D2 /* AlViewContainerLayout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A238A831170BC4EC00F820D2 /* AlViewContainerLayout.cpp */; };
 		A25B9E351717AC9300A1138D /* libpthread.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A25B9E341717AC9300A1138D /* libpthread.dylib */; };
 		A28FDB3C171E92F4001596DF /* UIView+AlViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A28FDB3B171E92F4001596DF /* UIView+AlViewLayout.m */; };
-		A28FDB3F171EA4D5001596DF /* UIRelativeLayouter.m in Sources */ = {isa = PBXBuildFile; fileRef = A28FDB3E171EA4D5001596DF /* UIRelativeLayouter.m */; };
+		A28FDB3F171EA4D5001596DF /* UIRelativeLayoutManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A28FDB3E171EA4D5001596DF /* UIRelativeLayoutManager.m */; };
 		A29CCC37170425B70068B119 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A29CCC36170425B70068B119 /* UIKit.framework */; };
 		A29CCC39170425B70068B119 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A29CCC38170425B70068B119 /* Foundation.framework */; };
 		A29CCC3B170425B70068B119 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A29CCC3A170425B70068B119 /* CoreGraphics.framework */; };
@@ -26,6 +26,10 @@
 		A29CCC5E1704279E0068B119 /* UIAlLayouter.mm in Sources */ = {isa = PBXBuildFile; fileRef = A29CCC5D1704279E0068B119 /* UIAlLayouter.mm */; };
 		A29CCC6417042FC30068B119 /* AlViewLayout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A29CCC6217042FC30068B119 /* AlViewLayout.cpp */; };
 		A29CCC6B1704478B0068B119 /* AlViewRelativeLayout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A29CCC691704478A0068B119 /* AlViewRelativeLayout.cpp */; };
+		A2ACE1711726569E00FE1BEE /* AlLayoutChainNode.m in Sources */ = {isa = PBXBuildFile; fileRef = A2ACE1701726569E00FE1BEE /* AlLayoutChainNode.m */; };
+		A2ACE17717265EAB00FE1BEE /* UILayoutManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A2ACE17617265EAB00FE1BEE /* UILayoutManager.m */; };
+		A2ACE179172660DE00FE1BEE /* AlLayoutParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = A2ACE178172660DD00FE1BEE /* AlLayoutParameter.m */; };
+		A2BA4A7E17269FB200D07A63 /* NSObject_KVContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = A2BA4A7D17269FB200D07A63 /* NSObject_KVContainer.m */; };
 		A2E3CA8B1709783C00968906 /* BitMatrix.c in Sources */ = {isa = PBXBuildFile; fileRef = A2E3CA8A1709783C00968906 /* BitMatrix.c */; };
 /* End PBXBuildFile section */
 
@@ -34,8 +38,8 @@
 		A25B9E341717AC9300A1138D /* libpthread.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpthread.dylib; path = usr/lib/libpthread.dylib; sourceTree = SDKROOT; };
 		A28FDB3A171E92F4001596DF /* UIView+AlViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AlViewLayout.h"; sourceTree = "<group>"; };
 		A28FDB3B171E92F4001596DF /* UIView+AlViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AlViewLayout.m"; sourceTree = "<group>"; };
-		A28FDB3D171EA4D5001596DF /* UIRelativeLayouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIRelativeLayouter.h; sourceTree = "<group>"; };
-		A28FDB3E171EA4D5001596DF /* UIRelativeLayouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIRelativeLayouter.m; sourceTree = "<group>"; };
+		A28FDB3D171EA4D5001596DF /* UIRelativeLayoutManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIRelativeLayoutManager.h; sourceTree = "<group>"; };
+		A28FDB3E171EA4D5001596DF /* UIRelativeLayoutManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIRelativeLayoutManager.m; sourceTree = "<group>"; };
 		A29CCC33170425B70068B119 /* MyUIView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyUIView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A29CCC36170425B70068B119 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A29CCC38170425B70068B119 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -61,6 +65,14 @@
 		A29CCC68170435370068B119 /* AlViewLayoutParameter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlViewLayoutParameter.h; sourceTree = "<group>"; };
 		A29CCC691704478A0068B119 /* AlViewRelativeLayout.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AlViewRelativeLayout.cpp; sourceTree = "<group>"; };
 		A29CCC6A1704478B0068B119 /* AlViewRelativeLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlViewRelativeLayout.h; sourceTree = "<group>"; };
+		A2ACE16F1726569D00FE1BEE /* AlLayoutChainNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlLayoutChainNode.h; sourceTree = "<group>"; };
+		A2ACE1701726569E00FE1BEE /* AlLayoutChainNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlLayoutChainNode.m; sourceTree = "<group>"; };
+		A2ACE17217265E2500FE1BEE /* AlLayoutParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlLayoutParameter.h; sourceTree = "<group>"; };
+		A2ACE17517265EAB00FE1BEE /* UILayoutManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UILayoutManager.h; sourceTree = "<group>"; };
+		A2ACE17617265EAB00FE1BEE /* UILayoutManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UILayoutManager.m; sourceTree = "<group>"; };
+		A2ACE178172660DD00FE1BEE /* AlLayoutParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlLayoutParameter.m; sourceTree = "<group>"; };
+		A2BA4A7C17269F3A00D07A63 /* NSObject_KVContainer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSObject_KVContainer.h; sourceTree = "<group>"; };
+		A2BA4A7D17269FB200D07A63 /* NSObject_KVContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSObject_KVContainer.m; sourceTree = "<group>"; };
 		A2E3CA891709758500968906 /* BitMatrix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BitMatrix.h; sourceTree = "<group>"; };
 		A2E3CA8A1709783C00968906 /* BitMatrix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BitMatrix.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -88,8 +100,16 @@
 				A29CCC5D1704279E0068B119 /* UIAlLayouter.mm */,
 				A28FDB3A171E92F4001596DF /* UIView+AlViewLayout.h */,
 				A28FDB3B171E92F4001596DF /* UIView+AlViewLayout.m */,
-				A28FDB3D171EA4D5001596DF /* UIRelativeLayouter.h */,
-				A28FDB3E171EA4D5001596DF /* UIRelativeLayouter.m */,
+				A28FDB3D171EA4D5001596DF /* UIRelativeLayoutManager.h */,
+				A28FDB3E171EA4D5001596DF /* UIRelativeLayoutManager.m */,
+				A2ACE16F1726569D00FE1BEE /* AlLayoutChainNode.h */,
+				A2ACE1701726569E00FE1BEE /* AlLayoutChainNode.m */,
+				A2ACE17217265E2500FE1BEE /* AlLayoutParameter.h */,
+				A2ACE178172660DD00FE1BEE /* AlLayoutParameter.m */,
+				A2ACE17517265EAB00FE1BEE /* UILayoutManager.h */,
+				A2ACE17617265EAB00FE1BEE /* UILayoutManager.m */,
+				A2BA4A7C17269F3A00D07A63 /* NSObject_KVContainer.h */,
+				A2BA4A7D17269FB200D07A63 /* NSObject_KVContainer.m */,
 			);
 			name = AlUIView;
 			sourceTree = "<group>";
@@ -243,7 +263,11 @@
 				A2E3CA8B1709783C00968906 /* BitMatrix.c in Sources */,
 				A238A832170BC4EC00F820D2 /* AlViewContainerLayout.cpp in Sources */,
 				A28FDB3C171E92F4001596DF /* UIView+AlViewLayout.m in Sources */,
-				A28FDB3F171EA4D5001596DF /* UIRelativeLayouter.m in Sources */,
+				A28FDB3F171EA4D5001596DF /* UIRelativeLayoutManager.m in Sources */,
+				A2ACE1711726569E00FE1BEE /* AlLayoutChainNode.m in Sources */,
+				A2ACE17717265EAB00FE1BEE /* UILayoutManager.m in Sources */,
+				A2ACE179172660DE00FE1BEE /* AlLayoutParameter.m in Sources */,
+				A2BA4A7E17269FB200D07A63 /* NSObject_KVContainer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

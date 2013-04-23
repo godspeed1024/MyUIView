@@ -7,12 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "UIAlLayouter.h"
 
 @interface UIView (AlViewLayout)
 
-- (void) setAlLayouter : (UIAlLayouter*) alLayouter;
+- (void) setMeasuredPreferSize : (CGSize) size;
 
-- (UIAlLayouter*) alLayouter;
+- (CGSize) measuredPreferSize;
 
 @end
