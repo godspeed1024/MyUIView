@@ -93,19 +93,19 @@
     lp.marginBottom = 10;
     alRelativeLayout->addChild(b, lp);
 
-    //alRelativeLayout->addLayoutRelation(b, b, kLayoutRelationAlignParentBottom);
-    //alRelativeLayout->addLayoutRelation(a, b, kLayoutRelationAlignParentRight);
-    //alRelativeLayout->addLayoutRelation(a, b, kLayoutRelationAlignBottomWith);
     alRelativeLayout->addLayoutRelation(a, b, kLayoutRelationToLeftOf);
-    alRelativeLayout->addLayoutRelation(a, b, kLayoutRelationAbove);
+    alRelativeLayout->addLayoutRelation(b, b, kLayoutRelationCenterParentHorizontal);
+    //alRelativeLayout->addLayoutRelation(b, b, kLayoutRelationAlignParentBottom);
+    //alRelativeLayout->addLayoutRelation(b, b, kLayoutRelationAlignParentRight);
+    //alRelativeLayout->addLayoutRelation(a, b, kLayoutRelationAlignBottomWith);
+    alRelativeLayout->addLayoutRelation(a, b, kLayoutRelationBelow);
     //alRelativeLayout->addLayoutRelation(a, b, kLayoutRelationAlignParentLeft);
     //alRelativeLayout->addLayoutRelation(a, a, kLayoutRelationAlignParentTop);
     
-    //alRelativeLayout->addLayoutRelation(a, a, kLayoutRelationCenterParentHorizontal);
     ///alRelativeLayout->addLayoutRelation(a, b, kLayoutRelationCenterHorizontalWith);
     alRelativeLayout->addLayoutRelation(a, a, kLayoutRelationCenterParentVertical);
     
-    lp.givenSize = CGSizeMake(130, 200);
+    lp.givenSize = CGSizeMake(320, 360);
     alRelativeLayout->measure(lp);
     alRelativeLayout->applyLayout();
     

@@ -888,7 +888,16 @@ void AlViewRelativeLayout::onMeasure (AlViewLayoutParameter givenLayoutParam)
         }
         
         horizontalLayoutChainRoots.insert(make_pair(itrRoot->second, itrRoot->first));
-        float widthOfThisChain = recursiveFindMaxWidthOfHorizontalChain(itrRoot->second, 1, 0.0f, framesOfChildren);
+        
+        float widthOfThisChain;
+        if (0 == itrRoot->second->nextNodes[0].size())
+        {
+            widthOfThisChain = recursiveFindMaxWidthOfHorizontalChain(itrRoot->second, 1, 0.0f, framesOfChildren);
+        }
+        else
+        {
+            widthOfThisChain = recursiveFindMaxWidthOfHorizontalChain(itrRoot->second, 0, 0.0f, framesOfChildren);
+        }
         if (widthOfThisChain > widthNeeded)
         {
             widthNeeded = widthOfThisChain;
@@ -940,14 +949,36 @@ void AlViewRelativeLayout::onMeasure (AlViewLayoutParameter givenLayoutParam)
                 framesOfChildren[itrRoot->first->layouter] = offsettedRect;
                 recursiveOffsetHorizontalChains(itrRoot->first, 0, offset, framesOfChildren);
             }
-            else
+            else if (itrLayoutFlag->second & kLayoutRelationAlignParentLeft)
             {
                 offset = iterChildPair->second.parameter.marginLeft - iterFrameOfChild->second.origin.x;
+            }
+            else
+            {
+                if (0 == itrRoot->first->nextNodes[0].size())
+                {
+                    offset = iterChildPair->second.parameter.marginLeft - iterFrameOfChild->second.origin.x;
+                }
+                else
+                {
+                    offset = widthNeeded - iterChildPair->second.parameter.marginRight - iterFrameOfChild->second.size.width
+                            - iterFrameOfChild->second.origin.x;
+                    direction = 0;
+                }
             }
         }
         else
         {
-            offset = iterChildPair->second.parameter.marginLeft - iterFrameOfChild->second.origin.x;
+            if (0 == itrRoot->first->nextNodes[0].size())
+            {
+                offset = iterChildPair->second.parameter.marginLeft - iterFrameOfChild->second.origin.x;
+            }
+            else
+            {
+                offset = widthNeeded - iterChildPair->second.parameter.marginRight - iterFrameOfChild->second.size.width
+                - iterFrameOfChild->second.origin.x;
+                direction = 0;
+            }
         }
         
         recursiveOffsetHorizontalChains(itrRoot->first, direction, offset, framesOfChildren);
@@ -1043,7 +1074,15 @@ void AlViewRelativeLayout::onMeasure (AlViewLayoutParameter givenLayoutParam)
         }
         
         verticalLayoutChainRoots.insert(make_pair(itrRoot->second, itrRoot->first));
-        float heightOfThisChain = recursiveFindMaxHeightOfVerticalChain(itrRoot->second, 1, 0.0f, framesOfChildren);
+        float heightOfThisChain;
+        if (0 == itrRoot->second->nextNodes[0].size())
+        {
+            heightOfThisChain = recursiveFindMaxWidthOfHorizontalChain(itrRoot->second, 1, 0.0f, framesOfChildren);
+        }
+        else
+        {
+            heightOfThisChain = recursiveFindMaxWidthOfHorizontalChain(itrRoot->second, 0, 0.0f, framesOfChildren);
+        }
         if (heightOfThisChain > heightNeeded)
         {
             heightNeeded = heightOfThisChain;
@@ -1095,14 +1134,36 @@ void AlViewRelativeLayout::onMeasure (AlViewLayoutParameter givenLayoutParam)
                 framesOfChildren[itrRoot->first->layouter] = offsettedRect;
                 recursiveOffsetVerticalChains(itrRoot->first, 0, offset, framesOfChildren);
             }
-            else
+            else if (itrLayoutFlag->second & kLayoutRelationAlignParentTop)
             {
                 offset = iterChildPair->second.parameter.marginTop - iterFrameOfChild->second.origin.y;
+            }
+            else
+            {
+                if (0 == itrRoot->first->nextNodes[0].size())
+                {
+                    offset = iterChildPair->second.parameter.marginTop - iterFrameOfChild->second.origin.y;
+                }
+                else
+                {
+                    offset = heightNeeded - iterChildPair->second.parameter.marginBottom - iterFrameOfChild->second.size.height
+                            - iterFrameOfChild->second.origin.y;
+                    direction = 0;
+                }
             }
         }
         else
         {
-            offset = iterChildPair->second.parameter.marginTop - iterFrameOfChild->second.origin.y;
+            if (0 == itrRoot->first->nextNodes[0].size())
+            {
+                offset = iterChildPair->second.parameter.marginTop - iterFrameOfChild->second.origin.y;
+            }
+            else
+            {
+                offset = heightNeeded - iterChildPair->second.parameter.marginBottom - iterFrameOfChild->second.size.height
+                - iterFrameOfChild->second.origin.y;
+                direction = 0;
+            }
         }
         
         recursiveOffsetVerticalChains(itrRoot->first, direction, offset, framesOfChildren);
@@ -1116,6 +1177,10 @@ void AlViewRelativeLayout::onMeasure (AlViewLayoutParameter givenLayoutParam)
         cp.child->_layoutedRect = framesOfChildren[cp.child];
         cp.child->applyLayout();///!!!
     }
+    
+    setMinimalMeasuredSize(widthNeeded, heightNeeded);
+    setDesiredMeasuredSize(widthNeeded, heightNeeded);
+    _layoutedRect = CGRectMake(0, 0, widthNeeded, heightNeeded);
     
 #else
     
@@ -1173,11 +1238,11 @@ void AlViewRelativeLayout::onMeasure (AlViewLayoutParameter givenLayoutParam)
         cp.child->applyLayout();///!!!
     }
     
-#endif // V2
+    setMinimalMeasuredSize(givenLayoutParam.givenSize.width, givenLayoutParam.givenSize.height);
+    setDesiredMeasuredSize(givenLayoutParam.givenSize.width, givenLayoutParam.givenSize.height);
+    _layoutedRect = CGRectMake(0, 0, givenLayoutParam.givenSize.width, _minimalMeasuredSize.height);
     
-    setMinimalMeasuredSize(widthNeeded, givenLayoutParam.givenSize.height);
-    setDesiredMeasuredSize(widthNeeded, givenLayoutParam.givenSize.height);
-    _layoutedRect = CGRectMake(0, 0, widthNeeded, _minimalMeasuredSize.height);
+#endif // V2
 }
 
 void AlViewRelativeLayout::doRecursiveTraverse (RelationGraphNode* curNode, int direction, RelationGraphNode* fromNode, RelationGraphEdge* edge,
