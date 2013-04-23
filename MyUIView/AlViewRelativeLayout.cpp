@@ -61,16 +61,23 @@ void AlViewRelativeLayout::addLayoutRelation (int leftOperandID, int rightOperan
     }
     
     LayoutChainNode* dependencyNode;
-    map<AlViewLayout*, LayoutChainNode*>::iterator itrDependencyNode = pLayoutChains->find(dependencyOperand);
-    if (pLayoutChains->end() == itrDependencyNode)
+    if (NULL == dependencyOperand)
     {
-        dependencyNode = new LayoutChainNode;
-        dependencyNode->layouter = dependencyOperand;
-        pLayoutChains->insert(make_pair(dependencyOperand, dependencyNode));
+        dependencyNode = NULL;
     }
     else
     {
-        dependencyNode = itrDependencyNode->second;
+        map<AlViewLayout*, LayoutChainNode*>::iterator itrDependencyNode = pLayoutChains->find(dependencyOperand);
+        if (pLayoutChains->end() == itrDependencyNode)
+        {
+            dependencyNode = new LayoutChainNode;
+            dependencyNode->layouter = dependencyOperand;
+            pLayoutChains->insert(make_pair(dependencyOperand, dependencyNode));
+        }
+        else
+        {
+            dependencyNode = itrDependencyNode->second;
+        }
     }
     
     switch (layoutRelation)
@@ -205,16 +212,23 @@ void AlViewRelativeLayout::addLayoutRelation (AlViewLayout* leftOperandChild, Al
     }
     
     LayoutChainNode* dependencyNode;
-    map<AlViewLayout*, LayoutChainNode*>::iterator itrDependencyNode = pLayoutChains->find(dependencyOperand);
-    if (pLayoutChains->end() == itrDependencyNode)
+    if (NULL == dependencyOperand)
     {
-        dependencyNode = new LayoutChainNode;
-        dependencyNode->layouter = dependencyOperand;
-        pLayoutChains->insert(make_pair(dependencyOperand, dependencyNode));///!!!???
+        dependencyNode = NULL;
     }
     else
     {
-        dependencyNode = itrDependencyNode->second;
+        map<AlViewLayout*, LayoutChainNode*>::iterator itrDependencyNode = pLayoutChains->find(dependencyOperand);
+        if (pLayoutChains->end() == itrDependencyNode)
+        {
+            dependencyNode = new LayoutChainNode;
+            dependencyNode->layouter = dependencyOperand;
+            pLayoutChains->insert(make_pair(dependencyOperand, dependencyNode));///!!!???
+        }
+        else
+        {
+            dependencyNode = itrDependencyNode->second;
+        }
     }
     
     switch (layoutRelation)
@@ -578,6 +592,7 @@ void AlViewRelativeLayout::interpretConstraintsWithChildsBound (list<LayoutConst
     reinterpretedConstraints->push_back(lc);
 }
 
+///!!! TODO: AlignXXXWith
 float AlViewRelativeLayout::recursiveFindMaxWidthOfHorizontalChain (LayoutChainNode* curNode, byte direction,
                                                           float curPosition, map<AlViewLayout*, CGRect>& framesOfChildren)
 {

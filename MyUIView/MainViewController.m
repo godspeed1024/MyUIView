@@ -114,27 +114,27 @@
     
     
     UIAlLayouter* layouterWestNorth = [_btnWestNorth alLayouter];///[[UIAlLayouter alloc] initWithUIView:_btnA layouter:NULL];
-    //UIAlLayouter* layouterWestSouth = [_btnWestSouth alLayouter];
+    UIAlLayouter* layouterWestSouth = [_btnWestSouth alLayouter];
     UIAlLayouter* layouterEastNorth = [_btnEastNorth alLayouter];
-    //UIAlLayouter* layouterEastSouth = [_btnEastSouth alLayouter];
+    UIAlLayouter* layouterEastSouth = [_btnEastSouth alLayouter];
     UIAlLayouter* layouterNorth = [_btnNorth alLayouter];
-    //UIAlLayouter* layouterSouth = [_btnSouth alLayouter];
+    UIAlLayouter* layouterSouth = [_btnSouth alLayouter];
     UIAlLayouter* layouterCenter = [_btnCenter alLayouter];
-    //UIAlLayouter* layouterEast = [_btnEast alLayouter];
-    //UIAlLayouter* layouterWest = [_btnWest alLayouter];
+    UIAlLayouter* layouterEast = [_btnEast alLayouter];
+    UIAlLayouter* layouterWest = [_btnWest alLayouter];
     
     AlViewLayoutParameter lp;
     lp.horizontalLayoutFlag = kLayoutFlagPrecise;
     lp.verticalLayoutFlag = kLayoutFlagPrecise;
     
-    lp.givenSize = CGSizeMake(90, 90);
+    lp.givenSize = CGSizeMake(60, 60);
     lp.marginLeft = 5;
     lp.marginRight = 5;
     lp.marginTop = 5;
     lp.marginBottom = 5;
     AlViewLayout* center = layouterCenter.layouter;
     alRelativeLayout->addChild(center, lp);
-    /*
+    //*
     lp.givenSize = CGSizeMake(50, 50);
     lp.marginLeft = 5;
     lp.marginRight = 5;
@@ -150,7 +150,7 @@
     lp.marginBottom = 5;
     AlViewLayout* north = layouterNorth.layouter;
     alRelativeLayout->addChild(north, lp);
-    /*
+    //*
     lp.givenSize = CGSizeMake(40, 40);
     lp.marginLeft = 5;
     lp.marginRight = 5;
@@ -182,7 +182,7 @@
     lp.marginBottom = 5;
     AlViewLayout* eastNorth = layouterEastNorth.layouter;
     alRelativeLayout->addChild(eastNorth, lp);
-    /*
+    //*
     lp.givenSize = CGSizeMake(50, 50);
     lp.marginLeft = 5;
     lp.marginRight = 5;
@@ -199,25 +199,42 @@
     AlViewLayout* westSouth = layouterWestSouth.layouter;
     alRelativeLayout->addChild(westSouth, lp);
     //*/
-    //alRelativeLayout->addLayoutRelation(west, center, kLayoutRelationToLeftOf);
-    //alRelativeLayout->addLayoutRelation(center, east, kLayoutRelationToLeftOf);
+    alRelativeLayout->addLayoutRelation(west, center, kLayoutRelationToLeftOf);
+    alRelativeLayout->addLayoutRelation(center, east, kLayoutRelationToLeftOf);
     
     alRelativeLayout->addLayoutRelation(north, westNorth, kLayoutRelationToRightOf);
     alRelativeLayout->addLayoutRelation(eastNorth, north, kLayoutRelationToRightOf);
     
-    //alRelativeLayout->addLayoutRelation(westSouth, south, kLayoutRelationToLeftOf);
-    //alRelativeLayout->addLayoutRelation(eastSouth, south, kLayoutRelationToRightOf);
+    alRelativeLayout->addLayoutRelation(westSouth, south, kLayoutRelationToLeftOf);
+    alRelativeLayout->addLayoutRelation(eastSouth, south, kLayoutRelationToRightOf);
     
     alRelativeLayout->addLayoutRelation(center, north, kLayoutRelationBelow);
-    //alRelativeLayout->addLayoutRelation(westNorth, west, kLayoutRelationAbove);
+    alRelativeLayout->addLayoutRelation(westNorth, west, kLayoutRelationAbove);
     
-    //alRelativeLayout->addLayoutRelation(eastSouth, east, kLayoutRelationBelow);
-    //alRelativeLayout->addLayoutRelation(east, eastNorth, kLayoutRelationBelow);
+    alRelativeLayout->addLayoutRelation(eastSouth, east, kLayoutRelationBelow);
+    alRelativeLayout->addLayoutRelation(east, eastNorth, kLayoutRelationBelow);
     
-    //alRelativeLayout->addLayoutRelation(west, westSouth, kLayoutRelationAbove);
+    alRelativeLayout->addLayoutRelation(west, westSouth, kLayoutRelationAbove);
     
     alRelativeLayout->addLayoutRelation(center, center, kLayoutRelationCenterParentHorizontal);
     alRelativeLayout->addLayoutRelation(center, center, kLayoutRelationCenterParentVertical);
+    
+    alRelativeLayout->addLayoutRelation(west, NULL, kLayoutRelationAlignParentLeft);
+    alRelativeLayout->addLayoutRelation(north, NULL, kLayoutRelationAlignParentTop);
+    alRelativeLayout->addLayoutRelation(east, NULL, kLayoutRelationAlignParentRight);
+    alRelativeLayout->addLayoutRelation(south, NULL, kLayoutRelationAlignParentBottom);
+    
+    alRelativeLayout->addLayoutRelation(westNorth, NULL, kLayoutRelationAlignParentLeft);
+    alRelativeLayout->addLayoutRelation(westSouth, west, kLayoutRelationAlignParentLeft);
+    
+    alRelativeLayout->addLayoutRelation(eastNorth, eastSouth, kLayoutRelationAlignParentRight);
+    alRelativeLayout->addLayoutRelation(eastSouth, east, kLayoutRelationAlignParentRight);
+    
+    alRelativeLayout->addLayoutRelation(westNorth, eastNorth, kLayoutRelationAlignParentTop);
+    alRelativeLayout->addLayoutRelation(eastNorth, north, kLayoutRelationAlignParentTop);
+    
+    alRelativeLayout->addLayoutRelation(eastSouth, eastSouth, kLayoutRelationAlignParentBottom);
+    alRelativeLayout->addLayoutRelation(westSouth, westSouth, kLayoutRelationAlignParentBottom);
     
     lp.givenSize = CGSizeMake(320, 360);
     alRelativeLayout->measure(lp);
