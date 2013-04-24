@@ -50,15 +50,15 @@
     return [_name2SubLayouterMap objectForKey:name];
 }
 
-- (void) layout
+- (void) layout : (CGSize) givenSize
 {
     if (_isLayoutInvalid)
     {
         for (TMALLayouter* subLayouter in [_name2SubLayouterMap allValues])
         {
-            [subLayouter layout];
+            [subLayouter layout:givenSize];
         }
-        [self onLayout];
+        [self onLayout:givenSize];
     }
     _isLayoutInvalid = NO;
 }

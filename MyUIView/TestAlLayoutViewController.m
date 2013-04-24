@@ -190,7 +190,9 @@
     lp.marginRight = 0;
     lp.marginTop = 0;
     lp.marginBottom = 0;
+    lp.horizontalStretch = kLayoutFillParent;
     [alCell addSubLayouter:alTopBar withName:@"topbar" layoutParameter:lp];
+    lp.horizontalStretch = kLayoutWrapContent;
     
 // This Msg //
     lp.marginLeft = 5;
@@ -225,12 +227,13 @@
     
     //[alCell setLayoutConstraintOfSubLayouter:alWest toLeftOf:alNorth];
     
-    
+    [alCell setLayoutConstraintOfSubLayouter:alTopBar withAnchor:ParentLeft];
+    [alCell setLayoutConstraintOfSubLayouter:alTopBar withAnchor:ParentRight];
     
     [alCell setLayoutConstraintOfSubLayouter:alThisMsg below:alTopBar];
     [alCell setLayoutConstraintOfSubLayouter:alThisMsg withAnchor:ParentLeft];
     
-    [alCell layout];
+    [alCell layout:CGSizeZero];
     ///[alCell onLayout];
     
     _btnForwardTimes.frame = [alTopBar subLayouterOfName:@"forwardtimes"].layoutedFrame;

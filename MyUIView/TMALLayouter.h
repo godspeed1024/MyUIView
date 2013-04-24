@@ -40,8 +40,8 @@
 
 - (void) setLayoutInvalid;
 
-- (void) layout;
+- (void) layout : (CGSize) givenSize;
 
-- (void) onLayout;
+- (void) onLayout : (CGSize) givenSize;
 
 @end

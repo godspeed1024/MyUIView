@@ -54,16 +54,16 @@
     _measuredPreferSize = size;
 }
 
-- (void) layout
+- (void) layout : (CGSize) givenSize
 {
     if (_isLayoutInvalid)
     {
-        [self onLayout];
+        [self onLayout:givenSize];
     }
     _isLayoutInvalid = NO;
 }
 
-- (void) onLayout
+- (void) onLayout : (CGSize) givenSize
 {
     
 }

@@ -122,6 +122,10 @@ typedef enum
                                   offset : (CGFloat) offset;
 ///!!!framesOfChildren : (NSDictionary*) framesOfChildren;
 
+- (void) recursiveAdustForAlignParentHorizontalAnchors : (TMALLayoutChainNode*) curNode
+                                           direction : (int) direction
+                                              offset : (CGFloat) offset;
+
 - (CGFloat) recursiveFindMaxHeightOfVerticalChain : (TMALLayoutChainNode*) curNode
                                         direction : (int) direction
                                       curPosition : (CGFloat) curPosition;
@@ -132,6 +136,10 @@ typedef enum
                                 offset : (CGFloat) offset;
 ///!!!framesOfChildren : (NSDictionary*) framesOfChildren;
 
-- (void) onLayout;
+- (void) recursiveAdustForAlignParentVerticalAnchors : (TMALLayoutChainNode*) curNode
+                                           direction : (int) direction
+                                              offset : (CGFloat) offset;
+
+///!!!- (void) onLayout : (CGSize) givenSize;
 
 @end

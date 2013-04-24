@@ -332,18 +332,84 @@
 {
     if (nil == curNode) return;
     
-    NSValue* nsPtrNode = [NSValue valueWithPointer : (void*)curNode.subLayouter];
-    NSValue* nvFrame = [_frameOfSubLayouter objectForKey:nsPtrNode];
+    NSValue* nsPtrLayouter = [NSValue valueWithPointer : (void*)curNode.subLayouter];
+    NSValue* nvFrame = [_frameOfSubLayouter objectForKey:nsPtrLayouter];
     CGRect frame = [nvFrame CGRectValue];
     frame.origin.x += offset;
     nvFrame = [NSValue valueWithCGRect:frame];
-    [_frameOfSubLayouter setObject:nvFrame forKey:nsPtrNode];
+    [_frameOfSubLayouter setObject:nvFrame forKey:nsPtrLayouter];
     
     for (TMALLayoutChainNode* nextNode in [curNode.nextNodes objectAtIndex:direction])
     {
         [self recursiveOffsetHorizontalChains : nextNode
                                     direction : direction
                                        offset : offset];
+    }
+}
+
+- (void) recursiveAdustForAlignParentHorizontalAnchors : (TMALLayoutChainNode*) curNode
+                                             direction : (int) direction
+                                                offset : (CGFloat) offset
+{
+    NSValue* nsPtrNode = [NSValue valueWithPointer : (void*)curNode.subLayouter];
+    NSValue* nvFrame = [_frameOfSubLayouter objectForKey:nsPtrNode];
+    CGRect frame = [nvFrame CGRectValue];
+    
+    NSNumber* nnLayoutFlag = [_layoutFlagsOfNode objectForKey:[NSValue valueWithPointer:(void*)curNode]];
+    int layoutFlag = (nil == nnLayoutFlag ? 0 : [nnLayoutFlag intValue]);
+    if (0.0f > offset)
+    {
+        if (kLayoutWrapContent == curNode.subLayouter.layoutParameter.horizontalStretch)
+        {
+            if (layoutFlag & ParentRight)
+            {
+                return;
+            }
+            else
+            {
+                frame.origin.x += offset;
+            }
+        }
+        else if (kLayoutFillParent == curNode.subLayouter.layoutParameter.horizontalStretch)
+        {
+            frame.origin.x += offset;
+            frame.size.width -= offset;
+            
+            [curNode.subLayouter setLayoutInvalid];
+            [curNode.subLayouter layout:frame.size];
+        }
+    }
+    else
+    {
+        if (kLayoutWrapContent == curNode.subLayouter.layoutParameter.horizontalStretch)
+        {
+            if (layoutFlag & ParentLeft)
+            {
+                return;
+            }
+            else
+            {
+                frame.origin.x += offset;
+            }
+        }
+        else if (kLayoutFillParent == curNode.subLayouter.layoutParameter.horizontalStretch)
+        {
+            frame.size.width += offset;
+            
+            [curNode.subLayouter setLayoutInvalid];
+            [curNode.subLayouter layout:frame.size];
+        }
+    }
+    
+    nvFrame = [NSValue valueWithCGRect:frame];
+    [_frameOfSubLayouter setObject:nvFrame forKey:nsPtrNode];
+    
+    if (kLayoutFillParent != curNode.subLayouter.layoutParameter.horizontalStretch)
+    {
+        for (TMALLayoutChainNode* nextNode in [curNode.nextNodes objectAtIndex:direction])
+        {
+            [self recursiveAdustForAlignParentHorizontalAnchors:nextNode direction:direction offset:offset];
+        }
     }
 }
 
@@ -425,7 +491,69 @@
     }
 }
 
-- (void) onLayout
+- (void) recursiveAdustForAlignParentVerticalAnchors : (TMALLayoutChainNode*) curNode
+                                             direction : (int) direction
+                                                offset : (CGFloat) offset
+{
+    //bool continueRecursing = true;
+    
+    NSValue* nsPtrNode = [NSValue valueWithPointer : (void*)curNode.subLayouter];
+    NSValue* nvFrame = [_frameOfSubLayouter objectForKey:nsPtrNode];
+    CGRect frame = [nvFrame CGRectValue];
+    
+    NSNumber* nnLayoutFlag = [_layoutFlagsOfNode objectForKey:[NSValue valueWithPointer:(void*)curNode]];
+    int layoutFlag = (nil == nnLayoutFlag ? 0 : [nnLayoutFlag intValue]);
+    if (0.0f > offset)
+    {
+        if (kLayoutWrapContent == curNode.subLayouter.layoutParameter.verticalStretch)
+        {
+            if (layoutFlag & ParentBottom)
+            {
+                return;
+            }
+            else
+            {
+                frame.origin.y += offset;
+            }
+        }
+        else if (kLayoutFillParent == curNode.subLayouter.layoutParameter.verticalStretch)
+        {
+            frame.origin.y += offset;
+            frame.size.height -= offset;
+        }
+    }
+    else
+    {
+        if (kLayoutWrapContent == curNode.subLayouter.layoutParameter.verticalStretch)
+        {
+            if (layoutFlag & ParentTop)
+            {
+                return;
+            }
+            else
+            {
+                frame.origin.y += offset;
+            }
+        }
+        else if (kLayoutFillParent == curNode.subLayouter.layoutParameter.verticalStretch)
+        {
+            frame.size.height += offset;
+        }
+    }
+    
+    nvFrame = [NSValue valueWithCGRect:frame];
+    [_frameOfSubLayouter setObject:nvFrame forKey:nsPtrNode];
+    
+    if (kLayoutFillParent != curNode.subLayouter.layoutParameter.verticalStretch)
+    {
+        for (TMALLayoutChainNode* nextNode in [curNode.nextNodes objectAtIndex:direction])
+        {
+            [self recursiveAdustForAlignParentVerticalAnchors:nextNode direction:direction offset:offset];
+        }
+    }
+}
+
+- (void) onLayout : (CGSize) givenSize
 {
     // Measure all children & Create nodes for children that not exist in any constraints :
     [_frameOfSubLayouter removeAllObjects];
@@ -450,7 +578,7 @@
     // Horizontal :
     
     // Measure max width of all chains:
-    float widthNeeded = 0.0f;
+    float widthNeeded = givenSize.width;
     
     for (TMALLayoutChainNode* node in _horizontalLayoutChainRoots)
     {
@@ -613,10 +741,34 @@
         [self recursiveOffsetHorizontalChains:node direction:direction offset:offset];
     }
     
+    for (TMALLayoutChainNode* node in _horizontalLayoutChainRoots)
+    {
+        if (nil == node) continue;
+        
+        float offset;
+        
+        CGRect frame;
+        NSValue* nvFrame = [_frameOfSubLayouter objectForKey:[NSValue valueWithPointer:(void*)node.subLayouter]];
+        frame = [nvFrame CGRectValue];
+        
+        NSNumber* nnLayoutFlag = [_layoutFlagsOfNode objectForKey:[NSValue valueWithPointer:(void*)node]];
+        int layoutFlag = (nil == nnLayoutFlag ? 0 : [nnLayoutFlag intValue]);
+        if (layoutFlag & ParentLeft)
+        {
+            offset = node.subLayouter.layoutParameter.marginLeft - frame.origin.x;
+            [self recursiveAdustForAlignParentHorizontalAnchors:node direction:1 offset:offset];
+        }
+        else if (layoutFlag & ParentRight)
+        {
+            offset = widthNeeded - node.subLayouter.layoutParameter.marginRight - frame.origin.x - frame.size.width;
+            [self recursiveAdustForAlignParentHorizontalAnchors:node direction:0 offset:offset];
+        }
+    }
+    
     // Vertical:
     
     // Measure max height of all chains:
-    float heightNeeded = 0.0f;
+    float heightNeeded = givenSize.height;
     
     for (TMALLayoutChainNode* node in _verticalLayoutChainRoots)
     {
@@ -775,6 +927,30 @@
         }
         
         [self recursiveOffsetVerticalChains:node direction:direction offset:offset];
+    }
+    
+    for (TMALLayoutChainNode* node in _verticalLayoutChainRoots)
+    {
+        if (nil == node) continue;
+        
+        float offset;
+        
+        CGRect frame;
+        NSValue* nvFrame = [_frameOfSubLayouter objectForKey:[NSValue valueWithPointer:(void*)node.subLayouter]];
+        frame = [nvFrame CGRectValue];
+        
+        NSNumber* nnLayoutFlag = [_layoutFlagsOfNode objectForKey:[NSValue valueWithPointer:(void*)node]];
+        int layoutFlag = (nil == nnLayoutFlag ? 0 : [nnLayoutFlag intValue]);
+        if (layoutFlag & ParentTop)
+        {
+            offset = node.subLayouter.layoutParameter.marginTop - frame.origin.y;
+            [self recursiveAdustForAlignParentVerticalAnchors:node direction:1 offset:offset];
+        }
+        else if (layoutFlag & ParentBottom)
+        {
+            offset = heightNeeded - node.subLayouter.layoutParameter.marginBottom - frame.origin.y - frame.size.height;
+            [self recursiveAdustForAlignParentVerticalAnchors:node direction:0 offset:offset];
+        }
     }
     
     ////////
