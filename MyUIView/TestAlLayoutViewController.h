@@ -10,16 +10,19 @@
 
 @interface TestAlLayoutViewController : UIViewController
 {
-    UIButton* _btnParent;
-    UIButton* _btnCenter;
-    UIButton* _btnWest;
-    UIButton* _btnNorth;
-    UIButton* _btnEast;
-    UIButton* _btnSouth;
-    UIButton* _btnWestNorth;
-    UIButton* _btnEastNorth;
-    UIButton* _btnEastSouth;
-    UIButton* _btnWestSouth;
+    UIButton* _btnCell;
+    UIButton* _btnTopBar;
+    
+    UIButton* _btnAuthorsAvatar;
+    UIButton* _btnCommentButton;
+    UIButton* _btnForwardButton;
+    UIButton* _btnForwardTimes;
+    UIButton* _btnForwardedFollowers;
+    UIButton* _btnThisMsg;
+    UIButton* _btnReferMsg;
+    UIButton* _btnNickname;
+    UIButton* _btnVideo;
+    UIButton* _btnLargeImage;
 }
 
 @end

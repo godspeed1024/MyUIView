@@ -28,61 +28,82 @@
 
 - (void) loadView
 {
-    _btnParent = [[UIButton alloc] init];
-    [_btnParent setBackgroundColor:[UIColor whiteColor]];
-    _btnParent.clipsToBounds = YES;
+    _btnCell = [[UIButton alloc] init];
+    [_btnCell setBackgroundColor:[UIColor whiteColor]];
+    _btnCell.clipsToBounds = YES;
     
-    _btnWestNorth = [[UIButton alloc] init];
-    [_btnWestNorth setBackgroundColor:[UIColor redColor]];
-    _btnWestNorth.clipsToBounds = YES;
+    _btnTopBar = [[UIButton alloc] init];
+    [_btnTopBar setBackgroundColor:[UIColor whiteColor]];
+    _btnTopBar.clipsToBounds = YES;
     
-    _btnNorth = [[UIButton alloc] init];
-    [_btnNorth setBackgroundColor:[UIColor orangeColor]];
-    _btnNorth.clipsToBounds = YES;
+    _btnAuthorsAvatar = [[UIButton alloc] init];
+    [_btnAuthorsAvatar setBackgroundColor:[UIColor redColor]];
+    [_btnAuthorsAvatar setBackgroundImage:[UIImage imageNamed:@"altest_authoravatar.png"] forState:UIControlStateNormal];
+    _btnAuthorsAvatar.clipsToBounds = YES;
     
-    _btnEastNorth = [[UIButton alloc] init];
-    [_btnEastNorth setBackgroundColor:[UIColor yellowColor]];
-    _btnEastNorth.clipsToBounds = YES;
+    _btnCommentButton = [[UIButton alloc] init];
+    [_btnCommentButton setBackgroundColor:[UIColor orangeColor]];
+    [_btnCommentButton setBackgroundImage:[UIImage imageNamed:@"altest_button_comment.png"] forState:UIControlStateNormal];
+    _btnCommentButton.clipsToBounds = YES;
     
-    _btnWest = [[UIButton alloc] init];
-    [_btnWest setBackgroundColor:[UIColor greenColor]];
-    _btnWest.clipsToBounds = YES;
+    _btnForwardButton = [[UIButton alloc] init];
+    [_btnForwardButton setBackgroundColor:[UIColor yellowColor]];
+    [_btnForwardButton setBackgroundImage:[UIImage imageNamed:@"altest_button_forward.png"] forState:UIControlStateNormal];
+    _btnForwardButton.clipsToBounds = YES;
     
-    _btnCenter = [[UIButton alloc] init];
-    [_btnCenter setBackgroundColor:[UIColor cyanColor]];
-    _btnCenter.clipsToBounds = YES;
+    _btnForwardTimes = [[UIButton alloc] init];
+    [_btnForwardTimes setBackgroundColor:[UIColor greenColor]];
+    [_btnForwardTimes setBackgroundImage:[UIImage imageNamed:@"altest_label_forwardtimes.png"] forState:UIControlStateNormal];
+    _btnForwardTimes.clipsToBounds = YES;
     
-    _btnEast = [[UIButton alloc] init];
-    [_btnEast setBackgroundColor:[UIColor blueColor]];
-    _btnEast.clipsToBounds = YES;
+    _btnForwardedFollowers = [[UIButton alloc] init];
+    [_btnForwardedFollowers setBackgroundColor:[UIColor cyanColor]];
+    [_btnForwardedFollowers setBackgroundImage:[UIImage imageNamed:@"altest_label_forwardfollowers.png"] forState:UIControlStateNormal];
+    _btnForwardedFollowers.clipsToBounds = YES;
     
-    _btnWestSouth = [[UIButton alloc] init];
-    [_btnWestSouth setBackgroundColor:[UIColor purpleColor]];
-    _btnWestSouth.clipsToBounds = YES;
+    _btnThisMsg = [[UIButton alloc] init];
+    [_btnThisMsg setBackgroundColor:[UIColor blueColor]];
+    [_btnThisMsg setBackgroundImage:[UIImage imageNamed:@"altest_thismsg.png"] forState:UIControlStateNormal];
+    _btnThisMsg.clipsToBounds = YES;
     
-    _btnSouth = [[UIButton alloc] init];
-    [_btnSouth setBackgroundColor:[UIColor redColor]];
-    _btnSouth.clipsToBounds = YES;
+    _btnNickname = [[UIButton alloc] init];
+    [_btnNickname setBackgroundColor:[UIColor purpleColor]];
+    [_btnNickname setBackgroundImage:[UIImage imageNamed:@"altest_nickname.png"] forState:UIControlStateNormal];
+    _btnNickname.clipsToBounds = YES;
     
-    _btnEastSouth = [[UIButton alloc] init];
-    [_btnEastSouth setBackgroundColor:[UIColor orangeColor]];
-    _btnEastSouth.clipsToBounds = YES;
+    _btnVideo = [[UIButton alloc] init];
+    [_btnVideo setBackgroundColor:[UIColor redColor]];
+    [_btnVideo setBackgroundImage:[UIImage imageNamed:@"altest_video.png"] forState:UIControlStateNormal];
+    _btnVideo.clipsToBounds = YES;
+    
+    _btnLargeImage = [[UIButton alloc] init];
+    [_btnLargeImage setBackgroundColor:[UIColor redColor]];
+    [_btnLargeImage setBackgroundImage:[UIImage imageNamed:@"altest_largeimage.png"] forState:UIControlStateNormal];
+    _btnLargeImage.clipsToBounds = YES;
+    
+    _btnReferMsg = [[UIButton alloc] init];
+    [_btnReferMsg setBackgroundColor:[UIColor orangeColor]];
+    [_btnReferMsg setBackgroundImage:[UIImage imageNamed:@"altest_refermsg.png"] forState:UIControlStateNormal];
+    _btnReferMsg.clipsToBounds = YES;
     
     
-    [_btnParent addSubview:_btnWestNorth];
-    [_btnParent addSubview:_btnNorth];
-    [_btnParent addSubview:_btnEastNorth];
-    [_btnParent addSubview:_btnWest];
-    [_btnParent addSubview:_btnCenter];
-    [_btnParent addSubview:_btnEast];
-    [_btnParent addSubview:_btnWestSouth];
-    [_btnParent addSubview:_btnSouth];
-    [_btnParent addSubview:_btnEastSouth];
+    [_btnTopBar addSubview:_btnAuthorsAvatar];
+    [_btnTopBar addSubview:_btnCommentButton];
+    [_btnTopBar addSubview:_btnForwardButton];
+    [_btnTopBar addSubview:_btnForwardTimes];
+    [_btnTopBar addSubview:_btnNickname];
+    
+    [_btnCell addSubview:_btnTopBar];
+    [_btnCell addSubview:_btnForwardedFollowers];
+    [_btnCell addSubview:_btnThisMsg];
+    [_btnCell addSubview:_btnVideo];
+    [_btnCell addSubview:_btnReferMsg];
+    [_btnCell addSubview:_btnLargeImage];
     
     UIView* rootView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [rootView setBackgroundColor:[UIColor blackColor]];
     [self setView:rootView];
-    [rootView addSubview:_btnParent];
+    [rootView addSubview:_btnCell];
 }
 
 
@@ -91,138 +112,141 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    TMALRelativeLayouter* layoutManager = [[TMALRelativeLayouter alloc] init];
+    TMALRelativeLayouter* alCell = [[TMALRelativeLayouter alloc] init];
+    TMALRelativeLayouter* alTopBar = [[TMALRelativeLayouter alloc] init];
     
-    TMALLayouter* alCenter = [[TMALLayouter alloc] initWithParent:nil];
-    TMALLayouter* alWest = [[TMALLayouter alloc] initWithParent:layoutManager];
-    TMALLayouter* alEast = [[TMALLayouter alloc] initWithParent:layoutManager];
-    TMALLayouter* alNorth = [[TMALLayouter alloc] initWithParent:layoutManager];
-    TMALLayouter* alSouth = [[TMALLayouter alloc] initWithParent:layoutManager];
-    TMALLayouter* alWestNorth = [[TMALLayouter alloc] initWithParent:nil];
-    TMALLayouter* alEastNorth = [[TMALLayouter alloc] initWithParent:layoutManager];
-    TMALLayouter* alWestSouth = [[TMALLayouter alloc] initWithParent:layoutManager];
-    TMALLayouter* alEastSouth = [[TMALLayouter alloc] initWithParent:layoutManager];
+    TMALLayouter* alAuthorsAvatar = [[TMALLayouter alloc] initWithParent:nil];
+    TMALLayouter* alNickname = [[TMALLayouter alloc] initWithParent:nil];
+    TMALLayouter* alForwardTimes = [[TMALLayouter alloc] initWithParent:nil];
+    TMALLayouter* alForwardButton = [[TMALLayouter alloc] initWithParent:nil];
+    TMALLayouter* alCommentButton = [[TMALLayouter alloc] initWithParent:nil];
+    
+    TMALLayouter* alThisMsg = [[TMALLayouter alloc] initWithParent:nil];
+    TMALLayouter* alReferMsg = [[TMALLayouter alloc] initWithParent:nil];
+    TMALLayouter* alVideo = [[TMALLayouter alloc] initWithParent:nil];
+    TMALLayouter* alLargeImage = [[TMALLayouter alloc] initWithParent:nil];
+    TMALLayouter* alForwardedFollowers = [[TMALLayouter alloc] initWithParent:nil];
     
     TMALLayoutParameter lp;
-// Center //
+    
+// Top Bar Area //
+
+// Author's Avatar //
     lp.marginLeft = 5;
     lp.marginRight = 5;
     lp.marginTop = 5;
     lp.marginBottom = 5;
-    [alCenter setMeasuredPreferSize:CGSizeMake(60, 60)];
-    [layoutManager addSubLayouter:alCenter withName:@"center" layoutParameter:lp];
-// West //
+    [_btnAuthorsAvatar sizeToFit];
+    [alAuthorsAvatar setMeasuredPreferSize:[_btnAuthorsAvatar sizeThatFits:CGSizeZero]];
+    [alTopBar addSubLayouter:alAuthorsAvatar withName:@"authorsavatar" layoutParameter:lp];
+// Author's Nickname //
     lp.marginLeft = 5;
     lp.marginRight = 5;
     lp.marginTop = 5;
     lp.marginBottom = 5;
-    [alWest setMeasuredPreferSize:CGSizeMake(60, 60)];
-    [layoutManager addSubLayouter:alWest withName:@"west" layoutParameter:lp];
-// North //
+    [_btnNickname sizeToFit];
+    [alNickname setMeasuredPreferSize:[_btnNickname sizeThatFits:CGSizeZero]];
+    [alTopBar addSubLayouter:alNickname withName:@"nickname" layoutParameter:lp];
+// Forward Times //
     lp.marginLeft = 5;
     lp.marginRight = 5;
     lp.marginTop = 5;
     lp.marginBottom = 5;
-    [alNorth setMeasuredPreferSize:CGSizeMake(60, 60)];
-    [layoutManager addSubLayouter:alNorth withName:@"north" layoutParameter:lp];
-// East //
+    [_btnForwardTimes sizeToFit];
+    [alForwardTimes setMeasuredPreferSize:[_btnForwardTimes sizeThatFits:CGSizeZero]];
+    [alTopBar addSubLayouter:alForwardTimes withName:@"forwardtimes" layoutParameter:lp];
+// Forward Button //
     lp.marginLeft = 5;
     lp.marginRight = 5;
     lp.marginTop = 5;
     lp.marginBottom = 5;
-    [alEast setMeasuredPreferSize:CGSizeMake(60, 60)];
-    [layoutManager addSubLayouter:alEast withName:@"east" layoutParameter:lp];
-// South //
+    [_btnForwardButton sizeToFit];
+    [alForwardButton setMeasuredPreferSize:[_btnForwardButton sizeThatFits:CGSizeZero]];
+    [alTopBar addSubLayouter:alForwardButton withName:@"forwardbutton" layoutParameter:lp];
+// Comment Button //
     lp.marginLeft = 5;
     lp.marginRight = 5;
     lp.marginTop = 5;
     lp.marginBottom = 5;
-    [alSouth setMeasuredPreferSize:CGSizeMake(60, 60)];
-    [layoutManager addSubLayouter:alSouth withName:@"south" layoutParameter:lp];
-// WestNorth */
+    [_btnCommentButton sizeToFit];
+    [alCommentButton setMeasuredPreferSize:[_btnCommentButton sizeThatFits:CGSizeZero]];
+    [alTopBar addSubLayouter:alCommentButton withName:@"commentbutton" layoutParameter:lp];
+    
+    [alTopBar setLayoutConstraintOfSubLayouter:alAuthorsAvatar toLeftOf:alNickname];
+    [alTopBar setLayoutConstraintOfSubLayouter:alAuthorsAvatar withAnchor:ParentLeft];
+    
+    [alTopBar setLayoutConstraintOfSubLayouter:alCommentButton toRightOf:alForwardButton];
+    [alTopBar setLayoutConstraintOfSubLayouter:alForwardButton toRightOf:alForwardTimes];
+    
+    [alTopBar setLayoutConstraintOfSubLayouter:alCommentButton withAnchor:ParentRight];
+    
+    [alTopBar setLayoutConstraintOfSubLayouter:alAuthorsAvatar withAnchor:ParentVerticalCenter];
+    [alTopBar setLayoutConstraintOfSubLayouter:alNickname withAnchor:ParentVerticalCenter];
+    [alTopBar setLayoutConstraintOfSubLayouter:alCommentButton withAnchor:ParentVerticalCenter];
+    [alTopBar setLayoutConstraintOfSubLayouter:alForwardButton withAnchor:ParentVerticalCenter];
+    [alTopBar setLayoutConstraintOfSubLayouter:alForwardTimes withAnchor:ParentVerticalCenter];
+    
+    lp.marginLeft = 0;
+    lp.marginRight = 0;
+    lp.marginTop = 0;
+    lp.marginBottom = 0;
+    [alCell addSubLayouter:alTopBar withName:@"topbar" layoutParameter:lp];
+    
+// This Msg //
     lp.marginLeft = 5;
     lp.marginRight = 5;
     lp.marginTop = 5;
     lp.marginBottom = 5;
-    [alWestNorth setMeasuredPreferSize:CGSizeMake(10, 10)];
-    [layoutManager addSubLayouter:alWestNorth withName:@"westnorth" layoutParameter:lp];
-// EastNorth //
+    [_btnThisMsg sizeToFit];
+    [alThisMsg setMeasuredPreferSize:[_btnThisMsg sizeThatFits:CGSizeZero]];
+    [alCell addSubLayouter:alThisMsg withName:@"thismsg" layoutParameter:lp];
+/* EastNorth //
     lp.marginLeft = 5;
     lp.marginRight = 5;
     lp.marginTop = 5;
     lp.marginBottom = 5;
     [alEastNorth setMeasuredPreferSize:CGSizeMake(60, 60)];
-    [layoutManager addSubLayouter:alEastNorth withName:@"eastnorth" layoutParameter:lp];
+    [alCell addSubLayouter:alEastNorth withName:@"eastnorth" layoutParameter:lp];
 // EastSouth //
     lp.marginLeft = 5;
     lp.marginRight = 5;
     lp.marginTop = 5;
     lp.marginBottom = 5;
     [alEastSouth setMeasuredPreferSize:CGSizeMake(60, 60)];
-    [layoutManager addSubLayouter:alEastSouth withName:@"eastsouth" layoutParameter:lp];
+    [alCell addSubLayouter:alEastSouth withName:@"eastsouth" layoutParameter:lp];
 // WestSouth //
     lp.marginLeft = 5;
     lp.marginRight = 5;
     lp.marginTop = 5;
     lp.marginBottom = 5;
     [alWestSouth setMeasuredPreferSize:CGSizeMake(60, 60)];
-    [layoutManager addSubLayouter:alWestSouth withName:@"westsouth" layoutParameter:lp];
+    [alCell addSubLayouter:alWestSouth withName:@"westsouth" layoutParameter:lp];
 //*/
     
-    //[layoutManager setLayoutConstraintOfSubLayouter:alWest toLeftOf:alNorth];
-    
-    [layoutManager setLayoutConstraintOfSubLayouter:alWest toLeftOf:alCenter];
-    [layoutManager setLayoutConstraintOfSubLayouter:alCenter toLeftOf:alEast];
-
-    [layoutManager setLayoutConstraintOfSubLayouter:alWestNorth toLeftOf:alNorth];
-    [layoutManager setLayoutConstraintOfSubLayouter:alEastNorth toRightOf:alNorth];
-
-    [layoutManager setLayoutConstraintOfSubLayouter:alWestSouth toLeftOf:alSouth];
-    [layoutManager setLayoutConstraintOfSubLayouter:alEastSouth toRightOf:alSouth];
-
-    [layoutManager setLayoutConstraintOfSubLayouter:alCenter below:alNorth];
-    [layoutManager setLayoutConstraintOfSubLayouter:alWestNorth above:alWest];
-    [layoutManager setLayoutConstraintOfSubLayouter:alEastNorth above:alEast];
-
-    [layoutManager setLayoutConstraintOfSubLayouter:alEastSouth below:alEast];
-    
-    [layoutManager setLayoutConstraintOfSubLayouter:alWest above:alWestSouth];
-
-    [layoutManager setLayoutConstraintOfSubLayouter:alNorth withAnchor:ParentHorizontalCenter];
-    [layoutManager setLayoutConstraintOfSubLayouter:alCenter withAnchor:ParentVerticalCenter];
-
-    [layoutManager setLayoutConstraintOfSubLayouter:alWest withAnchor:ParentLeft];
-    [layoutManager setLayoutConstraintOfSubLayouter:alNorth withAnchor:ParentTop];///!!!
-    [layoutManager setLayoutConstraintOfSubLayouter:alEast withAnchor:ParentRight];
-    [layoutManager setLayoutConstraintOfSubLayouter:alSouth withAnchor:ParentBottom];
-    
-    //[layoutManager setLayoutConstraintOfSubLayouter:alWestNorth withAnchor:ParentLeft];
-    [layoutManager setLayoutConstraintOfSubLayouter:alWestSouth withAnchor:ParentLeft];
-    
-    [layoutManager setLayoutConstraintOfSubLayouter:alEastNorth withAnchor:ParentRight];
-    [layoutManager setLayoutConstraintOfSubLayouter:alEastSouth withAnchor:ParentRight];
-    
-    //[layoutManager setLayoutConstraintOfSubLayouter:alWestNorth withAnchor:ParentTop];
-    [layoutManager setLayoutConstraintOfSubLayouter:alEastNorth withAnchor:ParentTop];
-    
-    [layoutManager setLayoutConstraintOfSubLayouter:alEastSouth withAnchor:ParentBottom];
-    [layoutManager setLayoutConstraintOfSubLayouter:alWestSouth withAnchor:ParentBottom];
+    //[alCell setLayoutConstraintOfSubLayouter:alWest toLeftOf:alNorth];
     
     
-    [layoutManager onLayout];
-    [layoutManager onLayout];
     
-    _btnCenter.frame = [layoutManager subLayouterOfName:@"center"].layoutedFrame;
-    _btnWest.frame = [layoutManager subLayouterOfName:@"west"].layoutedFrame;
-    _btnEast.frame = [layoutManager subLayouterOfName:@"east"].layoutedFrame;
-    _btnNorth.frame = [layoutManager subLayouterOfName:@"north"].layoutedFrame;
-    _btnSouth.frame = [layoutManager subLayouterOfName:@"south"].layoutedFrame;
-    _btnWestNorth.frame = [layoutManager subLayouterOfName:@"westnorth"].layoutedFrame;
-    _btnEastNorth.frame = [layoutManager subLayouterOfName:@"eastnorth"].layoutedFrame;
-    _btnWestSouth.frame = [layoutManager subLayouterOfName:@"westsouth"].layoutedFrame;
-    _btnEastSouth.frame = [layoutManager subLayouterOfName:@"eastsouth"].layoutedFrame;
+    [alCell setLayoutConstraintOfSubLayouter:alThisMsg below:alTopBar];
+    [alCell setLayoutConstraintOfSubLayouter:alThisMsg withAnchor:ParentLeft];
     
-    [_btnParent setFrame:CGRectMake(0, 0, [layoutManager measuredPreferSize].width, [layoutManager measuredPreferSize].height)];
+    [alCell layout];
+    ///[alCell onLayout];
+    
+    _btnForwardTimes.frame = [alTopBar subLayouterOfName:@"forwardtimes"].layoutedFrame;
+    _btnCommentButton.frame = [alTopBar subLayouterOfName:@"commentbutton"].layoutedFrame;
+    _btnAuthorsAvatar.frame = [alTopBar subLayouterOfName:@"authorsavatar"].layoutedFrame;
+    _btnForwardButton.frame = [alTopBar subLayouterOfName:@"forwardbutton"].layoutedFrame;
+    _btnNickname.frame = [alTopBar subLayouterOfName:@"nickname"].layoutedFrame;
+    
+    _btnTopBar.frame = [alCell subLayouterOfName:@"topbar"].layoutedFrame;
+    
+    _btnForwardedFollowers.frame = [alCell subLayouterOfName:@"forwardedfollowers"].layoutedFrame;
+    _btnThisMsg.frame = [alCell subLayouterOfName:@"thismsg"].layoutedFrame;
+    _btnVideo.frame = [alCell subLayouterOfName:@"video"].layoutedFrame;
+    _btnReferMsg.frame = [alCell subLayouterOfName:@"refermsg"].layoutedFrame;
+    
+    [_btnCell setFrame:CGRectMake(0, 0, [alCell measuredPreferSize].width, [alCell measuredPreferSize].height)];
 }
 
 - (void)didReceiveMemoryWarning
