@@ -10,7 +10,6 @@
 		A238A832170BC4EC00F820D2 /* AlViewContainerLayout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A238A831170BC4EC00F820D2 /* AlViewContainerLayout.cpp */; };
 		A25B9E351717AC9300A1138D /* libpthread.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A25B9E341717AC9300A1138D /* libpthread.dylib */; };
 		A28FDB3C171E92F4001596DF /* UIView+AlViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A28FDB3B171E92F4001596DF /* UIView+AlViewLayout.m */; };
-		A28FDB3F171EA4D5001596DF /* AlRelativeLayoutManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A28FDB3E171EA4D5001596DF /* AlRelativeLayoutManager.m */; };
 		A29CCC37170425B70068B119 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A29CCC36170425B70068B119 /* UIKit.framework */; };
 		A29CCC39170425B70068B119 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A29CCC38170425B70068B119 /* Foundation.framework */; };
 		A29CCC3B170425B70068B119 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A29CCC3A170425B70068B119 /* CoreGraphics.framework */; };
@@ -22,13 +21,15 @@
 		A29CCC4D170425B70068B119 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A29CCC4C170425B70068B119 /* Default@2x.png */; };
 		A29CCC4F170425B70068B119 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A29CCC4E170425B70068B119 /* Default-568h@2x.png */; };
 		A29CCC52170425B70068B119 /* MyUIView.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A29CCC50170425B70068B119 /* MyUIView.xcdatamodeld */; };
-		A29CCC5A170425E50068B119 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A29CCC59170425E50068B119 /* MainViewController.m */; };
 		A29CCC6417042FC30068B119 /* AlViewLayout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A29CCC6217042FC30068B119 /* AlViewLayout.cpp */; };
 		A29CCC6B1704478B0068B119 /* AlViewRelativeLayout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A29CCC691704478A0068B119 /* AlViewRelativeLayout.cpp */; };
-		A2ACE1711726569E00FE1BEE /* AlLayoutChainNode.m in Sources */ = {isa = PBXBuildFile; fileRef = A2ACE1701726569E00FE1BEE /* AlLayoutChainNode.m */; };
-		A2ACE17717265EAB00FE1BEE /* AlLayoutManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A2ACE17617265EAB00FE1BEE /* AlLayoutManager.m */; };
-		A2ACE179172660DE00FE1BEE /* AlLayoutParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = A2ACE178172660DD00FE1BEE /* AlLayoutParameter.m */; };
 		A2BA4A7E17269FB200D07A63 /* NSObject_KVContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = A2BA4A7D17269FB200D07A63 /* NSObject_KVContainer.m */; };
+		A2BA4AB31727B15100D07A63 /* TestAlLayoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2BA4AA91727B15100D07A63 /* TestAlLayoutViewController.m */; };
+		A2BA4AB41727B15100D07A63 /* TMALRelativeLayouter.m in Sources */ = {isa = PBXBuildFile; fileRef = A2BA4AAA1727B15100D07A63 /* TMALRelativeLayouter.m */; };
+		A2BA4AB51727B15100D07A63 /* TMALLayoutChainNode.m in Sources */ = {isa = PBXBuildFile; fileRef = A2BA4AAC1727B15100D07A63 /* TMALLayoutChainNode.m */; };
+		A2BA4AB61727B15100D07A63 /* TMALLayoutParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = A2BA4AAF1727B15100D07A63 /* TMALLayoutParameter.m */; };
+		A2BA4ABC1727B1DC00D07A63 /* TMALLayouter.m in Sources */ = {isa = PBXBuildFile; fileRef = A2BA4AB91727B1DC00D07A63 /* TMALLayouter.m */; };
+		A2BA4ABD1727B1DC00D07A63 /* TMALContainerLayouter.m in Sources */ = {isa = PBXBuildFile; fileRef = A2BA4ABA1727B1DC00D07A63 /* TMALContainerLayouter.m */; };
 		A2E3CA8B1709783C00968906 /* BitMatrix.c in Sources */ = {isa = PBXBuildFile; fileRef = A2E3CA8A1709783C00968906 /* BitMatrix.c */; };
 /* End PBXBuildFile section */
 
@@ -37,8 +38,6 @@
 		A25B9E341717AC9300A1138D /* libpthread.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpthread.dylib; path = usr/lib/libpthread.dylib; sourceTree = SDKROOT; };
 		A28FDB3A171E92F4001596DF /* UIView+AlViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AlViewLayout.h"; sourceTree = "<group>"; };
 		A28FDB3B171E92F4001596DF /* UIView+AlViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AlViewLayout.m"; sourceTree = "<group>"; };
-		A28FDB3D171EA4D5001596DF /* AlRelativeLayoutManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlRelativeLayoutManager.h; sourceTree = "<group>"; };
-		A28FDB3E171EA4D5001596DF /* AlRelativeLayoutManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlRelativeLayoutManager.m; sourceTree = "<group>"; };
 		A29CCC33170425B70068B119 /* MyUIView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyUIView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A29CCC36170425B70068B119 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A29CCC38170425B70068B119 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -54,22 +53,26 @@
 		A29CCC4C170425B70068B119 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		A29CCC4E170425B70068B119 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		A29CCC51170425B70068B119 /* MyUIView.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyUIView.xcdatamodel; sourceTree = "<group>"; };
-		A29CCC58170425E50068B119 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		A29CCC59170425E50068B119 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		A29CCC6217042FC30068B119 /* AlViewLayout.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AlViewLayout.cpp; sourceTree = "<group>"; };
 		A29CCC6317042FC30068B119 /* AlViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlViewLayout.h; sourceTree = "<group>"; };
 		A29CCC661704341E0068B119 /* AlViewContainerLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlViewContainerLayout.h; sourceTree = "<group>"; };
 		A29CCC68170435370068B119 /* AlViewLayoutParameter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlViewLayoutParameter.h; sourceTree = "<group>"; };
 		A29CCC691704478A0068B119 /* AlViewRelativeLayout.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AlViewRelativeLayout.cpp; sourceTree = "<group>"; };
 		A29CCC6A1704478B0068B119 /* AlViewRelativeLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlViewRelativeLayout.h; sourceTree = "<group>"; };
-		A2ACE16F1726569D00FE1BEE /* AlLayoutChainNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlLayoutChainNode.h; sourceTree = "<group>"; };
-		A2ACE1701726569E00FE1BEE /* AlLayoutChainNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlLayoutChainNode.m; sourceTree = "<group>"; };
-		A2ACE17217265E2500FE1BEE /* AlLayoutParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlLayoutParameter.h; sourceTree = "<group>"; };
-		A2ACE17517265EAB00FE1BEE /* AlLayoutManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlLayoutManager.h; sourceTree = "<group>"; };
-		A2ACE17617265EAB00FE1BEE /* AlLayoutManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlLayoutManager.m; sourceTree = "<group>"; };
-		A2ACE178172660DD00FE1BEE /* AlLayoutParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlLayoutParameter.m; sourceTree = "<group>"; };
 		A2BA4A7C17269F3A00D07A63 /* NSObject_KVContainer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSObject_KVContainer.h; sourceTree = "<group>"; };
 		A2BA4A7D17269FB200D07A63 /* NSObject_KVContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSObject_KVContainer.m; sourceTree = "<group>"; };
+		A2BA4AA91727B15100D07A63 /* TestAlLayoutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestAlLayoutViewController.m; sourceTree = "<group>"; };
+		A2BA4AAA1727B15100D07A63 /* TMALRelativeLayouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMALRelativeLayouter.m; sourceTree = "<group>"; };
+		A2BA4AAB1727B15100D07A63 /* TMALRelativeLayouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMALRelativeLayouter.h; sourceTree = "<group>"; };
+		A2BA4AAC1727B15100D07A63 /* TMALLayoutChainNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMALLayoutChainNode.m; sourceTree = "<group>"; };
+		A2BA4AAD1727B15100D07A63 /* TMALLayoutChainNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMALLayoutChainNode.h; sourceTree = "<group>"; };
+		A2BA4AAE1727B15100D07A63 /* TMALLayoutParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMALLayoutParameter.h; sourceTree = "<group>"; };
+		A2BA4AAF1727B15100D07A63 /* TMALLayoutParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMALLayoutParameter.m; sourceTree = "<group>"; };
+		A2BA4AB21727B15100D07A63 /* TestAlLayoutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestAlLayoutViewController.h; sourceTree = "<group>"; };
+		A2BA4AB81727B1DC00D07A63 /* TMALLayouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMALLayouter.h; sourceTree = "<group>"; };
+		A2BA4AB91727B1DC00D07A63 /* TMALLayouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMALLayouter.m; sourceTree = "<group>"; };
+		A2BA4ABA1727B1DC00D07A63 /* TMALContainerLayouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMALContainerLayouter.m; sourceTree = "<group>"; };
+		A2BA4ABB1727B1DC00D07A63 /* TMALContainerLayouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMALContainerLayouter.h; sourceTree = "<group>"; };
 		A2E3CA891709758500968906 /* BitMatrix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BitMatrix.h; sourceTree = "<group>"; };
 		A2E3CA8A1709783C00968906 /* BitMatrix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BitMatrix.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -93,16 +96,20 @@
 		A238A833170C0BAB00F820D2 /* AlUIView */ = {
 			isa = PBXGroup;
 			children = (
+				A2BA4AB81727B1DC00D07A63 /* TMALLayouter.h */,
+				A2BA4AB91727B1DC00D07A63 /* TMALLayouter.m */,
+				A2BA4ABA1727B1DC00D07A63 /* TMALContainerLayouter.m */,
+				A2BA4ABB1727B1DC00D07A63 /* TMALContainerLayouter.h */,
+				A2BA4AA91727B15100D07A63 /* TestAlLayoutViewController.m */,
+				A2BA4AAA1727B15100D07A63 /* TMALRelativeLayouter.m */,
+				A2BA4AAB1727B15100D07A63 /* TMALRelativeLayouter.h */,
+				A2BA4AAC1727B15100D07A63 /* TMALLayoutChainNode.m */,
+				A2BA4AAD1727B15100D07A63 /* TMALLayoutChainNode.h */,
+				A2BA4AAE1727B15100D07A63 /* TMALLayoutParameter.h */,
+				A2BA4AAF1727B15100D07A63 /* TMALLayoutParameter.m */,
+				A2BA4AB21727B15100D07A63 /* TestAlLayoutViewController.h */,
 				A28FDB3A171E92F4001596DF /* UIView+AlViewLayout.h */,
 				A28FDB3B171E92F4001596DF /* UIView+AlViewLayout.m */,
-				A28FDB3D171EA4D5001596DF /* AlRelativeLayoutManager.h */,
-				A28FDB3E171EA4D5001596DF /* AlRelativeLayoutManager.m */,
-				A2ACE16F1726569D00FE1BEE /* AlLayoutChainNode.h */,
-				A2ACE1701726569E00FE1BEE /* AlLayoutChainNode.m */,
-				A2ACE17217265E2500FE1BEE /* AlLayoutParameter.h */,
-				A2ACE178172660DD00FE1BEE /* AlLayoutParameter.m */,
-				A2ACE17517265EAB00FE1BEE /* AlLayoutManager.h */,
-				A2ACE17617265EAB00FE1BEE /* AlLayoutManager.m */,
 				A2BA4A7C17269F3A00D07A63 /* NSObject_KVContainer.h */,
 				A2BA4A7D17269FB200D07A63 /* NSObject_KVContainer.m */,
 			);
@@ -143,8 +150,6 @@
 			children = (
 				A238A833170C0BAB00F820D2 /* AlUIView */,
 				A29CCC5B170427430068B119 /* AlView */,
-				A29CCC58170425E50068B119 /* MainViewController.h */,
-				A29CCC59170425E50068B119 /* MainViewController.m */,
 				A29CCC47170425B70068B119 /* AppDelegate.h */,
 				A29CCC48170425B70068B119 /* AppDelegate.m */,
 				A29CCC50170425B70068B119 /* MyUIView.xcdatamodeld */,
@@ -251,17 +256,18 @@
 				A29CCC45170425B70068B119 /* main.m in Sources */,
 				A29CCC49170425B70068B119 /* AppDelegate.m in Sources */,
 				A29CCC52170425B70068B119 /* MyUIView.xcdatamodeld in Sources */,
-				A29CCC5A170425E50068B119 /* MainViewController.m in Sources */,
 				A29CCC6417042FC30068B119 /* AlViewLayout.cpp in Sources */,
 				A29CCC6B1704478B0068B119 /* AlViewRelativeLayout.cpp in Sources */,
 				A2E3CA8B1709783C00968906 /* BitMatrix.c in Sources */,
 				A238A832170BC4EC00F820D2 /* AlViewContainerLayout.cpp in Sources */,
 				A28FDB3C171E92F4001596DF /* UIView+AlViewLayout.m in Sources */,
-				A28FDB3F171EA4D5001596DF /* AlRelativeLayoutManager.m in Sources */,
-				A2ACE1711726569E00FE1BEE /* AlLayoutChainNode.m in Sources */,
-				A2ACE17717265EAB00FE1BEE /* AlLayoutManager.m in Sources */,
-				A2ACE179172660DE00FE1BEE /* AlLayoutParameter.m in Sources */,
 				A2BA4A7E17269FB200D07A63 /* NSObject_KVContainer.m in Sources */,
+				A2BA4AB31727B15100D07A63 /* TestAlLayoutViewController.m in Sources */,
+				A2BA4AB41727B15100D07A63 /* TMALRelativeLayouter.m in Sources */,
+				A2BA4AB51727B15100D07A63 /* TMALLayoutChainNode.m in Sources */,
+				A2BA4AB61727B15100D07A63 /* TMALLayoutParameter.m in Sources */,
+				A2BA4ABC1727B1DC00D07A63 /* TMALLayouter.m in Sources */,
+				A2BA4ABD1727B1DC00D07A63 /* TMALContainerLayouter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

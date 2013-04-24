@@ -7,8 +7,6 @@
 //
 
 #import "MainViewController.h"
-#import "AlViewRelativeLayout.h"
-#import "UIAlLayouter.h"
 #import "UIView+AlViewLayout.h"
 #import "AlRelativeLayoutManager.h"
 
@@ -92,17 +90,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     AlRelativeLayoutManager* layoutManager = [[AlRelativeLayoutManager alloc] init];
-    /*
-    UIAlLayouter* layouterWestNorth = [_btnWestNorth alLayouter];///[[UIAlLayouter alloc] initWithUIView:_btnA layouter:NULL];
-    UIAlLayouter* layouterWestSouth = [_btnWestSouth alLayouter];
-    UIAlLayouter* layouterEastNorth = [_btnEastNorth alLayouter];
-    UIAlLayouter* layouterEastSouth = [_btnEastSouth alLayouter];
-    UIAlLayouter* layouterNorth = [_btnNorth alLayouter];
-    UIAlLayouter* layouterSouth = [_btnSouth alLayouter];
-    UIAlLayouter* layouterCenter = [_btnCenter alLayouter];
-    UIAlLayouter* layouterEast = [_btnEast alLayouter];
-    UIAlLayouter* layouterWest = [_btnWest alLayouter];
-    //*/
+    
     AlLayoutParameter* lp;
     
     lp = [[AlLayoutParameter alloc] init];

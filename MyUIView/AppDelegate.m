@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "MainViewController.h"
+#import "TestAlLayoutViewController.h"
 
 @implementation AppDelegate
 
@@ -22,7 +23,7 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    [self.window setRootViewController:[[MainViewController alloc] init]];
+    [self.window setRootViewController:[[TestAlLayoutViewController alloc] init]];
     /*
     BitMatrix bm = CreateBitMatrix(3, 5);
     SetBitInMatrix(&bm, 1, 2, 1);
