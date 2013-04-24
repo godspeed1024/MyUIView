@@ -100,10 +100,10 @@
     [_btnRichMedia addSubview:_btnVideo];
     [_btnRichMedia addSubview:_btnReferMsg];
     [_btnRichMedia addSubview:_btnLargeImage];
+    [_btnRichMedia addSubview:_btnForwardedFollowers];
     
     [_btnCell addSubview:_btnTopBar];
     [_btnCell addSubview:_btnRichMedia];
-    [_btnCell addSubview:_btnForwardedFollowers];
     [_btnCell addSubview:_btnThisMsg];
     
     UIView* rootView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -227,8 +227,26 @@
     [_btnLargeImage sizeToFit];
     [alLargeImage setMeasuredPreferSize:[_btnLargeImage sizeThatFits:CGSizeZero]];
     [alRichMedia addSubLayouter:alLargeImage withName:@"largeimage" layoutParameter:lp];
+    // Refer Msg //
+    lp.marginLeft = 5;
+    lp.marginRight = 5;
+    lp.marginTop = 5;
+    lp.marginBottom = 5;
+    [_btnReferMsg sizeToFit];
+    [alReferMsg setMeasuredPreferSize:[_btnReferMsg sizeThatFits:CGSizeZero]];
+    [alRichMedia addSubLayouter:alReferMsg withName:@"refermsg" layoutParameter:lp];
+    // Forwarded Followers //
+    lp.marginLeft = 5;
+    lp.marginRight = 5;
+    lp.marginTop = 5;
+    lp.marginBottom = 5;
+    [_btnForwardedFollowers sizeToFit];
+    [alForwardedFollowers setMeasuredPreferSize:[_btnForwardedFollowers sizeThatFits:CGSizeZero]];
+    [alRichMedia addSubLayouter:alForwardedFollowers withName:@"forwardedfollwers" layoutParameter:lp];
     
     [alRichMedia setLayoutConstraintOfSubLayouter:alLargeImage below:alVideo];
+    [alRichMedia setLayoutConstraintOfSubLayouter:alReferMsg below:alLargeImage];
+    [alRichMedia setLayoutConstraintOfSubLayouter:alForwardedFollowers below:alReferMsg];
     
     lp.marginLeft = 0;
     lp.marginRight = 0;
@@ -282,8 +300,8 @@
     
     _btnRichMedia.frame = [alCell subLayouterOfName:@"richmedia"].layoutedFrame;
     
-    _btnForwardedFollowers.frame = [alCell subLayouterOfName:@"forwardedfollowers"].layoutedFrame;
-    _btnReferMsg.frame = [alCell subLayouterOfName:@"refermsg"].layoutedFrame;
+    _btnForwardedFollowers.frame = [alRichMedia subLayouterOfName:@"forwardedfollowers"].layoutedFrame;
+    _btnReferMsg.frame = [alRichMedia subLayouterOfName:@"refermsg"].layoutedFrame;
     
     [_btnCell setFrame:CGRectMake(0, 0, [alCell measuredPreferSize].width, [alCell measuredPreferSize].height)];
 }

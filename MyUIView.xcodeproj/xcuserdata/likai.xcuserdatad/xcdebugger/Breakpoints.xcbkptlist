@@ -1995,11 +1995,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/TestAlLayoutViewController.m"
-         timestampString = "388509765.250835"
+         timestampString = "388512236.613723"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "257"
-         endingLineNumber = "257"
+         startingLineNumber = "275"
+         endingLineNumber = "275"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2060,11 +2060,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/TestAlLayoutViewController.m"
-         timestampString = "388509882.177717"
+         timestampString = "388512236.613723"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "267"
-         endingLineNumber = "267"
+         startingLineNumber = "285"
+         endingLineNumber = "285"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
