@@ -36,6 +36,10 @@
     [_btnTopBar setBackgroundColor:[UIColor whiteColor]];
     _btnTopBar.clipsToBounds = YES;
     
+    _btnRichMedia = [[UIButton alloc] init];
+    [_btnRichMedia setBackgroundColor:[UIColor whiteColor]];
+    _btnRichMedia.clipsToBounds = YES;
+    
     _btnAuthorsAvatar = [[UIButton alloc] init];
     [_btnAuthorsAvatar setBackgroundColor:[UIColor redColor]];
     [_btnAuthorsAvatar setBackgroundImage:[UIImage imageNamed:@"altest_authoravatar.png"] forState:UIControlStateNormal];
@@ -93,12 +97,14 @@
     [_btnTopBar addSubview:_btnForwardTimes];
     [_btnTopBar addSubview:_btnNickname];
     
+    [_btnRichMedia addSubview:_btnVideo];
+    [_btnRichMedia addSubview:_btnReferMsg];
+    [_btnRichMedia addSubview:_btnLargeImage];
+    
     [_btnCell addSubview:_btnTopBar];
+    [_btnCell addSubview:_btnRichMedia];
     [_btnCell addSubview:_btnForwardedFollowers];
     [_btnCell addSubview:_btnThisMsg];
-    [_btnCell addSubview:_btnVideo];
-    [_btnCell addSubview:_btnReferMsg];
-    [_btnCell addSubview:_btnLargeImage];
     
     UIView* rootView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [rootView setBackgroundColor:[UIColor blackColor]];
@@ -114,6 +120,7 @@
     
     TMALRelativeLayouter* alCell = [[TMALRelativeLayouter alloc] init];
     TMALRelativeLayouter* alTopBar = [[TMALRelativeLayouter alloc] init];
+    TMALRelativeLayouter* alRichMedia = [[TMALRelativeLayouter alloc] init];
     
     TMALLayouter* alAuthorsAvatar = [[TMALLayouter alloc] initWithParent:nil];
     TMALLayouter* alNickname = [[TMALLayouter alloc] initWithParent:nil];
@@ -202,14 +209,34 @@
     [_btnThisMsg sizeToFit];
     [alThisMsg setMeasuredPreferSize:[_btnThisMsg sizeThatFits:CGSizeZero]];
     [alCell addSubLayouter:alThisMsg withName:@"thismsg" layoutParameter:lp];
-/* EastNorth //
+    
+// RichMedia //
+    // Video //
     lp.marginLeft = 5;
     lp.marginRight = 5;
     lp.marginTop = 5;
     lp.marginBottom = 5;
-    [alEastNorth setMeasuredPreferSize:CGSizeMake(60, 60)];
-    [alCell addSubLayouter:alEastNorth withName:@"eastnorth" layoutParameter:lp];
-// EastSouth //
+    [_btnVideo sizeToFit];
+    [alVideo setMeasuredPreferSize:[_btnVideo sizeThatFits:CGSizeZero]];
+    [alRichMedia addSubLayouter:alVideo withName:@"video" layoutParameter:lp];
+    // Large Image //
+    lp.marginLeft = 5;
+    lp.marginRight = 5;
+    lp.marginTop = 5;
+    lp.marginBottom = 5;
+    [_btnLargeImage sizeToFit];
+    [alLargeImage setMeasuredPreferSize:[_btnLargeImage sizeThatFits:CGSizeZero]];
+    [alRichMedia addSubLayouter:alLargeImage withName:@"largeimage" layoutParameter:lp];
+    
+    [alRichMedia setLayoutConstraintOfSubLayouter:alLargeImage below:alVideo];
+    
+    lp.marginLeft = 0;
+    lp.marginRight = 0;
+    lp.marginTop = 0;
+    lp.marginBottom = 0;
+    [alCell addSubLayouter:alRichMedia withName:@"richmedia" layoutParameter:lp];
+    
+/* EastSouth //
     lp.marginLeft = 5;
     lp.marginRight = 5;
     lp.marginTop = 5;
@@ -233,6 +260,10 @@
     [alCell setLayoutConstraintOfSubLayouter:alThisMsg below:alTopBar];
     [alCell setLayoutConstraintOfSubLayouter:alThisMsg withAnchor:ParentLeft];
     
+    [alCell setLayoutConstraintOfSubLayouter:alRichMedia below:alTopBar];
+    [alCell setLayoutConstraintOfSubLayouter:alRichMedia toRightOf:alThisMsg];
+    ///[alCell setLayoutConstraintOfSubLayouter:alRichMedia withAnchor:ParentRight];
+    
     [alCell layout:CGSizeZero];
     ///[alCell onLayout];
     
@@ -244,9 +275,14 @@
     
     _btnTopBar.frame = [alCell subLayouterOfName:@"topbar"].layoutedFrame;
     
-    _btnForwardedFollowers.frame = [alCell subLayouterOfName:@"forwardedfollowers"].layoutedFrame;
     _btnThisMsg.frame = [alCell subLayouterOfName:@"thismsg"].layoutedFrame;
-    _btnVideo.frame = [alCell subLayouterOfName:@"video"].layoutedFrame;
+    
+    _btnVideo.frame = [alRichMedia subLayouterOfName:@"video"].layoutedFrame;
+    _btnLargeImage.frame = [alRichMedia subLayouterOfName:@"largeimage"].layoutedFrame;
+    
+    _btnRichMedia.frame = [alCell subLayouterOfName:@"richmedia"].layoutedFrame;
+    
+    _btnForwardedFollowers.frame = [alCell subLayouterOfName:@"forwardedfollowers"].layoutedFrame;
     _btnReferMsg.frame = [alCell subLayouterOfName:@"refermsg"].layoutedFrame;
     
     [_btnCell setFrame:CGRectMake(0, 0, [alCell measuredPreferSize].width, [alCell measuredPreferSize].height)];

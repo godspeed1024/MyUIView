@@ -12,6 +12,7 @@
 {
     UIButton* _btnCell;
     UIButton* _btnTopBar;
+    UIButton* _btnRichMedia;
     
     UIButton* _btnAuthorsAvatar;
     UIButton* _btnCommentButton;
