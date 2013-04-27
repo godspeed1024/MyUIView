@@ -52,11 +52,11 @@
 
 - (void) layout : (CGSize) givenSize
 {
-    if (_isLayoutInvalid)
+    ///!!!if (_isLayoutInvalid)
     {
         for (TMALLayouter* subLayouter in [_name2SubLayouterMap allValues])
         {
-            [subLayouter layout:givenSize];
+            [subLayouter layout:CGSizeZero];
         }
         [self onLayout:givenSize];
     }

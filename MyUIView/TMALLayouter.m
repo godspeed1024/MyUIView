@@ -7,6 +7,7 @@
 //
 
 #import "TMALLayouter.h"
+#import "TMALContainerLayouter.h"
 
 @implementation TMALLayouter
 
@@ -28,18 +29,19 @@
     }
     return self;
 }
-
+/*
 - (id) initWithParent : (TMALLayouter*) parent
 {
     self = [super init];
     if (nil != self)
     {
+        TMALContainerLayouter* pp;
         _parent = parent;
         _isLayoutInvalid = YES;
     }
     return self;
 }
-
+//*/
 - (void) setLayoutInvalid
 {
     _isLayoutInvalid = YES;
@@ -51,12 +53,18 @@
 
 - (void) setMeasuredPreferSize : (CGSize) size
 {
+    /*
+    if (!CGSizeEqualToSize(size, _measuredPreferSize))
+    {
+        [self setLayoutInvalid];
+    }
+     //*/
     _measuredPreferSize = size;
 }
 
 - (void) layout : (CGSize) givenSize
 {
-    if (_isLayoutInvalid)
+    ///!!!if (_isLayoutInvalid)
     {
         [self onLayout:givenSize];
     }

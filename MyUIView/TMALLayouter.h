@@ -34,7 +34,7 @@
 
 - (id) init;
 
-- (id) initWithParent : (TMALLayouter*) parent;
+///- (id) initWithParent : (TMALLayouter*) parent;
 
 - (void) setMeasuredPreferSize : (CGSize) size;
 

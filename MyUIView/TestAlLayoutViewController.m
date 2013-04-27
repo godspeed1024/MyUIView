@@ -122,19 +122,21 @@
     TMALRelativeLayouter* alTopBar = [[TMALRelativeLayouter alloc] init];
     TMALRelativeLayouter* alRichMedia = [[TMALRelativeLayouter alloc] init];
     
-    TMALLayouter* alAuthorsAvatar = [[TMALLayouter alloc] initWithParent:nil];
-    TMALLayouter* alNickname = [[TMALLayouter alloc] initWithParent:nil];
-    TMALLayouter* alForwardTimes = [[TMALLayouter alloc] initWithParent:nil];
-    TMALLayouter* alForwardButton = [[TMALLayouter alloc] initWithParent:nil];
-    TMALLayouter* alCommentButton = [[TMALLayouter alloc] initWithParent:nil];
+    TMALLayouter* alAuthorsAvatar = [[TMALLayouter alloc] init];
+    TMALLayouter* alNickname = [[TMALLayouter alloc] init];
+    TMALLayouter* alForwardTimes = [[TMALLayouter alloc] init];
+    TMALLayouter* alForwardButton = [[TMALLayouter alloc] init];
+    TMALLayouter* alCommentButton = [[TMALLayouter alloc] init];
     
-    TMALLayouter* alThisMsg = [[TMALLayouter alloc] initWithParent:nil];
-    TMALLayouter* alReferMsg = [[TMALLayouter alloc] initWithParent:nil];
-    TMALLayouter* alVideo = [[TMALLayouter alloc] initWithParent:nil];
-    TMALLayouter* alLargeImage = [[TMALLayouter alloc] initWithParent:nil];
-    TMALLayouter* alForwardedFollowers = [[TMALLayouter alloc] initWithParent:nil];
+    TMALLayouter* alThisMsg = [[TMALLayouter alloc] init];
+    TMALLayouter* alReferMsg = [[TMALLayouter alloc] init];
+    TMALLayouter* alVideo = [[TMALLayouter alloc] init];
+    TMALLayouter* alLargeImage = [[TMALLayouter alloc] init];
+    TMALLayouter* alForwardedFollowers = [[TMALLayouter alloc] init];
     
     TMALLayoutParameter lp;
+    lp.horizontalStretch = kLayoutWrapContent;
+    lp.verticalStretch = kLayoutWrapContent;
     
 // Top Bar Area //
 
