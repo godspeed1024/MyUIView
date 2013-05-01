@@ -11,6 +11,9 @@
 #import "TMALRelativeLayouter.h"
 #import "TMALLayoutParameter.h"
 
+#define RootLayouter alCell
+#define RootUIView   _btnCell
+
 @interface TestAlLayoutViewController ()
 
 @end
@@ -109,7 +112,7 @@
     UIView* rootView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [rootView setBackgroundColor:[UIColor blackColor]];
     [self setView:rootView];
-    [rootView addSubview:_btnCell];
+    [rootView addSubview:RootUIView];
 }
 
 
@@ -256,22 +259,6 @@
     lp.marginBottom = 0;
     [alCell addSubLayouter:alRichMedia withName:@"richmedia" layoutParameter:lp];
     
-/* EastSouth //
-    lp.marginLeft = 5;
-    lp.marginRight = 5;
-    lp.marginTop = 5;
-    lp.marginBottom = 5;
-    [alEastSouth setMeasuredPreferSize:CGSizeMake(60, 60)];
-    [alCell addSubLayouter:alEastSouth withName:@"eastsouth" layoutParameter:lp];
-// WestSouth //
-    lp.marginLeft = 5;
-    lp.marginRight = 5;
-    lp.marginTop = 5;
-    lp.marginBottom = 5;
-    [alWestSouth setMeasuredPreferSize:CGSizeMake(60, 60)];
-    [alCell addSubLayouter:alWestSouth withName:@"westsouth" layoutParameter:lp];
-//*/
-    
     //[alCell setLayoutConstraintOfSubLayouter:alWest toLeftOf:alNorth];
     
     [alCell setLayoutConstraintOfSubLayouter:alTopBar withAnchor:ParentLeft];
@@ -284,7 +271,10 @@
     [alCell setLayoutConstraintOfSubLayouter:alRichMedia toRightOf:alThisMsg];
     ///[alCell setLayoutConstraintOfSubLayouter:alRichMedia withAnchor:ParentRight];
     
-    [alCell layout:CGSizeZero];
+    ///!!!
+    TMALLayouter* rootLayouter = RootLayouter;
+    [rootLayouter measure:CGSizeMake(480, 320)];
+    [rootLayouter layout:CGRectMake(0, 0, rootLayouter.measuredPreferSize.width, rootLayouter.measuredPreferSize.height)];
     ///[alCell onLayout];
     
     _btnForwardTimes.frame = [alTopBar subLayouterOfName:@"forwardtimes"].layoutedFrame;
@@ -305,7 +295,7 @@
     _btnForwardedFollowers.frame = [alRichMedia subLayouterOfName:@"forwardedfollowers"].layoutedFrame;
     _btnReferMsg.frame = [alRichMedia subLayouterOfName:@"refermsg"].layoutedFrame;
     
-    [_btnCell setFrame:CGRectMake(0, 0, [alCell measuredPreferSize].width, [alCell measuredPreferSize].height)];
+    [RootUIView setFrame:CGRectMake(0, 0, [RootLayouter measuredPreferSize].width, [RootLayouter measuredPreferSize].height)];
 }
 
 - (void)didReceiveMemoryWarning

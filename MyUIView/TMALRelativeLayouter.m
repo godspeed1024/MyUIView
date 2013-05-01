@@ -46,7 +46,7 @@
 - (void) setLayoutConstraintOfSubLayouter : (TMALLayouter*) rightSubLayouter
                                 toRightOf : (TMALLayouter*) leftSubLayouter
 {
-    if (nil == rightSubLayouter) return;
+    if (nil == rightSubLayouter || nil == leftSubLayouter) return;
     
     TMALLayoutChainNode* rightNode;
     TMALLayoutChainNode* leftNode;
@@ -81,7 +81,7 @@
 - (void) setLayoutConstraintOfSubLayouter : (TMALLayouter*) leftSubLayouter
                                  toLeftOf : (TMALLayouter*) rightSubLayouter
 {
-    if (nil == leftSubLayouter) return;
+    if (nil == rightSubLayouter || nil == leftSubLayouter) return;
     
     TMALLayoutChainNode* rightNode;
     TMALLayoutChainNode* leftNode;
@@ -116,7 +116,7 @@
 - (void) setLayoutConstraintOfSubLayouter : (TMALLayouter*) aboveSubLayouter
                                     above : (TMALLayouter*) belowSubLayouter
 {
-    if (nil == aboveSubLayouter) return;
+    if (nil == aboveSubLayouter || nil == belowSubLayouter) return;
     
     TMALLayoutChainNode* belowNode;
     TMALLayoutChainNode* aboveNode;
@@ -151,7 +151,7 @@
 - (void) setLayoutConstraintOfSubLayouter : (TMALLayouter*) belowSubLayouter
                                     below : (TMALLayouter*) aboveSubLayouter
 {
-    if (nil == belowSubLayouter) return;
+    if (nil == belowSubLayouter || nil == aboveSubLayouter) return;
     
     TMALLayoutChainNode* belowNode;
     TMALLayoutChainNode* aboveNode;
@@ -374,11 +374,12 @@
         {
             frame.origin.x += offset;
             frame.size.width -= offset;
-            
+            /*
             ///[curNode.subLayouter setLayoutInvalid];
             [curNode.subLayouter setMeasuredPreferSize:frame.size];
             //_isLayoutInvalid = NO;
-            [curNode.subLayouter layout:frame.size];
+             //*/
+            [curNode.subLayouter measure:frame.size];
         }
     }
     else
@@ -397,11 +398,12 @@
         else if (kLayoutFillParent == curNode.subLayouter.layoutParameter.horizontalStretch)
         {
             frame.size.width += offset;
-            
+            /*
             ///[curNode.subLayouter setLayoutInvalid];
             [curNode.subLayouter setMeasuredPreferSize:frame.size];
             //_isLayoutInvalid = NO;
-            [curNode.subLayouter layout:frame.size];
+             //*/
+            [curNode.subLayouter measure:frame.size];
         }
     }
     
@@ -524,11 +526,12 @@
         {
             frame.origin.y += offset;
             frame.size.height -= offset;
-            
+            /*
             ///[curNode.subLayouter setLayoutInvalid];
             [curNode.subLayouter setMeasuredPreferSize:frame.size];
             //_isLayoutInvalid = NO;
-            [curNode.subLayouter layout:frame.size];
+             //*/
+            [curNode.subLayouter measure:frame.size];
         }
     }
     else
@@ -547,11 +550,12 @@
         else if (kLayoutFillParent == curNode.subLayouter.layoutParameter.verticalStretch)
         {
             frame.size.height += offset;
-            
+            /*
             ///[curNode.subLayouter setLayoutInvalid];
             [curNode.subLayouter setMeasuredPreferSize:frame.size];
             //_isLayoutInvalid = NO;
-            [curNode.subLayouter layout:frame.size];
+             //*/
+            [curNode.subLayouter measure:frame.size];
         }
     }
     
@@ -567,12 +571,18 @@
     }
 }
 
-- (void) onLayout : (CGSize) givenSize
+- (CGSize) onMeasure : (CGSize)givenSize
 {
     float widthNeeded = givenSize.width;
     float heightNeeded = givenSize.height;
     
-    ///!!!while (_isLayoutInvalid)
+    for (TMALLayouter* subLayouter in [_name2SubLayouterMap allValues])
+    {
+        [subLayouter measure:CGSizeZero];
+    }
+    
+    _isLayoutInvalid = YES;
+    while (_isLayoutInvalid)
     {
         _isLayoutInvalid = NO;
         
@@ -969,17 +979,20 @@
                 [self recursiveAdustForAlignParentVerticalAnchors:node direction:0 offset:offset];
             }
         }
-        
-        ////////
-        for (TMALLayouter* subLayouter in [_name2SubLayouterMap allValues])
-        {
-            NSValue* nsPtrNode = [NSValue valueWithPointer : (void*)subLayouter];
-            NSValue* nvFrame = [_frameOfSubLayouter objectForKey:nsPtrNode];
-            subLayouter.layoutedFrame = [nvFrame CGRectValue];
-        }
     }
     
-    [self setMeasuredPreferSize:CGSizeMake(widthNeeded, heightNeeded)];
+    return CGSizeMake(widthNeeded, heightNeeded);
+}
+
+- (void) onLayout : (CGRect)givenBound
+{
+    for (TMALLayouter* subLayouter in [_name2SubLayouterMap allValues])
+    {
+        NSValue* nsPtrNode = [NSValue valueWithPointer : (void*)subLayouter];
+        NSValue* nvFrame = [_frameOfSubLayouter objectForKey:nsPtrNode];
+        [subLayouter layout:[nvFrame CGRectValue]];
+        //subLayouter.layoutedFrame = [nvFrame CGRectValue];
+    }
 }
 
 @end

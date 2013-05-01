@@ -29,6 +29,8 @@
                withName : (NSString*) name
         layoutParameter : (TMALLayoutParameter) layoutParameter
 {
+    if (nil == subLayouter) return;
+    
     //NSValue *value = [NSValue valueWithBytes:&myTestStruct objCType:@encode(MyTestStruct)];
     if (nil != subLayouter.parent && subLayouter.parent != self)
     {
@@ -48,19 +50,6 @@
 - (TMALLayouter*) subLayouterOfName : (NSString*) name
 {
     return [_name2SubLayouterMap objectForKey:name];
-}
-
-- (void) layout : (CGSize) givenSize
-{
-    ///!!!if (_isLayoutInvalid)
-    {
-        for (TMALLayouter* subLayouter in [_name2SubLayouterMap allValues])
-        {
-            [subLayouter layout:CGSizeZero];
-        }
-        [self onLayout:givenSize];
-    }
-    _isLayoutInvalid = NO;
 }
 
 

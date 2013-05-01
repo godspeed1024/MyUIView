@@ -1995,11 +1995,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/TestAlLayoutViewController.m"
-         timestampString = "388512236.613723"
+         timestampString = "389111771.247017"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "275"
-         endingLineNumber = "275"
+         startingLineNumber = "262"
+         endingLineNumber = "262"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2008,11 +2008,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/TestAlLayoutViewController.m"
-         timestampString = "388509662.563976"
+         timestampString = "389111771.247017"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "147"
-         endingLineNumber = "147"
+         startingLineNumber = "150"
+         endingLineNumber = "150"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2021,11 +2021,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/TestAlLayoutViewController.m"
-         timestampString = "388509662.563976"
+         timestampString = "389111684.317199"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "92"
-         endingLineNumber = "92"
+         startingLineNumber = "95"
+         endingLineNumber = "95"
          landmarkName = "-loadView"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2034,11 +2034,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/TestAlLayoutViewController.m"
-         timestampString = "388509662.563976"
+         timestampString = "389111684.317199"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "91"
-         endingLineNumber = "91"
+         startingLineNumber = "94"
+         endingLineNumber = "94"
          landmarkName = "-loadView"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2047,11 +2047,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/TestAlLayoutViewController.m"
-         timestampString = "388509662.563976"
+         timestampString = "389111771.247017"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "210"
-         endingLineNumber = "210"
+         startingLineNumber = "213"
+         endingLineNumber = "213"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2060,11 +2060,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/TestAlLayoutViewController.m"
-         timestampString = "388512236.613723"
+         timestampString = "389111771.247017"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "285"
-         endingLineNumber = "285"
+         startingLineNumber = "272"
+         endingLineNumber = "272"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2073,142 +2073,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/TMALRelativeLayouter.m"
-         timestampString = "388509043.095389"
+         timestampString = "389106394.035086"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "773"
-         endingLineNumber = "773"
-         landmarkName = "-onLayout:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "MyUIView/TMALRelativeLayouter.m"
-         timestampString = "388509043.095389"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "964"
-         endingLineNumber = "964"
-         landmarkName = "-onLayout:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "MyUIView/TMALRelativeLayouter.m"
-         timestampString = "388509043.095389"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "560"
-         endingLineNumber = "560"
+         startingLineNumber = "564"
+         endingLineNumber = "564"
          landmarkName = "-recursiveAdustForAlignParentVerticalAnchors:direction:offset:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "MyUIView/TMALRelativeLayouter.m"
-         timestampString = "388509043.095389"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "771"
-         endingLineNumber = "771"
-         landmarkName = "-onLayout:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "MyUIView/TMALRelativeLayouter.m"
-         timestampString = "388509043.095389"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "957"
-         endingLineNumber = "957"
-         landmarkName = "-onLayout:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "MyUIView/TMALRelativeLayouter.m"
-         timestampString = "388509043.095389"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "635"
-         endingLineNumber = "635"
-         landmarkName = "-onLayout:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "MyUIView/TMALRelativeLayouter.m"
-         timestampString = "388509043.095389"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "851"
-         endingLineNumber = "851"
-         landmarkName = "-onLayout:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "MyUIView/TMALRelativeLayouter.m"
-         timestampString = "388509043.095389"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "841"
-         endingLineNumber = "841"
-         landmarkName = "-onLayout:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "MyUIView/TMALRelativeLayouter.m"
-         timestampString = "388509043.095389"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "756"
-         endingLineNumber = "756"
-         landmarkName = "-onLayout:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "MyUIView/TMALRelativeLayouter.m"
-         timestampString = "388509043.095389"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "676"
-         endingLineNumber = "676"
-         landmarkName = "-onLayout:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "MyUIView/TMALRelativeLayouter.m"
-         timestampString = "388509043.095389"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "961"
-         endingLineNumber = "961"
-         landmarkName = "-onLayout:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2229,11 +2099,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/TMALRelativeLayouter.m"
-         timestampString = "388509043.095389"
+         timestampString = "389106394.035086"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "400"
-         endingLineNumber = "400"
+         startingLineNumber = "401"
+         endingLineNumber = "401"
          landmarkName = "-recursiveAdustForAlignParentHorizontalAnchors:direction:offset:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2241,13 +2111,65 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "MyUIView/TMALContainerLayouter.m"
-         timestampString = "388508808.863579"
+         filePath = "MyUIView/TestAlLayoutViewController.m"
+         timestampString = "389111771.247017"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "61"
-         endingLineNumber = "61"
-         landmarkName = "-layout:"
+         startingLineNumber = "276"
+         endingLineNumber = "276"
+         landmarkName = "-viewDidLoad"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyUIView/TMALRelativeLayouter.m"
+         timestampString = "389117830.75446"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "664"
+         endingLineNumber = "664"
+         landmarkName = "-onMeasure:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyUIView/TMALRelativeLayouter.m"
+         timestampString = "389117830.75446"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "705"
+         endingLineNumber = "705"
+         landmarkName = "-onMeasure:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyUIView/TMALRelativeLayouter.m"
+         timestampString = "389117830.75446"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "773"
+         endingLineNumber = "773"
+         landmarkName = "-onMeasure:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyUIView/TMALRelativeLayouter.m"
+         timestampString = "389117830.75446"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "800"
+         endingLineNumber = "800"
+         landmarkName = "-onMeasure:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2255,11 +2177,284 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/TMALRelativeLayouter.m"
-         timestampString = "388509043.095389"
+         timestampString = "389117830.75446"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "583"
-         endingLineNumber = "583"
+         startingLineNumber = "851"
+         endingLineNumber = "851"
+         landmarkName = "-onMeasure:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyUIView/TMALRelativeLayouter.m"
+         timestampString = "389117830.75446"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "891"
+         endingLineNumber = "891"
+         landmarkName = "-onMeasure:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyUIView/TMALRelativeLayouter.m"
+         timestampString = "389117830.75446"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "959"
+         endingLineNumber = "959"
+         landmarkName = "-onMeasure:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyUIView/TMALRelativeLayouter.m"
+         timestampString = "389117830.75446"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "984"
+         endingLineNumber = "984"
+         landmarkName = "-onMeasure:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyUIView/TestAlLayoutViewController.m"
+         timestampString = "389111771.247017"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "277"
+         endingLineNumber = "277"
+         landmarkName = "-viewDidLoad"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyUIView/TestAlLayoutViewController.m"
+         timestampString = "389111771.247017"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "280"
+         endingLineNumber = "280"
+         landmarkName = "-viewDidLoad"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyUIView/TestAlLayoutViewController.m"
+         timestampString = "389111771.247017"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "287"
+         endingLineNumber = "287"
+         landmarkName = "-viewDidLoad"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyUIView/TestAlLayoutViewController.m"
+         timestampString = "389111771.247017"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "288"
+         endingLineNumber = "288"
+         landmarkName = "-viewDidLoad"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyUIView/TestAlLayoutViewController.m"
+         timestampString = "389111771.247017"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "298"
+         endingLineNumber = "298"
+         landmarkName = "-viewDidLoad"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyUIView/TMALRelativeLayouter.m"
+         timestampString = "389117830.75446"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "993"
+         endingLineNumber = "993"
+         landmarkName = "-onLayout:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyUIView/TMALRelativeLayouter.m"
+         timestampString = "389109590.546718"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "534"
+         endingLineNumber = "534"
+         landmarkName = "-recursiveAdustForAlignParentVerticalAnchors:direction:offset:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyUIView/TMALRelativeLayouter.m"
+         timestampString = "389109594.445686"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "558"
+         endingLineNumber = "558"
+         landmarkName = "-recursiveAdustForAlignParentVerticalAnchors:direction:offset:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyUIView/TMALRelativeLayouter.m"
+         timestampString = "389109635.682694"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "382"
+         endingLineNumber = "382"
+         landmarkName = "-recursiveAdustForAlignParentHorizontalAnchors:direction:offset:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyUIView/TMALRelativeLayouter.m"
+         timestampString = "389109638.234715"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "406"
+         endingLineNumber = "406"
+         landmarkName = "-recursiveAdustForAlignParentHorizontalAnchors:direction:offset:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyUIView/TMALRelativeLayouter.m"
+         timestampString = "389117830.75446"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "587"
+         endingLineNumber = "587"
+         landmarkName = "-onMeasure:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyUIView/TestAlLayoutViewController.m"
+         timestampString = "389111771.247017"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "293"
+         endingLineNumber = "293"
+         landmarkName = "-viewDidLoad"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyUIView/TMALRelativeLayouter.m"
+         timestampString = "389117830.75446"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "612"
+         endingLineNumber = "612"
+         landmarkName = "-onMeasure:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyUIView/TMALRelativeLayouter.m"
+         timestampString = "389113089.088818"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "310"
+         endingLineNumber = "310"
+         landmarkName = "-recursiveFindMaxWidthOfHorizontalChain:direction:curPosition:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyUIView/TMALRelativeLayouter.m"
+         timestampString = "389117830.75446"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "714"
+         endingLineNumber = "714"
+         landmarkName = "-onMeasure:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyUIView/TMALLayouter.m"
+         timestampString = "389115174.289515"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "74"
+         endingLineNumber = "74"
+         landmarkName = "-layout:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyUIView/TestAlLayoutViewController.m"
+         timestampString = "389115214.508207"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "290"
+         endingLineNumber = "290"
+         landmarkName = "-viewDidLoad"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MyUIView/TMALRelativeLayouter.m"
+         timestampString = "389117830.75446"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "991"
+         endingLineNumber = "991"
          landmarkName = "-onLayout:"
          landmarkType = "5">
       </FileBreakpoint>

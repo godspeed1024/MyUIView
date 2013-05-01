@@ -58,22 +58,38 @@
     {
         [self setLayoutInvalid];
     }
-     //*/
-    _measuredPreferSize = size;
+    /*/
+    //*
+    if ((layoutedFrame.size.width > 0 && size.width > layoutedFrame.size.width)
+        || (layoutedFrame.size.height > 0 && size.height > layoutedFrame.size.height))
+    {
+        [self setLayoutInvalid];
+    }
+    //*/
+    _measuredPreferSize = CGSizeMake(MAX(size.width, layoutedFrame.size.width), MAX(size.height, layoutedFrame.size.height));
 }
 
-- (void) layout : (CGSize) givenSize
+- (void) layout : (CGRect) givenBound
 {
-    ///!!!if (_isLayoutInvalid)
-    {
-        [self onLayout:givenSize];
-    }
+    [self onLayout:givenBound];
+    self.layoutedFrame = givenBound;
     _isLayoutInvalid = NO;
 }
 
-- (void) onLayout : (CGSize) givenSize
+- (void) onLayout : (CGRect) givenBound
 {
-    
+    // TO BE IMPLEMENTED (Oftenly only by subclass of TMALContainerLayouter)
+}
+
+- (void) measure : (CGSize) givenSize
+{
+    [self setMeasuredPreferSize:[self onMeasure:givenSize]];
+}
+
+- (CGSize) onMeasure : (CGSize) givenSize
+{
+    // TO BE IMPLEMENTED (Oftenly only by subclass of TMALContainerLayouter)
+    return _measuredPreferSize;
 }
 
 @end

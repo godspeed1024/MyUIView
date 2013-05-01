@@ -40,8 +40,14 @@
 
 - (void) setLayoutInvalid;
 
-- (void) layout : (CGSize) givenSize;
+- (void) layout : (CGRect) givenBound;
 
-- (void) onLayout : (CGSize) givenSize;
+- (void) onLayout : (CGRect) givenBound;
+
+///- (void) doLayout : (CGRect) givenBound;
+
+- (void) measure : (CGSize) givenSize;
+
+- (CGSize) onMeasure : (CGSize) givenSize;
 
 @end
