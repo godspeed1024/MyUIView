@@ -578,7 +578,7 @@
     
     for (TMALLayouter* subLayouter in [_name2SubLayouterMap allValues])
     {
-        [subLayouter measure:CGSizeZero];
+        [subLayouter measure:subLayouter.measuredPreferSize];
     }
     
     _isLayoutInvalid = YES;

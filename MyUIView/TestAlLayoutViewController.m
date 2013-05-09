@@ -14,6 +14,40 @@
 #define RootLayouter alRootArea
 #define RootUIView   _rootArea
 
+
+@implementation TwoPassMeasuringLayouter
+
+- (id) initWithArea:(CGFloat)area
+{
+    self = [super init];
+    if (nil != self)
+    {
+        _area = area;
+    }
+    return self;
+}
+
+- (CGSize) onMeasure:(CGSize)givenSize
+{
+    if (givenSize.width != 0.0f)
+    {
+        givenSize.height = _area / givenSize.width;
+    }
+    else if (givenSize.height != 0.0f)
+    {
+        givenSize.width = _area / givenSize.height;
+    }
+    else
+    {
+        givenSize.width = sqrtf(_area);
+        givenSize.height = sqrtf(_area);
+    }
+    return givenSize;
+}
+
+@end
+
+
 @interface TestAlLayoutViewController ()
 
 @end
@@ -138,8 +172,11 @@
     TMALLayouter* alVideo = [[TMALLayouter alloc] init];
     TMALLayouter* alLargeImage = [[TMALLayouter alloc] init];
     TMALLayouter* alForwardedFollowers = [[TMALLayouter alloc] init];
-    
-    TMALLayouter* alThisMsg = [[TMALLayouter alloc] init];
+    /*
+    TMALLayouter* alThisMsg = [[TMALRelativeLayouter alloc] init];
+    /*/
+    TMALLayouter* alThisMsg = [[TwoPassMeasuringLayouter alloc] initWithArea:311*396];
+    //*/
     
     TMALLayouter* alForwardButton = nil;//[[TMALLayouter alloc] init];
     TMALLayouter* alCommentButton = nil;//[[TMALLayouter alloc] init];
@@ -201,7 +238,11 @@
     lp.marginTop = 5;
     lp.marginBottom = 5;
     [_leftArea sizeToFit];
+    /*
     [alThisMsg setMeasuredPreferSize:[_leftArea sizeThatFits:CGSizeZero]];
+    /*/
+    [alThisMsg setMeasuredPreferSize:CGSizeMake(360, 0)];
+    //*/
     [alRootArea addSubLayouter:alThisMsg withName:@"thismsg" layoutParameter:lp];
     
     // RichMedia //

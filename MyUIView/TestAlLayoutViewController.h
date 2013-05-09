@@ -7,6 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TMALLayouter.h"
+
+@interface TwoPassMeasuringLayouter : TMALLayouter
+{
+    CGFloat _area;
+}
+
+- (id) initWithArea : (CGFloat) area;
+
+@end
 
 @interface TestAlLayoutViewController : UIViewController
 {
