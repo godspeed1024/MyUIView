@@ -40,6 +40,21 @@
 		A2BA4ACE1727B99800D07A63 /* altest_thismsg.png in Resources */ = {isa = PBXBuildFile; fileRef = A2BA4AC51727B99800D07A63 /* altest_thismsg.png */; };
 		A2BA4ACF1727B99800D07A63 /* altest_nickname.png in Resources */ = {isa = PBXBuildFile; fileRef = A2BA4AC61727B99800D07A63 /* altest_nickname.png */; };
 		A2BA4AD11727B9BB00D07A63 /* altest_authoravatar.png in Resources */ = {isa = PBXBuildFile; fileRef = A2BA4AD01727B9BB00D07A63 /* altest_authoravatar.png */; };
+		A2DA58D917353AA40005BE70 /* altest_lbs_label.png in Resources */ = {isa = PBXBuildFile; fileRef = A2DA58CA17353AA30005BE70 /* altest_lbs_label.png */; };
+		A2DA58DA17353AA40005BE70 /* altest_lbs_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A2DA58CB17353AA30005BE70 /* altest_lbs_icon.png */; };
+		A2DA58DB17353AA40005BE70 /* altest_source.png in Resources */ = {isa = PBXBuildFile; fileRef = A2DA58CC17353AA30005BE70 /* altest_source.png */; };
+		A2DA58DC17353AA40005BE70 /* altest_followers2.png in Resources */ = {isa = PBXBuildFile; fileRef = A2DA58CD17353AA30005BE70 /* altest_followers2.png */; };
+		A2DA58DD17353AA40005BE70 /* altest_followers1.png in Resources */ = {isa = PBXBuildFile; fileRef = A2DA58CE17353AA30005BE70 /* altest_followers1.png */; };
+		A2DA58DE17353AA40005BE70 /* altest_followers0.png in Resources */ = {isa = PBXBuildFile; fileRef = A2DA58CF17353AA30005BE70 /* altest_followers0.png */; };
+		A2DA58DF17353AA40005BE70 /* weibo_timeline_share_travel_tag@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A2DA58D017353AA30005BE70 /* weibo_timeline_share_travel_tag@2x.png */; };
+		A2DA58E017353AA40005BE70 /* weibo_timeline_share_album_tag@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A2DA58D117353AA40005BE70 /* weibo_timeline_share_album_tag@2x.png */; };
+		A2DA58E117353AA40005BE70 /* weibo_timeline_share_album_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A2DA58D217353AA40005BE70 /* weibo_timeline_share_album_default@2x.png */; };
+		A2DA58E217353AA40005BE70 /* videoPlayButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A2DA58D317353AA40005BE70 /* videoPlayButton@2x.png */; };
+		A2DA58E317353AA40005BE70 /* timeline_cd_mid@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A2DA58D417353AA40005BE70 /* timeline_cd_mid@2x.png */; };
+		A2DA58E417353AA40005BE70 /* timeline_cd_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A2DA58D517353AA40005BE70 /* timeline_cd_bg@2x.png */; };
+		A2DA58E517353AA40005BE70 /* t_weibo_md_icon_music@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A2DA58D617353AA40005BE70 /* t_weibo_md_icon_music@2x.png */; };
+		A2DA58E617353AA40005BE70 /* t_weibo_md_icon_lbs@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A2DA58D717353AA40005BE70 /* t_weibo_md_icon_lbs@2x.png */; };
+		A2DA58E717353AA40005BE70 /* t_weibo_md_icon_gif@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A2DA58D817353AA40005BE70 /* t_weibo_md_icon_gif@2x.png */; };
 		A2E3CA8B1709783C00968906 /* BitMatrix.c in Sources */ = {isa = PBXBuildFile; fileRef = A2E3CA8A1709783C00968906 /* BitMatrix.c */; };
 /* End PBXBuildFile section */
 
@@ -93,6 +108,21 @@
 		A2BA4AC51727B99800D07A63 /* altest_thismsg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = altest_thismsg.png; sourceTree = "<group>"; };
 		A2BA4AC61727B99800D07A63 /* altest_nickname.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = altest_nickname.png; sourceTree = "<group>"; };
 		A2BA4AD01727B9BB00D07A63 /* altest_authoravatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = altest_authoravatar.png; sourceTree = "<group>"; };
+		A2DA58CA17353AA30005BE70 /* altest_lbs_label.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = altest_lbs_label.png; sourceTree = "<group>"; };
+		A2DA58CB17353AA30005BE70 /* altest_lbs_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = altest_lbs_icon.png; sourceTree = "<group>"; };
+		A2DA58CC17353AA30005BE70 /* altest_source.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = altest_source.png; sourceTree = "<group>"; };
+		A2DA58CD17353AA30005BE70 /* altest_followers2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = altest_followers2.png; sourceTree = "<group>"; };
+		A2DA58CE17353AA30005BE70 /* altest_followers1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = altest_followers1.png; sourceTree = "<group>"; };
+		A2DA58CF17353AA30005BE70 /* altest_followers0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = altest_followers0.png; sourceTree = "<group>"; };
+		A2DA58D017353AA30005BE70 /* weibo_timeline_share_travel_tag@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weibo_timeline_share_travel_tag@2x.png"; sourceTree = "<group>"; };
+		A2DA58D117353AA40005BE70 /* weibo_timeline_share_album_tag@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weibo_timeline_share_album_tag@2x.png"; sourceTree = "<group>"; };
+		A2DA58D217353AA40005BE70 /* weibo_timeline_share_album_default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weibo_timeline_share_album_default@2x.png"; sourceTree = "<group>"; };
+		A2DA58D317353AA40005BE70 /* videoPlayButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "videoPlayButton@2x.png"; sourceTree = "<group>"; };
+		A2DA58D417353AA40005BE70 /* timeline_cd_mid@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "timeline_cd_mid@2x.png"; sourceTree = "<group>"; };
+		A2DA58D517353AA40005BE70 /* timeline_cd_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "timeline_cd_bg@2x.png"; sourceTree = "<group>"; };
+		A2DA58D617353AA40005BE70 /* t_weibo_md_icon_music@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "t_weibo_md_icon_music@2x.png"; sourceTree = "<group>"; };
+		A2DA58D717353AA40005BE70 /* t_weibo_md_icon_lbs@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "t_weibo_md_icon_lbs@2x.png"; sourceTree = "<group>"; };
+		A2DA58D817353AA40005BE70 /* t_weibo_md_icon_gif@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "t_weibo_md_icon_gif@2x.png"; sourceTree = "<group>"; };
 		A2E3CA891709758500968906 /* BitMatrix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BitMatrix.h; sourceTree = "<group>"; };
 		A2E3CA8A1709783C00968906 /* BitMatrix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BitMatrix.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -181,6 +211,21 @@
 		A29CCC3F170425B70068B119 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A2DA58CA17353AA30005BE70 /* altest_lbs_label.png */,
+				A2DA58CB17353AA30005BE70 /* altest_lbs_icon.png */,
+				A2DA58CC17353AA30005BE70 /* altest_source.png */,
+				A2DA58CD17353AA30005BE70 /* altest_followers2.png */,
+				A2DA58CE17353AA30005BE70 /* altest_followers1.png */,
+				A2DA58CF17353AA30005BE70 /* altest_followers0.png */,
+				A2DA58D017353AA30005BE70 /* weibo_timeline_share_travel_tag@2x.png */,
+				A2DA58D117353AA40005BE70 /* weibo_timeline_share_album_tag@2x.png */,
+				A2DA58D217353AA40005BE70 /* weibo_timeline_share_album_default@2x.png */,
+				A2DA58D317353AA40005BE70 /* videoPlayButton@2x.png */,
+				A2DA58D417353AA40005BE70 /* timeline_cd_mid@2x.png */,
+				A2DA58D517353AA40005BE70 /* timeline_cd_bg@2x.png */,
+				A2DA58D617353AA40005BE70 /* t_weibo_md_icon_music@2x.png */,
+				A2DA58D717353AA40005BE70 /* t_weibo_md_icon_lbs@2x.png */,
+				A2DA58D817353AA40005BE70 /* t_weibo_md_icon_gif@2x.png */,
 				A2BA4AD01727B9BB00D07A63 /* altest_authoravatar.png */,
 				A2BA4ABE1727B99700D07A63 /* altest_button_comment.png */,
 				A2BA4ABF1727B99700D07A63 /* altest_button_forward.png */,
@@ -283,6 +328,21 @@
 				A2BA4ACE1727B99800D07A63 /* altest_thismsg.png in Resources */,
 				A2BA4ACF1727B99800D07A63 /* altest_nickname.png in Resources */,
 				A2BA4AD11727B9BB00D07A63 /* altest_authoravatar.png in Resources */,
+				A2DA58D917353AA40005BE70 /* altest_lbs_label.png in Resources */,
+				A2DA58DA17353AA40005BE70 /* altest_lbs_icon.png in Resources */,
+				A2DA58DB17353AA40005BE70 /* altest_source.png in Resources */,
+				A2DA58DC17353AA40005BE70 /* altest_followers2.png in Resources */,
+				A2DA58DD17353AA40005BE70 /* altest_followers1.png in Resources */,
+				A2DA58DE17353AA40005BE70 /* altest_followers0.png in Resources */,
+				A2DA58DF17353AA40005BE70 /* weibo_timeline_share_travel_tag@2x.png in Resources */,
+				A2DA58E017353AA40005BE70 /* weibo_timeline_share_album_tag@2x.png in Resources */,
+				A2DA58E117353AA40005BE70 /* weibo_timeline_share_album_default@2x.png in Resources */,
+				A2DA58E217353AA40005BE70 /* videoPlayButton@2x.png in Resources */,
+				A2DA58E317353AA40005BE70 /* timeline_cd_mid@2x.png in Resources */,
+				A2DA58E417353AA40005BE70 /* timeline_cd_bg@2x.png in Resources */,
+				A2DA58E517353AA40005BE70 /* t_weibo_md_icon_music@2x.png in Resources */,
+				A2DA58E617353AA40005BE70 /* t_weibo_md_icon_lbs@2x.png in Resources */,
+				A2DA58E717353AA40005BE70 /* t_weibo_md_icon_gif@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

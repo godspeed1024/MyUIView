@@ -1,6 +1,6 @@
 //
 //  MainViewController.h
-//  MyUIView
+//  MyUIButton
 //
 //  Created by Li Kai on 13-3-28.
 //  Copyright (c) 2013年 DomQiu. All rights reserved.
@@ -10,20 +10,32 @@
 
 @interface TestAlLayoutViewController : UIViewController
 {
-    UIButton* _btnCell;
-    UIButton* _btnTopBar;
-    UIButton* _btnRichMedia;
+    UIButton* _rootArea;
+    //{
+    UIButton* _topBar;
+    //  {
+    UIButton* _authorsAvatar;
+    UIButton* _nickname;
+    UIButton* _forwardTimes;
+    //  }
     
-    UIButton* _btnAuthorsAvatar;
-    UIButton* _btnCommentButton;
-    UIButton* _btnForwardButton;
-    UIButton* _btnForwardTimes;
-    UIButton* _btnForwardedFollowers;
-    UIButton* _btnThisMsg;
-    UIButton* _btnReferMsg;
-    UIButton* _btnNickname;
-    UIButton* _btnVideo;
-    UIButton* _btnLargeImage;
+    UIButton* _leftArea;
+    
+    UIButton* _rightArea;
+    //  {
+    UIButton* _video;
+    UIButton* _largeImage;
+
+    UIButton* _referMsg;
+    
+    UIButton* _forwardedFollowers;
+    //  }
+    
+    UIButton* _commentButton;
+    UIButton* _forwardButton;
+    
+    UIButton* _LBSIcon;
+    //}
 }
 
 @end
