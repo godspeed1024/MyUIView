@@ -167,7 +167,7 @@
     TMALLayouter* alNickname = [[TMALLayouter alloc] init];
     TMALLayouter* alForwardTimes = [[TMALLayouter alloc] init];
     
-    TMALRelativeLayouter* alRichMedia = [[TMALRelativeLayouter alloc] init];
+    TMALRelativeLayouter* alRichMedia = nil;///!!![[TMALRelativeLayouter alloc] init];///!!!
     TMALLayouter* alReferMsg = [[TMALLayouter alloc] init];
     TMALLayouter* alVideo = [[TMALLayouter alloc] init];
     TMALLayouter* alLargeImage = [[TMALLayouter alloc] init];
@@ -175,7 +175,7 @@
     /*
     TMALLayouter* alThisMsg = [[TMALRelativeLayouter alloc] init];
     /*/
-    TMALLayouter* alThisMsg = nil;///!!![[TwoPassMeasuringLayouter alloc] initWithArea:311*396];
+    TMALLayouter* alThisMsg = nil;///!!![[TwoPassMeasuringLayouter alloc] initWithArea:311*396];///!!!
     //*/
     
     TMALLayouter* alForwardButton = [[TMALLayouter alloc] init];
@@ -320,15 +320,18 @@
     
     [alRootArea setLayoutConstraintOfSubLayouter:alRichMedia below:alTopBar];
     [alRootArea setLayoutConstraintOfSubLayouter:alRichMedia toRightOf:alThisMsg];
-    //*
+    /*
     [alRootArea setLayoutConstraintOfSubLayouter:alRichMedia above:alForwardButton];
     [alRootArea setLayoutConstraintOfSubLayouter:alCommentButton below:alRichMedia];
+    /*/
+    [alRootArea setLayoutConstraintOfSubLayouter:alTopBar above:alForwardButton];
+    [alRootArea setLayoutConstraintOfSubLayouter:alCommentButton below:alTopBar];
+    //*/
     [alRootArea setLayoutConstraintOfSubLayouter:alForwardButton withAnchor:ParentBottom];
     //[alRootArea setLayoutConstraintOfSubLayouter:alCommentButton withAnchor:ParentBottom];
     [alRootArea setLayoutConstraintOfSubLayouter:alForwardButton toLeftOf:alCommentButton];
     [alRootArea setLayoutConstraintOfSubLayouter:alCommentButton withAnchor:ParentRight];
     ///[alRootArea setLayoutConstraintOfSubLayouter:alRichMedia withAnchor:ParentRight];
-    //*/
     
     // Layout :
     ///!!!
