@@ -671,11 +671,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/TMALRelativeLayouter.m"
-         timestampString = "389933872.627753"
+         timestampString = "389936225.776"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "581"
-         endingLineNumber = "581"
+         startingLineNumber = "623"
+         endingLineNumber = "623"
          landmarkName = "-recursiveAdustForAlignParentVerticalAnchors:direction:offset:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -684,11 +684,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/TMALRelativeLayouter.m"
-         timestampString = "389933872.627753"
+         timestampString = "389936225.776"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "390"
-         endingLineNumber = "390"
+         startingLineNumber = "411"
+         endingLineNumber = "411"
          landmarkName = "-recursiveAdustForAlignParentHorizontalAnchors:direction:offset:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -697,11 +697,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/TMALRelativeLayouter.m"
-         timestampString = "389933872.627753"
+         timestampString = "389936225.776"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "412"
-         endingLineNumber = "412"
+         startingLineNumber = "433"
+         endingLineNumber = "433"
          landmarkName = "-recursiveAdustForAlignParentHorizontalAnchors:direction:offset:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -710,11 +710,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/TMALRelativeLayouter.m"
-         timestampString = "389933872.627753"
+         timestampString = "389936225.776"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "681"
-         endingLineNumber = "681"
+         startingLineNumber = "739"
+         endingLineNumber = "739"
          landmarkName = "-onMeasure:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -723,11 +723,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/TMALRelativeLayouter.m"
-         timestampString = "389933872.627753"
+         timestampString = "389936225.776"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "724"
-         endingLineNumber = "724"
+         startingLineNumber = "787"
+         endingLineNumber = "787"
          landmarkName = "-onMeasure:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -736,11 +736,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/TMALRelativeLayouter.m"
-         timestampString = "389933872.627753"
+         timestampString = "389936225.776"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "795"
-         endingLineNumber = "795"
+         startingLineNumber = "858"
+         endingLineNumber = "858"
          landmarkName = "-onMeasure:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -749,11 +749,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/TMALRelativeLayouter.m"
-         timestampString = "389933872.627753"
+         timestampString = "389936225.776"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "822"
-         endingLineNumber = "822"
+         startingLineNumber = "884"
+         endingLineNumber = "884"
          landmarkName = "-onMeasure:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -762,11 +762,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/TMALRelativeLayouter.m"
-         timestampString = "389933872.627753"
+         timestampString = "389936225.776"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "873"
-         endingLineNumber = "873"
+         startingLineNumber = "951"
+         endingLineNumber = "951"
          landmarkName = "-onMeasure:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -775,11 +775,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/TMALRelativeLayouter.m"
-         timestampString = "389933872.627753"
+         timestampString = "389936225.776"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "914"
-         endingLineNumber = "914"
+         startingLineNumber = "998"
+         endingLineNumber = "998"
          landmarkName = "-onMeasure:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -788,11 +788,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/TMALRelativeLayouter.m"
-         timestampString = "389933872.627753"
+         timestampString = "389936225.776"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "985"
-         endingLineNumber = "985"
+         startingLineNumber = "1069"
+         endingLineNumber = "1069"
          landmarkName = "-onMeasure:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -801,11 +801,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/TMALRelativeLayouter.m"
-         timestampString = "389933872.627753"
+         timestampString = "389936225.776"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1010"
-         endingLineNumber = "1010"
+         startingLineNumber = "1094"
+         endingLineNumber = "1094"
          landmarkName = "-onMeasure:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -853,11 +853,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/TMALRelativeLayouter.m"
-         timestampString = "389933872.627753"
+         timestampString = "389936225.776"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1019"
-         endingLineNumber = "1019"
+         startingLineNumber = "1103"
+         endingLineNumber = "1103"
          landmarkName = "-onLayout:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -866,11 +866,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/TMALRelativeLayouter.m"
-         timestampString = "389933872.627753"
+         timestampString = "389936225.776"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "551"
-         endingLineNumber = "551"
+         startingLineNumber = "593"
+         endingLineNumber = "593"
          landmarkName = "-recursiveAdustForAlignParentVerticalAnchors:direction:offset:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -879,11 +879,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/TMALRelativeLayouter.m"
-         timestampString = "389933872.627753"
+         timestampString = "389936225.776"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "575"
-         endingLineNumber = "575"
+         startingLineNumber = "617"
+         endingLineNumber = "617"
          landmarkName = "-recursiveAdustForAlignParentVerticalAnchors:direction:offset:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -892,11 +892,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/TMALRelativeLayouter.m"
-         timestampString = "389933872.627753"
+         timestampString = "389936225.776"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "393"
-         endingLineNumber = "393"
+         startingLineNumber = "414"
+         endingLineNumber = "414"
          landmarkName = "-recursiveAdustForAlignParentHorizontalAnchors:direction:offset:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -905,11 +905,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/TMALRelativeLayouter.m"
-         timestampString = "389933872.627753"
+         timestampString = "389936225.776"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "417"
-         endingLineNumber = "417"
+         startingLineNumber = "438"
+         endingLineNumber = "438"
          landmarkName = "-recursiveAdustForAlignParentHorizontalAnchors:direction:offset:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -918,11 +918,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/TMALRelativeLayouter.m"
-         timestampString = "389933872.627753"
+         timestampString = "389936225.776"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "604"
-         endingLineNumber = "604"
+         startingLineNumber = "646"
+         endingLineNumber = "646"
          landmarkName = "-onMeasure:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -944,11 +944,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/TMALRelativeLayouter.m"
-         timestampString = "389933872.627753"
+         timestampString = "389936225.776"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "629"
-         endingLineNumber = "629"
+         startingLineNumber = "672"
+         endingLineNumber = "672"
          landmarkName = "-onMeasure:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -957,12 +957,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/TMALRelativeLayouter.m"
-         timestampString = "389886324.917345"
+         timestampString = "389936225.776"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "315"
-         endingLineNumber = "315"
-         landmarkName = "-recursiveFindMaxWidthOfHorizontalChain:direction:curPosition:"
+         startingLineNumber = "321"
+         endingLineNumber = "321"
+         landmarkName = "-recursiveFindMaxWidthOfHorizontalChain:direction:curPosition:stampedNodes:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -970,11 +970,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/TMALRelativeLayouter.m"
-         timestampString = "389933872.627753"
+         timestampString = "389936225.776"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "733"
-         endingLineNumber = "733"
+         startingLineNumber = "796"
+         endingLineNumber = "796"
          landmarkName = "-onMeasure:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1009,11 +1009,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/TMALRelativeLayouter.m"
-         timestampString = "389933872.627753"
+         timestampString = "389936225.776"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1017"
-         endingLineNumber = "1017"
+         startingLineNumber = "1101"
+         endingLineNumber = "1101"
          landmarkName = "-onLayout:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1087,11 +1087,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/TMALRelativeLayouter.m"
-         timestampString = "389933872.627753"
+         timestampString = "389936225.776"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "596"
-         endingLineNumber = "596"
+         startingLineNumber = "638"
+         endingLineNumber = "638"
          landmarkName = "-onMeasure:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1100,11 +1100,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/TMALRelativeLayouter.m"
-         timestampString = "389933872.627753"
+         timestampString = "389936225.776"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "601"
-         endingLineNumber = "601"
+         startingLineNumber = "643"
+         endingLineNumber = "643"
          landmarkName = "-onMeasure:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1113,11 +1113,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyUIView/TMALRelativeLayouter.m"
-         timestampString = "389933872.627753"
+         timestampString = "389936225.776"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "946"
-         endingLineNumber = "946"
+         startingLineNumber = "1030"
+         endingLineNumber = "1030"
          landmarkName = "-onMeasure:"
          landmarkType = "5">
       </FileBreakpoint>

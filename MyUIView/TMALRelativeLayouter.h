@@ -114,7 +114,8 @@ typedef enum
 
 - (CGFloat) recursiveFindMaxWidthOfHorizontalChain : (TMALLayoutChainNode*) curNode
                                          direction : (int) direction
-                                       curPosition : (CGFloat) curPosition;
+                                       curPosition : (CGFloat) curPosition
+                                      stampedNodes : (NSMutableSet*) stampedNodes;
 ///!!!framesOfChildren : (NSDictionary*) framesOfChildren;
 
 - (void) recursiveOffsetHorizontalChains : (TMALLayoutChainNode*) curNode
@@ -128,7 +129,8 @@ typedef enum
 
 - (CGFloat) recursiveFindMaxHeightOfVerticalChain : (TMALLayoutChainNode*) curNode
                                         direction : (int) direction
-                                      curPosition : (CGFloat) curPosition;
+                                      curPosition : (CGFloat) curPosition
+                                     stampedNodes : (NSMutableSet*) stampedNodes;
 ///!!!framesOfChildren : (NSDictionary*) framesOfChildren;
 
 - (void) recursiveOffsetVerticalChains : (TMALLayoutChainNode*) curNode

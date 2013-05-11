@@ -277,11 +277,17 @@
 - (CGFloat) recursiveFindMaxWidthOfHorizontalChain : (TMALLayoutChainNode*) curNode
                                          direction : (int) direction
                                        curPosition : (CGFloat) curPosition
+                                      stampedNodes : (NSMutableSet*) stampedNodes
 ///!!!framesOfChildren : (NSDictionary*) framesOfChildren
 {
-    TMALLayoutParameter lp = curNode.subLayouter.layoutParameter;
+    if ([stampedNodes containsObject:curNode])
+    {
+        return NA_RANGE;
+    }
+    [stampedNodes addObject:curNode];
     
-    float mySize = [curNode.subLayouter measuredPreferSize].width;
+    TMALLayoutParameter lp = curNode.subLayouter.layoutParameter;
+    float mySize = curNode.subLayouter.measuredPreferSize.width;
     mySize += lp.marginLeft;
     mySize += lp.marginRight;
     
@@ -299,15 +305,15 @@
     
     if (0 == direction)
     {
-        frame.origin.x = curPosition - lp.marginRight - [curNode.subLayouter measuredPreferSize].width;
-        frame.size.width = [curNode.subLayouter measuredPreferSize].width;
+        frame.origin.x = curPosition - lp.marginRight - curNode.subLayouter.measuredPreferSize.width;
+        frame.size.width = curNode.subLayouter.measuredPreferSize.width;
         
         curPosition -= mySize;
     }
     else
     {
         frame.origin.x = curPosition + lp.marginLeft;
-        frame.size.width = [curNode.subLayouter measuredPreferSize].width;
+        frame.size.width = curNode.subLayouter.measuredPreferSize.width;
         
         curPosition += mySize;
     }
@@ -319,7 +325,8 @@
     {
         float subTotalSize = [self recursiveFindMaxWidthOfHorizontalChain : nextNode
                                                                 direction : direction
-                                                              curPosition : curPosition];
+                                                              curPosition : curPosition
+                                                              stampedNodes:stampedNodes];
         
         if (subTotalSize > maxSubTotalSize)
         {
@@ -327,7 +334,21 @@
         }
     }
     
-    return mySize + maxSubTotalSize;
+    float reverseMaxSubTotalSize = 0;
+    for (TMALLayoutChainNode* nextNode in [curNode.nextNodes objectAtIndex:(1 - direction)])
+    {
+        float subTotalSize = [self recursiveFindMaxWidthOfHorizontalChain : nextNode
+                                                                direction : 1 - direction
+                                                              curPosition : curPosition
+                                                              stampedNodes:stampedNodes];
+        
+        if (subTotalSize > reverseMaxSubTotalSize)
+        {
+            reverseMaxSubTotalSize = subTotalSize;
+        }
+    }
+    
+    return MAX(mySize, reverseMaxSubTotalSize) + maxSubTotalSize;
 }
 
 - (void) recursiveOffsetHorizontalChains : (TMALLayoutChainNode*) curNode
@@ -433,11 +454,17 @@
 - (CGFloat) recursiveFindMaxHeightOfVerticalChain : (TMALLayoutChainNode*) curNode
                                         direction : (int) direction
                                       curPosition : (CGFloat) curPosition
+                                     stampedNodes : (NSMutableSet*) stampedNodes
 ///!!!framesOfChildren : (NSDictionary*) framesOfChildren;
 {
-    TMALLayoutParameter lp = curNode.subLayouter.layoutParameter;
+    if ([stampedNodes containsObject:curNode])
+    {
+        return NA_RANGE;
+    }
+    [stampedNodes addObject:curNode];
     
-    float mySize = [curNode.subLayouter measuredPreferSize].height;
+    TMALLayoutParameter lp = curNode.subLayouter.layoutParameter;
+    float mySize = curNode.subLayouter.measuredPreferSize.height;
     mySize += lp.marginTop;
     mySize += lp.marginBottom;
     
@@ -455,15 +482,15 @@
     
     if (0 == direction)
     {
-        frame.origin.y = curPosition - lp.marginBottom - [curNode.subLayouter measuredPreferSize].height;
-        frame.size.height = [curNode.subLayouter measuredPreferSize].height;
+        frame.origin.y = curPosition - lp.marginBottom - curNode.subLayouter.measuredPreferSize.height;
+        frame.size.height = curNode.subLayouter.measuredPreferSize.height;
         
         curPosition -= mySize;
     }
     else
     {
         frame.origin.y = curPosition + lp.marginTop;
-        frame.size.height = [curNode.subLayouter measuredPreferSize].height;
+        frame.size.height = curNode.subLayouter.measuredPreferSize.height;
         
         curPosition += mySize;
     }
@@ -475,7 +502,8 @@
     {
         float subTotalSize = [self recursiveFindMaxHeightOfVerticalChain : nextNode
                                                                direction : direction
-                                                             curPosition : curPosition];
+                                                             curPosition : curPosition
+                                                             stampedNodes:stampedNodes];
         
         if (subTotalSize > maxSubTotalSize)
         {
@@ -483,7 +511,21 @@
         }
     }
     
-    return mySize + maxSubTotalSize;
+    float reverseMaxSubTotalSize = 0;
+    for (TMALLayoutChainNode* nextNode in [curNode.nextNodes objectAtIndex:(1 - direction)])
+    {
+        float subTotalSize = [self recursiveFindMaxHeightOfVerticalChain : nextNode
+                                                                direction : 1 - direction
+                                                              curPosition : curPosition
+                                                              stampedNodes:stampedNodes];
+        
+        if (subTotalSize > reverseMaxSubTotalSize)
+        {
+            reverseMaxSubTotalSize = subTotalSize;
+        }
+    }
+    
+    return MAX(mySize, reverseMaxSubTotalSize) + maxSubTotalSize;
 }
 
 - (void) recursiveOffsetVerticalChains : (TMALLayoutChainNode*) curNode
@@ -623,9 +665,10 @@
             }
         }
         
+        NSMutableSet* stampedNodes = [[NSMutableSet alloc] init];
         // Horizontal :
-        
         // Measure max width of all chains:
+        [stampedNodes removeAllObjects];
         for (TMALLayoutChainNode* node in _horizontalLayoutChainRoots)
         {
             float widthOfThisChain;
@@ -637,21 +680,30 @@
                 int layoutFlag = [nnLayoutFlag intValue];
                 if (layoutFlag & ParentRight)
                 {
-                    widthOfThisChain = [self recursiveFindMaxWidthOfHorizontalChain:node direction:0 curPosition:0.0f];
+                    widthOfThisChain = [self recursiveFindMaxWidthOfHorizontalChain:node
+                                                                          direction:0
+                                                                        curPosition:0.0f
+                                                                       stampedNodes:stampedNodes];
                 }
                 else if (layoutFlag & ParentHorizontalCenter)
                 {
                     TMALLayoutParameter lp = node.subLayouter.layoutParameter;
-                    float boundWidthOfRoot = [node.subLayouter measuredPreferSize].width;
+                    float boundWidthOfRoot = node.subLayouter.measuredPreferSize.width;
                     boundWidthOfRoot += lp.marginLeft;
                     boundWidthOfRoot += lp.marginRight;
                     
-                    float halfWidth0 = [self recursiveFindMaxWidthOfHorizontalChain:node direction:0 curPosition:boundWidthOfRoot]
-                    - [node.subLayouter measuredPreferSize].width / 2
-                    - lp.marginRight;
-                    float halfWidth1 = [self recursiveFindMaxWidthOfHorizontalChain:node direction:1 curPosition:0.0f]
-                    - [node.subLayouter measuredPreferSize].width / 2
-                    - lp.marginLeft;
+                    float halfWidth0 = [self recursiveFindMaxWidthOfHorizontalChain:node
+                                                                          direction:0
+                                                                        curPosition:boundWidthOfRoot
+                                                                       stampedNodes:stampedNodes]
+                                        - node.subLayouter.measuredPreferSize.width / 2 - lp.marginRight;
+                    
+                    float halfWidth1 = [self recursiveFindMaxWidthOfHorizontalChain:node
+                                                                          direction:1
+                                                                        curPosition:0.0f
+                                                                       stampedNodes:stampedNodes]
+                                        - node.subLayouter.measuredPreferSize.width / 2 - lp.marginLeft;
+                    
                     if (halfWidth0 > halfWidth1)
                     {
                         widthOfThisChain = halfWidth0 * 2;
@@ -663,12 +715,18 @@
                 }
                 else
                 {
-                    widthOfThisChain = [self recursiveFindMaxWidthOfHorizontalChain:node direction:1 curPosition:0.0f];
+                    widthOfThisChain = [self recursiveFindMaxWidthOfHorizontalChain:node
+                                                                          direction:1
+                                                                        curPosition:0.0f
+                                                                       stampedNodes:stampedNodes];
                 }
             }
             else
             {
-                widthOfThisChain = [self recursiveFindMaxWidthOfHorizontalChain:node direction:1 curPosition:0.0f];
+                widthOfThisChain = [self recursiveFindMaxWidthOfHorizontalChain:node
+                                                                      direction:1
+                                                                    curPosition:0.0f
+                                                                   stampedNodes:stampedNodes];
             }
             
             if (widthOfThisChain > widthNeeded)
@@ -706,11 +764,17 @@
             float widthOfThisChain;
             if (0 == [[node.nextNodes objectAtIndex:0] count])
             {
-                widthOfThisChain = [self recursiveFindMaxWidthOfHorizontalChain:node direction:1 curPosition:0.0f];
+                widthOfThisChain = [self recursiveFindMaxWidthOfHorizontalChain:node
+                                                                      direction:1
+                                                                    curPosition:0.0f
+                                                                   stampedNodes:stampedNodes];
             }
             else
             {
-                widthOfThisChain = [self recursiveFindMaxWidthOfHorizontalChain:node direction:0 curPosition:0.0f];
+                widthOfThisChain = [self recursiveFindMaxWidthOfHorizontalChain:node
+                                                                      direction:0
+                                                                    curPosition:0.0f
+                                                                   stampedNodes:stampedNodes];
             }
             if (widthOfThisChain > widthNeeded)
             {
@@ -718,7 +782,6 @@
             }
         }
         
-        NSMutableSet* stampedNodes = [[NSMutableSet alloc] init];
         // Layout in horizontal :
         [stampedNodes removeAllObjects];
         for (TMALLayoutChainNode* node in _horizontalLayoutChainRoots)
@@ -817,8 +880,8 @@
         }
         
         // Vertical:
-        
         // Measure max height of all chains:
+        [stampedNodes removeAllObjects];
         for (TMALLayoutChainNode* node in _verticalLayoutChainRoots)
         {
             float heightOfThisChain;
@@ -829,21 +892,30 @@
                 int layoutFlag = [nnLayoutFlag intValue];
                 if (layoutFlag & ParentBottom)
                 {
-                    heightOfThisChain = [self recursiveFindMaxHeightOfVerticalChain:node direction:0 curPosition:0.0f];
+                    heightOfThisChain = [self recursiveFindMaxHeightOfVerticalChain:node
+                                                                          direction:0
+                                                                        curPosition:0.0f
+                                                                       stampedNodes:stampedNodes];
                 }
                 else if (layoutFlag & ParentVerticalCenter)
                 {
                     TMALLayoutParameter lp = node.subLayouter.layoutParameter;
-                    float boundHeightOfRoot = [node.subLayouter measuredPreferSize].height;
+                    float boundHeightOfRoot = node.subLayouter.measuredPreferSize.height;
                     boundHeightOfRoot += lp.marginTop;
                     boundHeightOfRoot += lp.marginBottom;
                     
-                    float halfHeight0 = [self recursiveFindMaxHeightOfVerticalChain:node direction:0 curPosition:boundHeightOfRoot]
-                    - [node.subLayouter measuredPreferSize].height / 2
-                    - lp.marginBottom;
-                    float halfHeight1 = [self recursiveFindMaxHeightOfVerticalChain:node direction:1 curPosition:0.0f]
-                    - [node.subLayouter measuredPreferSize].height / 2
-                    - lp.marginTop;
+                    float halfHeight0 = [self recursiveFindMaxHeightOfVerticalChain:node
+                                                                          direction:0
+                                                                        curPosition:boundHeightOfRoot
+                                                                       stampedNodes:stampedNodes]
+                                        - node.subLayouter.measuredPreferSize.height / 2 - lp.marginBottom;
+                    
+                    float halfHeight1 = [self recursiveFindMaxHeightOfVerticalChain:node
+                                                                          direction:1
+                                                                        curPosition:0.0f
+                                                                       stampedNodes:stampedNodes]
+                                        - node.subLayouter.measuredPreferSize.height / 2 - lp.marginTop;
+                    
                     if (halfHeight0 > halfHeight1)
                     {
                         heightOfThisChain = halfHeight0 * 2;
@@ -855,12 +927,18 @@
                 }
                 else
                 {
-                    heightOfThisChain = [self recursiveFindMaxHeightOfVerticalChain:node direction:1 curPosition:0.0f];
+                    heightOfThisChain = [self recursiveFindMaxHeightOfVerticalChain:node
+                                                                          direction:1
+                                                                        curPosition:0.0f
+                                                                       stampedNodes:stampedNodes];
                 }
             }
             else
             {
-                heightOfThisChain = [self recursiveFindMaxHeightOfVerticalChain:node direction:1 curPosition:0.0f];
+                heightOfThisChain = [self recursiveFindMaxHeightOfVerticalChain:node
+                                                                      direction:1
+                                                                    curPosition:0.0f
+                                                                   stampedNodes:stampedNodes];
             }
             
             if (heightOfThisChain > heightNeeded)
@@ -897,11 +975,17 @@
             float heightOfThisChain;
             if (0 == [[node.nextNodes objectAtIndex:0] count])
             {
-                heightOfThisChain = [self recursiveFindMaxHeightOfVerticalChain:node direction:1 curPosition:0.0f];
+                heightOfThisChain = [self recursiveFindMaxHeightOfVerticalChain:node
+                                                                      direction:1
+                                                                    curPosition:0.0f
+                                                                   stampedNodes:stampedNodes];
             }
             else
             {
-                heightOfThisChain = [self recursiveFindMaxHeightOfVerticalChain:node direction:0 curPosition:0.0f];
+                heightOfThisChain = [self recursiveFindMaxHeightOfVerticalChain:node
+                                                                      direction:0
+                                                                    curPosition:0.0f
+                                                                   stampedNodes:stampedNodes];
             }
             if (heightOfThisChain > heightNeeded)
             {
