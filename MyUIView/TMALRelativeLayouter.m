@@ -240,7 +240,7 @@
     {
         return NO;
     }
-    
+    //*
     if ([[node.nextNodes objectAtIndex:0] count] == 0)
     {
         for (TMALLayoutChainNode* iNode in [node.nextNodes objectAtIndex:1])
@@ -265,7 +265,12 @@
     {
         return NO;
     }
-    
+    /*/
+    if ([[node.nextNodes objectAtIndex:0] count] != 0 && [[node.nextNodes objectAtIndex:1] count] != 0)
+    {
+        return NO;
+    }
+    //*/
     return YES;
 }
 
@@ -326,11 +331,14 @@
 }
 
 - (void) recursiveOffsetHorizontalChains : (TMALLayoutChainNode*) curNode
-                               direction : (int) direction
                                   offset : (CGFloat) offset
+                            stampedNodes : (NSMutableSet*) stampedNodes
 ///!!!framesOfChildren : (NSDictionary*) framesOfChildren;
 {
     if (nil == curNode) return;
+    
+    if ([stampedNodes containsObject:curNode]) return;
+    [stampedNodes addObject:curNode];
     
     NSValue* nsPtrLayouter = [NSValue valueWithPointer : (void*)curNode.subLayouter];
     NSValue* nvFrame = [_frameOfSubLayouter objectForKey:nsPtrLayouter];
@@ -339,11 +347,14 @@
     nvFrame = [NSValue valueWithCGRect:frame];
     [_frameOfSubLayouter setObject:nvFrame forKey:nsPtrLayouter];
     
-    for (TMALLayoutChainNode* nextNode in [curNode.nextNodes objectAtIndex:direction])
+    for (int direction = 0; direction < 2; direction++)
     {
-        [self recursiveOffsetHorizontalChains : nextNode
-                                    direction : direction
-                                       offset : offset];
+        for (TMALLayoutChainNode* nextNode in [curNode.nextNodes objectAtIndex:direction])
+        {
+            [self recursiveOffsetHorizontalChains : nextNode
+                                           offset : offset
+                                     stampedNodes : stampedNodes];
+        }
     }
 }
 
@@ -476,11 +487,14 @@
 }
 
 - (void) recursiveOffsetVerticalChains : (TMALLayoutChainNode*) curNode
-                             direction : (int) direction
                                 offset : (CGFloat) offset
+                          stampedNodes : (NSMutableSet*) stampedNodes
 ///!!!framesOfChildren : (NSDictionary*) framesOfChildren;
 {
     if (nil == curNode) return;
+    
+    if ([stampedNodes containsObject:curNode]) return;
+    [stampedNodes addObject:curNode];
     
     NSValue* nsPtrNode = [NSValue valueWithPointer : (void*)curNode.subLayouter];
     NSValue* nvFrame = [_frameOfSubLayouter objectForKey:nsPtrNode];
@@ -489,11 +503,14 @@
     nvFrame = [NSValue valueWithCGRect:frame];
     [_frameOfSubLayouter setObject:nvFrame forKey:nsPtrNode];
     
-    for (TMALLayoutChainNode* nextNode in [curNode.nextNodes objectAtIndex:direction])
+    for (int direction = 0; direction < 2; direction++)
     {
-        [self recursiveOffsetVerticalChains : nextNode
-                                  direction : direction
-                                     offset : offset];
+        for (TMALLayoutChainNode* nextNode in [curNode.nextNodes objectAtIndex:direction])
+        {
+            [self recursiveOffsetVerticalChains : nextNode
+                                         offset : offset
+                                   stampedNodes : stampedNodes];
+        }
     }
 }
 
@@ -667,12 +684,12 @@
         {
             TMALLayoutChainNode* node = [_horizontalLayoutChains objectForKey:key];
             
-            if (NO == [self canBeLayoutChainRootCandidate:node])
+            if (YES == [_horizontalLayoutChainRoots containsObject:node])
             {
                 continue;
             }
             
-            if (YES == [_horizontalLayoutChainRoots containsObject:node])
+            if (NO == [self canBeLayoutChainRootCandidate:node])
             {
                 continue;
             }
@@ -701,7 +718,9 @@
             }
         }
         
+        NSMutableSet* stampedNodes = [[NSMutableSet alloc] init];
         // Layout in horizontal :
+        [stampedNodes removeAllObjects];
         for (TMALLayoutChainNode* node in _horizontalLayoutChainRoots)
         {
             if (nil == node) continue;
@@ -727,13 +746,15 @@
                 {
                     offset = (widthNeeded - [nvFrame CGRectValue].size.width) / 2
                     - [nvFrame CGRectValue].origin.x;
-                    
+                    /*
                     CGRect offsettedRect = [nvFrame CGRectValue];
                     offsettedRect.origin.x -= offset;
                     nvFrame = [NSValue valueWithCGRect:offsettedRect];
                     [_frameOfSubLayouter setObject:nvFrame forKey:nsPtrNode];
                     
-                    [self recursiveOffsetHorizontalChains:node direction:0 offset:offset];
+                    //[stampedNodes removeAllObjects];
+                    [self recursiveOffsetHorizontalChains:node direction:0 offset:offset stampedNodes:stampedNodes];
+                     //*/
                 }
                 else if (layoutFlag & ParentLeft)
                 {
@@ -767,7 +788,8 @@
                 }
             }
             
-            [self recursiveOffsetHorizontalChains:node direction:direction offset:offset];
+            //[stampedNodes removeAllObjects];
+            [self recursiveOffsetHorizontalChains:node offset:offset stampedNodes:stampedNodes];
         }
         
         for (TMALLayoutChainNode* node in _horizontalLayoutChainRoots)
@@ -853,12 +875,12 @@
         {
             TMALLayoutChainNode* node = [_verticalLayoutChains objectForKey:key];
             
-            if (NO == [self canBeLayoutChainRootCandidate:node])
+            if (YES == [_verticalLayoutChainRoots containsObject:node])
             {
                 continue;
             }
             
-            if (YES == [_verticalLayoutChainRoots containsObject:node])
+            if (NO == [self canBeLayoutChainRootCandidate:node])
             {
                 continue;
             }
@@ -888,6 +910,7 @@
         }
         
         // Layout in vertical :
+        [stampedNodes removeAllObjects];
         for (TMALLayoutChainNode* node in _verticalLayoutChainRoots)
         {
             if (nil == node) continue;
@@ -913,13 +936,15 @@
                 {
                     offset = (heightNeeded - [nvFrame CGRectValue].size.height) / 2
                     - [nvFrame CGRectValue].origin.y;
-                    
+                    /*
                     CGRect offsettedRect = [nvFrame CGRectValue];
                     offsettedRect.origin.y -= offset;
                     nvFrame = [NSValue valueWithCGRect:offsettedRect];
                     [_frameOfSubLayouter setObject:nvFrame forKey:nsPtrNode];
                     
-                    [self recursiveOffsetVerticalChains:node direction:0 offset:offset];
+                    //[stampedNodes removeAllObjects];
+                    [self recursiveOffsetVerticalChains:node direction:0 offset:offset stampedNodes:stampedNodes];
+                     //*/
                 }
                 else if (layoutFlag & ParentTop)
                 {
@@ -953,7 +978,8 @@
                 }
             }
             
-            [self recursiveOffsetVerticalChains:node direction:direction offset:offset];
+            //[stampedNodes removeAllObjects];
+            [self recursiveOffsetVerticalChains:node offset:offset stampedNodes:stampedNodes];
         }
         
         for (TMALLayoutChainNode* node in _verticalLayoutChainRoots)

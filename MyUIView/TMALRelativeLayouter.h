@@ -118,8 +118,8 @@ typedef enum
 ///!!!framesOfChildren : (NSDictionary*) framesOfChildren;
 
 - (void) recursiveOffsetHorizontalChains : (TMALLayoutChainNode*) curNode
-                               direction : (int) direction
-                                  offset : (CGFloat) offset;
+                                  offset : (CGFloat) offset
+                            stampedNodes : (NSMutableSet*) stampedNodes;
 ///!!!framesOfChildren : (NSDictionary*) framesOfChildren;
 
 - (void) recursiveAdustForAlignParentHorizontalAnchors : (TMALLayoutChainNode*) curNode
@@ -132,8 +132,8 @@ typedef enum
 ///!!!framesOfChildren : (NSDictionary*) framesOfChildren;
 
 - (void) recursiveOffsetVerticalChains : (TMALLayoutChainNode*) curNode
-                             direction : (int) direction
-                                offset : (CGFloat) offset;
+                                offset : (CGFloat) offset
+                          stampedNodes : (NSMutableSet*) stampedNodes;
 ///!!!framesOfChildren : (NSDictionary*) framesOfChildren;
 
 - (void) recursiveAdustForAlignParentVerticalAnchors : (TMALLayoutChainNode*) curNode

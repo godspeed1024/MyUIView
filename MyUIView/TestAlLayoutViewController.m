@@ -175,11 +175,11 @@
     /*
     TMALLayouter* alThisMsg = [[TMALRelativeLayouter alloc] init];
     /*/
-    TMALLayouter* alThisMsg = [[TwoPassMeasuringLayouter alloc] initWithArea:311*396];
+    TMALLayouter* alThisMsg = nil;///!!![[TwoPassMeasuringLayouter alloc] initWithArea:311*396];
     //*/
     
-    TMALLayouter* alForwardButton = nil;//[[TMALLayouter alloc] init];
-    TMALLayouter* alCommentButton = nil;//[[TMALLayouter alloc] init];
+    TMALLayouter* alForwardButton = [[TMALLayouter alloc] init];
+    TMALLayouter* alCommentButton = [[TMALLayouter alloc] init];
     
     //TMALLayouter* alLBSIcon = [[TMALLayouter alloc] init];
     
@@ -241,7 +241,7 @@
     /*
     [alThisMsg setMeasuredPreferSize:[_leftArea sizeThatFits:CGSizeZero]];
     /*/
-    [alThisMsg setMeasuredPreferSize:CGSizeMake(360, 0)];
+    [alThisMsg setMeasuredPreferSize:CGSizeMake(150, 0)];
     //*/
     [alRootArea addSubLayouter:alThisMsg withName:@"thismsg" layoutParameter:lp];
     
@@ -320,7 +320,15 @@
     
     [alRootArea setLayoutConstraintOfSubLayouter:alRichMedia below:alTopBar];
     [alRootArea setLayoutConstraintOfSubLayouter:alRichMedia toRightOf:alThisMsg];
+    //*
+    [alRootArea setLayoutConstraintOfSubLayouter:alRichMedia above:alForwardButton];
+    [alRootArea setLayoutConstraintOfSubLayouter:alCommentButton below:alRichMedia];
+    [alRootArea setLayoutConstraintOfSubLayouter:alForwardButton withAnchor:ParentBottom];
+    //[alRootArea setLayoutConstraintOfSubLayouter:alCommentButton withAnchor:ParentBottom];
+    [alRootArea setLayoutConstraintOfSubLayouter:alForwardButton toLeftOf:alCommentButton];
+    [alRootArea setLayoutConstraintOfSubLayouter:alCommentButton withAnchor:ParentRight];
     ///[alRootArea setLayoutConstraintOfSubLayouter:alRichMedia withAnchor:ParentRight];
+    //*/
     
     // Layout :
     ///!!!
