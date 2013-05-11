@@ -286,6 +286,20 @@
     }
     [stampedNodes addObject:curNode];
     
+    float reverseMaxSubTotalSize = 0;
+    for (TMALLayoutChainNode* nextNode in [curNode.nextNodes objectAtIndex:(1 - direction)])
+    {
+        float subTotalSize = [self recursiveFindMaxWidthOfHorizontalChain : nextNode
+                                                                direction : 1 - direction
+                                                              curPosition : curPosition
+                                                              stampedNodes:stampedNodes];
+        
+        if (NA_RANGE != subTotalSize && subTotalSize > reverseMaxSubTotalSize)
+        {
+            reverseMaxSubTotalSize = subTotalSize;
+        }
+    }
+    
     TMALLayoutParameter lp = curNode.subLayouter.layoutParameter;
     float mySize = curNode.subLayouter.measuredPreferSize.width;
     mySize += lp.marginLeft;
@@ -328,23 +342,9 @@
                                                               curPosition : curPosition
                                                               stampedNodes:stampedNodes];
         
-        if (subTotalSize > maxSubTotalSize)
+        if (NA_RANGE != subTotalSize && subTotalSize > maxSubTotalSize)
         {
             maxSubTotalSize = subTotalSize;
-        }
-    }
-    
-    float reverseMaxSubTotalSize = 0;
-    for (TMALLayoutChainNode* nextNode in [curNode.nextNodes objectAtIndex:(1 - direction)])
-    {
-        float subTotalSize = [self recursiveFindMaxWidthOfHorizontalChain : nextNode
-                                                                direction : 1 - direction
-                                                              curPosition : curPosition
-                                                              stampedNodes:stampedNodes];
-        
-        if (subTotalSize > reverseMaxSubTotalSize)
-        {
-            reverseMaxSubTotalSize = subTotalSize;
         }
     }
     
@@ -463,6 +463,20 @@
     }
     [stampedNodes addObject:curNode];
     
+    float reverseMaxSubTotalSize = 0;
+    for (TMALLayoutChainNode* nextNode in [curNode.nextNodes objectAtIndex:(1 - direction)])
+    {
+        float subTotalSize = [self recursiveFindMaxHeightOfVerticalChain : nextNode
+                                                               direction : 1 - direction
+                                                             curPosition : curPosition
+                                                             stampedNodes:stampedNodes];
+        
+        if (NA_RANGE != subTotalSize && subTotalSize > reverseMaxSubTotalSize)
+        {
+            reverseMaxSubTotalSize = subTotalSize;
+        }
+    }
+    
     TMALLayoutParameter lp = curNode.subLayouter.layoutParameter;
     float mySize = curNode.subLayouter.measuredPreferSize.height;
     mySize += lp.marginTop;
@@ -505,23 +519,9 @@
                                                              curPosition : curPosition
                                                              stampedNodes:stampedNodes];
         
-        if (subTotalSize > maxSubTotalSize)
+        if (NA_RANGE != subTotalSize && subTotalSize > maxSubTotalSize)
         {
             maxSubTotalSize = subTotalSize;
-        }
-    }
-    
-    float reverseMaxSubTotalSize = 0;
-    for (TMALLayoutChainNode* nextNode in [curNode.nextNodes objectAtIndex:(1 - direction)])
-    {
-        float subTotalSize = [self recursiveFindMaxHeightOfVerticalChain : nextNode
-                                                                direction : 1 - direction
-                                                              curPosition : curPosition
-                                                              stampedNodes:stampedNodes];
-        
-        if (subTotalSize > reverseMaxSubTotalSize)
-        {
-            reverseMaxSubTotalSize = subTotalSize;
         }
     }
     
