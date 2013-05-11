@@ -162,12 +162,12 @@
     
     TMALRelativeLayouter* alRootArea = [[TMALRelativeLayouter alloc] init];
     
-    TMALRelativeLayouter* alTopBar = [[TMALRelativeLayouter alloc] init];
+    TMALRelativeLayouter* alTopBar = [[TMALRelativeLayouter alloc] init];///!!!nil;///!!!
     TMALLayouter* alAuthorsAvatar = [[TMALLayouter alloc] init];
     TMALLayouter* alNickname = [[TMALLayouter alloc] init];
     TMALLayouter* alForwardTimes = [[TMALLayouter alloc] init];
     
-    TMALRelativeLayouter* alRichMedia = nil;///!!![[TMALRelativeLayouter alloc] init];///!!!
+    TMALRelativeLayouter* alRichMedia = [[TMALRelativeLayouter alloc] init];///!!!nil;///!!!
     TMALLayouter* alReferMsg = [[TMALLayouter alloc] init];
     TMALLayouter* alVideo = [[TMALLayouter alloc] init];
     TMALLayouter* alLargeImage = [[TMALLayouter alloc] init];
@@ -175,11 +175,11 @@
     /*
     TMALLayouter* alThisMsg = [[TMALRelativeLayouter alloc] init];
     /*/
-    TMALLayouter* alThisMsg = nil;///!!![[TwoPassMeasuringLayouter alloc] initWithArea:311*396];///!!!
+    TMALLayouter* alThisMsg = [[TwoPassMeasuringLayouter alloc] initWithArea:311*396];///!!!nil;///!!!
     //*/
     
-    TMALLayouter* alForwardButton = [[TMALLayouter alloc] init];
-    TMALLayouter* alCommentButton = [[TMALLayouter alloc] init];
+    TMALLayouter* alForwardButton = [[TMALLayouter alloc] init];///!!!nil;///!!!
+    TMALLayouter* alCommentButton = [[TMALLayouter alloc] init];///!!!nil;///!!!
     
     //TMALLayouter* alLBSIcon = [[TMALLayouter alloc] init];
     
@@ -320,15 +320,17 @@
     
     [alRootArea setLayoutConstraintOfSubLayouter:alRichMedia below:alTopBar];
     [alRootArea setLayoutConstraintOfSubLayouter:alRichMedia toRightOf:alThisMsg];
-    /*
-    [alRootArea setLayoutConstraintOfSubLayouter:alRichMedia above:alForwardButton];
-    [alRootArea setLayoutConstraintOfSubLayouter:alCommentButton below:alRichMedia];
+    //*
+    //[alRootArea setLayoutConstraintOfSubLayouter:alRichMedia above:alForwardButton];
+    //[alRootArea setLayoutConstraintOfSubLayouter:alThisMsg above:alForwardButton];
+    //[alRootArea setLayoutConstraintOfSubLayouter:alCommentButton below:alRichMedia];
+    //[alRootArea setLayoutConstraintOfSubLayouter:alCommentButton below:alThisMsg];
     /*/
     [alRootArea setLayoutConstraintOfSubLayouter:alTopBar above:alForwardButton];
     [alRootArea setLayoutConstraintOfSubLayouter:alCommentButton below:alTopBar];
     //*/
     [alRootArea setLayoutConstraintOfSubLayouter:alForwardButton withAnchor:ParentBottom];
-    //[alRootArea setLayoutConstraintOfSubLayouter:alCommentButton withAnchor:ParentBottom];
+    [alRootArea setLayoutConstraintOfSubLayouter:alCommentButton withAnchor:ParentBottom];
     [alRootArea setLayoutConstraintOfSubLayouter:alForwardButton toLeftOf:alCommentButton];
     [alRootArea setLayoutConstraintOfSubLayouter:alCommentButton withAnchor:ParentRight];
     ///[alRootArea setLayoutConstraintOfSubLayouter:alRichMedia withAnchor:ParentRight];
